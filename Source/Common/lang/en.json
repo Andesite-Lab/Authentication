@@ -1,0 +1,109 @@
+{
+  "app": {
+    "start": "{{name}} Started.",
+    "stop": "{{name}} Stopped.",
+    "redpanda": {
+      "REDPANDA_PRODUCER_CONNECTED": "RedPanda Producer connected.",
+      "REDPANDA_PRODUCER_DISCONNECTED": "RedPanda Producer disconnected.",
+      "REDPANDA_CONSUMER_CONNECTED": "RedPanda Consumer connected.",
+      "REDPANDA_CONSUMER_DISCONNECTED": "RedPanda Consumer disconnected."
+    },
+    "database": {
+      "DB_CONNECTED": "Database connected.",
+      "DB_DISCONNECTED": "Database disconnected.",
+      "DB_MIGRATIONS_RUN": "Database migrations run.",
+      "DB_MIGRATIONS_ROLLBACK_ALL": "Database migrations rollback all.",
+      "DB_SEEDERS_RUN": "Database seeds run."
+    },
+    "dragonfly": {
+      "DRAGONFLY_CONNECTED": "Dragonfly connected.",
+        "DRAGONFLY_DISCONNECTED": "Dragonfly disconnected."
+    },
+    "signal": {
+      "SIGINT": "SIGINT (Ctrl-C) received."
+    },
+    "httpServer": {
+      "HTTP_SERVER_LISTENING": "HTTP server listening on port {{port}} in {{mode}} mode. (Prefix: {{prefix}}) PID: {{pid}}",
+      "HTTP_SERVER_CLOSE": "HTTP server closed."
+    }
+  },
+  "error": {
+    "errorConfig": {
+      "DB_HOST_NOT_FOUND": "DB_HOST variable d'environnement non trouvée.",
+      "DB_NAME_NOT_FOUND": "DB_NAME variable d'environnement non trouvée.",
+      "DB_PASSWORD_NOT_FOUND": "DB_PASSWORD variable d'environnement non trouvée.",
+      "DB_USER_NOT_FOUND": "DB_USER variable d'environnement non trouvée.",
+      "DB_PORT_NOT_FOUND": "DB_PORT variable d'environnement non trouvée.",
+      "COOKIE_SECRET_NOT_FOUND": "COOKIE_SECRET variable d'environnement non trouvée.",
+      "HOST_NOT_FOUND": "HOST variable d'environnement non trouvée.",
+      "HTTP_PORT_NOT_FOUND": "HTTP_PORT variable d'environnement non trouvée.",
+      "NODE_ENV_NOT_FOUND": "NODE_ENV variable d'environnement non trouvée.",
+      "RED_PANDA_BROKER_NOT_FOUND": "RED_PANDA_BROKER variable d'environnement non trouvée.",
+      "WS_PORT_NOT_FOUND": "WS_PORT variable d'environnement non trouvée."
+    },
+    "errorInfrastructure": {
+      "KAFKA_PRODUCER_CONNECTION_ERROR": "Kafka producer connection error.",
+      "KAFKA_PRODUCER_IS_NOT_CONNECTED": "Kafka producer is not connected.",
+      "KAFKA_PRODUCER_DISCONNECT_ERROR": "Kafka producer disconnect error.",
+      "KAFKA_PRODUCER_SEND_ERROR": "Kafka producer send error.",
+      "KAFKA_CONSUMER_CONNECTION_ERROR": "Kafka consumer connection error.",
+      "KAFKA_CONSUMER_IS_NOT_CONNECTED": "Kafka consumer is not connected.",
+      "KAFKA_CONSUMER_SUBSCRIBE_ERROR": "Kafka consumer subscribe error.",
+      "KAFKA_CONSUMER_DISCONNECT_ERROR": "Kafka consumer disconnect error."
+    },
+    "errorValidator": {
+      "USERNAME_MIN_LENGTH": "The username must be at least 3 characters long.",
+      "USERNAME_MAX_LENGTH": "The username must be less than 20 characters long.",
+      "USERNAME_PATTERN": "The username must contain only letters, numbers, underscores and hyphens.",
+      "EMAIL_MIN_LENGTH": "The email must be at least 10 characters long.",
+      "EMAIL_MAX_LENGTH": "The email must be less than 255 characters long.",
+      "EMAIL_PATTERN_AND_BLACKLIST": "The email must be a valid email address and not in the blacklist.",
+      "PASSWORD_MIN_LENGTH": "The password must be at least 8 characters long.",
+      "PASSWORD_MAX_LENGTH": "The password must be less than 255 characters long.",
+      "PASSWORD_PATTERN": "The password must contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+      "EMAIL_OR_USERNAME_NOT_IN_BODY": "The email or username must be in the body.",
+      "PASSWORD_NOT_IN_BODY": "The password must be in the body."
+    },
+    "errorDatabase": {
+      "DB_CONNECTION_ERROR": "Database connection error.",
+      "DB_DISCONNECT_ERROR": "Database disconnect error.",
+      "MODEL_NOT_CREATED": "Model {{tableName}} not created.",
+      "MODEL_UNIQUE_CONSTRAINT_ERROR": "Model {{tableName}} unique constraint error [{{constraint}}].",
+      "MODEL_NOT_FOUND": "Model {{tableName}} not found.",
+      "MODEL_NOT_UPDATED": "Model {{tableName}}  not updated.",
+      "MODEL_NOT_DELETED": "Model {{tableName}} not deleted.",
+      "OTHER_DATABASE_ERROR": "Other database error."
+    },
+    "errorDragonfly": {
+      "DRAGONFLY_CONNECTION_ERROR": "Dragonfly connection error.",
+      "DRAGONFLY_DISCONNECT_ERROR": "Dragonfly disconnect error.",
+      "DRAGONFLY_NOT_CONNECTED": "Dragonfly is not connected."
+    },
+    "errorMiddleware": {
+      "TOKEN_INVALID": "Token is invalid.",
+      "TOKEN_INVALID_STRUCTURE": "Token structure is invalid.",
+      "TOKEN_INVALID_SIGNATURE": "Token signature is invalid.",
+      "TOKEN_EXPIRED": "Token is expired"
+    },
+    "errorUseCase": {
+      "PASSWORD_NOT_VALID": "The password is not valid."
+    }
+  },
+  "http": {
+    "plugin": {
+      "RateLimitPlugin": {
+        "RATE_LIMIT": "Rate limit {{max}} exceeded. Try again in {{timeWindow}} seconds."
+      }
+    },
+    "handler": {
+      "statusHandler": {
+        "health": "OK"
+      },
+      "authHandler": {
+        "login": "Login successful.",
+        "logout": "Logout successful.",
+        "register": "Registration successful."
+      }
+    }
+  }
+}
