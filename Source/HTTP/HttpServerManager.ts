@@ -3,7 +3,7 @@ import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { IPlugin, IRouter, IHook } from '@/HTTP/Interface';
 import { EnvironmentConfiguration } from '@/Config';
 import {
-    AdminRouter,
+    AdminRolesRouter,
     AuthRouter,
     StatusRouter,
     TokenRouter,
@@ -37,7 +37,7 @@ export class HttpServerManager {
             new StatusRouter('/status'),
             new AuthRouter('/auth'),
             new TokenRouter('/token'),
-            new AdminRouter('/admin'),
+            new AdminRolesRouter('/admin/roles'),
         ];
     }
 

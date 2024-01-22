@@ -63,7 +63,9 @@
       "PASSWORD_PATTERN": "The password must contain at least one uppercase letter, one lowercase letter, one number and one special character.",
       "EMAIL_OR_USERNAME_NOT_IN_BODY": "The email or username must be in the body.",
       "PASSWORD_NOT_IN_BODY": "The password must be in the body.",
-      "INVALID_ROLE": "The role is invalid. (only characters alpha)"
+      "INVALID_ROLE": "The role is invalid. (only characters alpha)",
+      "LIMIT_NOT_A_NUMBER": "The limit must be an number.",
+      "OFFSET_NOT_A_NUMBER": "The offset must be an number."
     },
     "errorDatabase": {
       "DB_CONNECTION_ERROR": "Database connection error.",

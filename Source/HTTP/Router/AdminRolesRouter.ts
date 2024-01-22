@@ -2,18 +2,18 @@ import { FastifyInstance } from 'fastify';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 
 import { AbstractRouter } from '@/HTTP/Router';
-import { AdminHandler } from '@/HTTP/Handler';
+import { AdminRolesHandler } from '@/HTTP/Handler';
 import { PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
 
-export class AdminRouter extends AbstractRouter<AdminHandler> {
+export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
     constructor(routerPrefix: string = '/auth') {
-        super(new AdminHandler(), routerPrefix);
+        super(new AdminRolesHandler(), routerPrefix);
     }
 
     protected initRoutes(fastify: FastifyInstance): void {
         fastify.route({
             method: 'POST',
-            url: '/role',
+            url: '/',
             preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.create'], false)],
             handler: this._handler.createRole,
             schema: {
@@ -24,5 +24,16 @@ export class AdminRouter extends AbstractRouter<AdminHandler> {
             attachValidation: true
         });
 
+        fastify.route({
+            method: 'GET',
+            url: '/',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
+            handler: this._handler.getRoles,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Get all roles'
+            },
+            attachValidation: true
+        });
     }
 }

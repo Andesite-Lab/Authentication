@@ -14,7 +14,7 @@ export abstract class AbstractRouter<T> implements IRouter {
     protected abstract initRoutes(fastify: FastifyInstance): void;
 
     public configure(app: FastifyInstance, base: string): void {
-        app.register(this._router, { prefix: `${base}/${this._routerPrefix}` });
+        app.register(this._router, { prefix: `${base}${this._routerPrefix}` });
     }
 
     private get _router(): FastifyPluginAsync {
