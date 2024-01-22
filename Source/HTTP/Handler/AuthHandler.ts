@@ -6,11 +6,13 @@ import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';
 import { IRegisterDTO, ILoginDTO } from '@/Data/DTO';
 import { RegisterBody, LoginBody } from '@/Validator';
-import { Register, Login } from '@/Domain/UseCase';
+import { Register, Login, Logout } from '@/Domain/UseCase';
+import { BasaltToken } from '@basalt-lab/basalt-auth';
 
 export class AuthHandler extends AbstractHandler {
     private readonly _registerUseCase: Register = new Register();
     private readonly _loginUseCase: Login = new Login();
+    private readonly _logoutUseCase: Logout = new Logout();
 
     public register = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
@@ -48,4 +50,21 @@ export class AuthHandler extends AbstractHandler {
             this.sendError(reply, e);
         }
     };
+
+    public logout = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            const basaltToken: BasaltToken = new BasaltToken();
+            const tokenUuid: string = basaltToken.getTokenUuid(req.cookies.token as string);
+            this._logoutUseCase.execute(tokenUuid);
+            this.clearCookie(reply, 'token');
+            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.logout', reply.request.headers['accept-language']));
+        } catch (e) {
+            if (e instanceof Error)
+                BasaltLogger.error({
+                    error: e,
+                    trace: e.stack,
+                });
+            this.sendError(reply, e);
+        }
+    }
 }

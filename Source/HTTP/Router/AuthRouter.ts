@@ -42,10 +42,7 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             method: 'GET',
             url: '/logout',
             preHandler: TokenChecker.execute,
-            handler: (req: FastifyRequest, reply: FastifyReply) => {
-                console.log('logout');
-                reply.send('logout');
-            },
+            handler: this._handler.logout,
             schema: {
                 tags: ['Auth'],
                 summary: 'Logout a user',
