@@ -103,7 +103,8 @@
       "authHandler": {
         "login": "Login successful.",
         "logout": "Logout successful.",
-        "register": "Registration successful."
+        "register": "Registration successful.",
+        "delete": "Account deletion successful."
       }
     }
   }

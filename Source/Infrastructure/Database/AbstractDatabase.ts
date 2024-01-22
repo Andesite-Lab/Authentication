@@ -47,12 +47,13 @@ export class AbstractDatabase {
             this._database = knex({
                 ...this._config,
             });
-            this._database.raw('select 1+1 as result').catch(err => {
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.DB_CONNECTION_ERROR,
-                    detail: err
+            this._database.raw('select 1+1 as result')
+                .catch(err => {
+                    throw new ErrorDatabase({
+                        key: ErrorDatabaseKey.DB_CONNECTION_ERROR,
+                        detail: err
+                    });
                 });
-            });
             return this;
         } catch (error) {
             throw new ErrorDatabase({

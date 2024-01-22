@@ -220,6 +220,5 @@ commander.action(async (): Promise<void> => {
     //         name: packageJsonConfiguration.name
     //     }));
     // });
-
 });
 commander.parse(process.argv);

@@ -6,13 +6,19 @@ import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';
 import { IRegisterDTO, ILoginDTO } from '@/Data/DTO';
 import { RegisterBody, LoginBody } from '@/Validator';
-import { Register, Login, Logout } from '@/Domain/UseCase';
+import {
+    Register,
+    Login,
+    Logout,
+    Delete
+} from '@/Domain/UseCase';
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 
 export class AuthHandler extends AbstractHandler {
     private readonly _registerUseCase: Register = new Register();
     private readonly _loginUseCase: Login = new Login();
     private readonly _logoutUseCase: Logout = new Logout();
+    private readonly _deleteUseCase: Delete = new Delete();
 
     public register = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
@@ -66,5 +72,20 @@ export class AuthHandler extends AbstractHandler {
                 });
             this.sendError(reply, e);
         }
-    }
+    };
+
+    public delete = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            await this._deleteUseCase.execute(req.cookies.token as string);
+            this.clearCookie(reply, 'token');
+            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.delete', reply.request.headers['accept-language']));
+        } catch (e) {
+            if (e instanceof Error)
+                BasaltLogger.error({
+                    error: e,
+                    trace: e.stack,
+                });
+            this.sendError(reply, e);
+        }
+    };
 }

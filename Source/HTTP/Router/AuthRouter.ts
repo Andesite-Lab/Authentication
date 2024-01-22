@@ -3,7 +3,7 @@ import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 
 import { AbstractRouter } from '@/HTTP/Router';
 import { AuthHandler } from '@/HTTP/Handler';
-import { TokenChecker } from '@/HTTP/Middleware';
+import { PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
 import * as process from 'process';
 
 export class AuthRouter extends AbstractRouter<AuthHandler> {
@@ -50,5 +50,19 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             },
             attachValidation: true
         });
+
+        fastify.route({
+            method: 'DELETE',
+            url: '/delete',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'credential', 'credential.delete'], false)],
+            handler: this._handler.delete,
+            schema: {
+                tags: ['Auth'],
+                summary: 'Delete a user',
+                security: []
+            },
+            attachValidation: true
+        });
+
     }
 }

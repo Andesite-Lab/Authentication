@@ -103,7 +103,8 @@
       "authHandler": {
         "login": "Connexion réussie.",
         "logout": "Déconnexion réussie.",
-        "register": "Inscription réussie."
+        "register": "Inscription réussie.",
+        "delete": "Suppression réussie."
       }
     }
   }
