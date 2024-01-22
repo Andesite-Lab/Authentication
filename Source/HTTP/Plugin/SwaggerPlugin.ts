@@ -23,8 +23,9 @@ export class SwaggerPlugin implements IPlugin {
                 },
                 servers: [ { url: `http://${EnvironmentConfiguration.env.HOST}:${EnvironmentConfiguration.env.HTTP_PORT}` } ],
                 tags: [
-                    { name: 'Status', description: 'Status related end-points' },
+                    { name: 'Admin', description: 'Admin related end-points' },
                     { name: 'Auth', description: 'Auth related end-points' },
+                    { name: 'Status', description: 'Status related end-points' },
                     { name: 'Token', description: 'Token related end-points' },
                 ],
                 components: {

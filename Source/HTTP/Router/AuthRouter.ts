@@ -45,7 +45,6 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             schema: {
                 tags: ['Auth'],
                 summary: 'Logout a user',
-                security: []
             },
             attachValidation: true
         });
@@ -58,7 +57,6 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             schema: {
                 tags: ['Auth'],
                 summary: 'Delete a user',
-                security: []
             },
             attachValidation: true
         });

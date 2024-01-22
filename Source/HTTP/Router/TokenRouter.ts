@@ -18,7 +18,6 @@ export class TokenRouter extends AbstractRouter<TokenHandler> {
             schema: {
                 tags: ['Token'],
                 summary: 'Check a token',
-                security: []
             },
             attachValidation: true
         });

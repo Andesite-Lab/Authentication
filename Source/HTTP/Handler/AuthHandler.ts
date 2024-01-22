@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { BasaltKeyInclusionFilter } from '@basalt-lab/basalt-helper';
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
+import { BasaltToken } from '@basalt-lab/basalt-auth';
 
 import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';
@@ -12,7 +13,6 @@ import {
     Logout,
     Delete
 } from '@/Domain/UseCase';
-import { BasaltToken } from '@basalt-lab/basalt-auth';
 
 export class AuthHandler extends AbstractHandler {
     private readonly _registerUseCase: Register = new Register();

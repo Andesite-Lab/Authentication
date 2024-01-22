@@ -12,6 +12,7 @@ export enum ErrorValidatorKey {
     PASSWORD_PATTERN = 'PASSWORD_PATTERN',
     EMAIL_OR_USERNAME_NOT_IN_BODY = 'EMAIL_OR_USERNAME_NOT_IN_BODY',
     PASSWORD_NOT_IN_BODY = 'PASSWORD_NOT_IN_BODY',
+    INVALID_ROLE = 'INVALID_ROLE',
 }
 
 const ErrorValidatorKeyCode: { [p: string]: number } = {
@@ -26,6 +27,7 @@ const ErrorValidatorKeyCode: { [p: string]: number } = {
     [ErrorValidatorKey.PASSWORD_PATTERN]: 400,
     [ErrorValidatorKey.EMAIL_OR_USERNAME_NOT_IN_BODY]: 400,
     [ErrorValidatorKey.PASSWORD_NOT_IN_BODY]: 400,
+    [ErrorValidatorKey.INVALID_ROLE]: 400,
 };
 
 export class ErrorValidator extends ErrorEntity {
