@@ -1,10 +1,15 @@
 import { RedpandaProducer, Topics } from '@/Infrastructure/RedPanda/Producer';
 
+export enum MailTypes {
+    WELCOME = 'welcome',
+    RESET_PASSWORD = 'reset-password',
+    DELETE_ACCOUNT = 'delete-account',
+}
+
 export class MailerProducer {
     public async execute(
-        username: string,
-        email: string,
-        mailType: string,
+        object: unknown,
+        mailType: MailTypes,
         scheduledEmailDate: string | undefined = undefined,
     ): Promise<void> {
         await RedpandaProducer.instance.send({
@@ -12,8 +17,7 @@ export class MailerProducer {
             messages: [
                 {
                     value: JSON.stringify({
-                        email,
-                        username,
+                        object,
                         mailType,
                         scheduledEmailDate,
                     }),
