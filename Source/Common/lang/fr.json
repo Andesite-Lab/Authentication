@@ -105,6 +105,9 @@
         "logout": "Déconnexion réussie.",
         "register": "Inscription réussie.",
         "delete": "Suppression réussie."
+      },
+      "tokenHandler": {
+        "check": "Le token est valide."
       }
     }
   }

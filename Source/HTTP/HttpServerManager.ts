@@ -2,7 +2,11 @@ import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 
 import { IPlugin, IRouter, IHook } from '@/HTTP/Interface';
 import { EnvironmentConfiguration } from '@/Config';
-import { StatusRouter, AuthRouter } from '@/HTTP/Router';
+import {
+    StatusRouter,
+    AuthRouter,
+    TokenRouter
+} from '@/HTTP/Router';
 import {
     CookiePlugin,
     CorsPlugin,
@@ -31,6 +35,7 @@ export class HttpServerManager {
         return [
             new StatusRouter('/status'),
             new AuthRouter('/auth'),
+            new TokenRouter('/token'),
         ];
     }
 

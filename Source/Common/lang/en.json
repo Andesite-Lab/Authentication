@@ -105,6 +105,9 @@
         "logout": "Logout successful.",
         "register": "Registration successful.",
         "delete": "Account deletion successful."
+      },
+      "tokenHandler": {
+        "check": "Token is valid."
       }
     }
   }
