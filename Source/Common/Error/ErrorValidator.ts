@@ -15,6 +15,7 @@ export enum ErrorValidatorKey {
     INVALID_ROLE = 'INVALID_ROLE',
     LIMIT_NOT_A_NUMBER = 'LIMIT_NOT_A_NUMBER',
     OFFSET_NOT_A_NUMBER = 'OFFSET_NOT_A_NUMBER',
+    ID_NOT_A_NUMBER = 'ID_NOT_A_NUMBER',
 }
 
 const ErrorValidatorKeyCode: { [p: string]: number } = {
@@ -32,6 +33,7 @@ const ErrorValidatorKeyCode: { [p: string]: number } = {
     [ErrorValidatorKey.INVALID_ROLE]: 400,
     [ErrorValidatorKey.LIMIT_NOT_A_NUMBER]: 400,
     [ErrorValidatorKey.OFFSET_NOT_A_NUMBER]: 400,
+    [ErrorValidatorKey.ID_NOT_A_NUMBER]: 400,
 };
 
 export class ErrorValidator extends ErrorEntity {

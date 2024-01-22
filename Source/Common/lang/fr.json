@@ -65,7 +65,8 @@
       "PASSWORD_NOT_IN_BODY": "Le mot de passe n'est pas dans le corps de la requête.",
       "INVALID_ROLE": "Le rôle n'est pas valide. (uniquement des caractères alpha)",
       "LIMIT_NOT_A_NUMBER": "La limite doit être un nombre.",
-      "OFFSET_NOT_A_NUMBER": "Le décalage doit être un nombre."
+      "OFFSET_NOT_A_NUMBER": "Le décalage doit être un nombre.",
+      "ID_NOT_A_NUMBER": "L'ID doit être un nombre."
     },
     "errorDatabase": {
       "DB_CONNECTION_ERROR": "Erreur de connexion à la base de données.",

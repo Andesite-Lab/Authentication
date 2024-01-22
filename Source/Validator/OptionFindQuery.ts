@@ -7,9 +7,9 @@ import { JSONSchema } from 'class-validator-jsonschema';
 import { ErrorValidatorKey } from '@/Common/Error';
 
 @JSONSchema({
-    title: 'OptionFindBody schema',
+    title: 'OptionFindQuery schema',
 })
-export class OptionFindBody<T> {
+export class OptionFindQuery<T> {
     @IsNumberString({}, {
         message: ErrorValidatorKey.LIMIT_NOT_A_NUMBER
     })
