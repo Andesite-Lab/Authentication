@@ -18,10 +18,10 @@ const RolesPermissions: IRolesPermissions = {
     ],
     permissions: [
         'admin',
-        'me',
-        'me.read',
-        'me.update',
-        'me.delete',
+        'credential',
+        'credential.read',
+        'credential.update',
+        'credential.delete',
         'user',
         'user.read',
         'user.update',
@@ -47,9 +47,9 @@ const RolesPermissions: IRolesPermissions = {
             'admin'
         ],
         user: [
-            'me.read',
-            'me.update',
-            'me.delete',
+            'credential.read',
+            'credential.update',
+            'credential.delete',
         ],
     }
 };
