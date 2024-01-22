@@ -2,6 +2,6 @@ import { ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO } from '@/Data/D
 
 export interface IBasaltAuthorization {
     groupPermissionByRole(raw: Pick<ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO, 'role' | 'permission'>[]): Record<string, string[]>;
-    checkContainOneOfPermissions(permissionsToSearch: string[], entityToCheck: Record<string, Set<string>>): boolean;
-    checkContainAllOfPermissions(permissionsToSearch: string[], entityToCheck: Record<string, Set<string>>): boolean;
+    checkContainOneOfPermissions(permissionsToSearch: string[], entityToCheck: Record<string, string[]>): boolean;
+    checkContainAllOfPermissions(permissionsToSearch: string[], entityToCheck: Record<string, string[]>): boolean;
 }

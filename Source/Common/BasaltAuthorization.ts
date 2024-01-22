@@ -25,15 +25,19 @@ export class BasaltAuthorization implements IBasaltAuthorization {
         return roles;
     }
 
-    public checkContainOneOfPermissions(permissionsToSearch: string[], entityToCheck: Record<string, Set<string>>): boolean {
+    public checkContainOneOfPermissions(permissionsToSearch: string[], entityToCheck: Record<string, string[]>): boolean {
         return permissionsToSearch.some((permission: string) => {
-            return Object.values(entityToCheck).some((permissions: Set<string>) => permissions.has(permission));
+            return Object.values(entityToCheck).some((permissions: string[]) => {
+                return permissions.includes(permission);
+            });
         });
     }
 
-    public checkContainAllOfPermissions(permissionsToSearch: string[], entityToCheck: Record<string, Set<string>>): boolean {
+    public checkContainAllOfPermissions(permissionsToSearch: string[], entityToCheck: Record<string, string[]>): boolean {
         return permissionsToSearch.every((permission: string) => {
-            return Object.values(entityToCheck).some((permissions: Set<string>) => permissions.has(permission));
+            return Object.values(entityToCheck).some((permissions: string[]) => {
+                return permissions.includes(permission);
+            });
         });
     }
 }

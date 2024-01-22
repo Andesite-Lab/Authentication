@@ -52,7 +52,6 @@ export class TokenChecker {
 
     public static async execute(req: FastifyRequest, reply: FastifyReply): Promise<void> {
         try {
-            console.log('token checker');
             const token: string = req.cookies.token || '';
             const tokenUuid: string = TokenChecker.getTokenUuid(token);
             const publicKey: string = await TokenChecker.getPublicKey(tokenUuid);

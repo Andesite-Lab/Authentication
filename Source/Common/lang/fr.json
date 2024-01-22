@@ -83,7 +83,8 @@
       "TOKEN_INVALID": "Le token est invalide",
       "TOKEN_INVALID_STRUCTURE": "La structure du token est invalide",
       "TOKEN_INVALID_SIGNATURE": "La signature du token est invalide",
-      "TOKEN_EXPIRED": "Le token a expiré"
+      "TOKEN_EXPIRED": "Le token a expiré",
+      "PERMISSION_DENIED": "Permission refusée"
     },
     "errorUseCase": {
       "PASSWORD_NOT_VALID": "Le mot de passe n'est pas valide."
