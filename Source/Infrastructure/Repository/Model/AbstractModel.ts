@@ -179,22 +179,24 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
     public async delete(
         entitiesToDelete: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[],
+        columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
             toThrow?: boolean;
             transaction?: Transaction;
         }
-    ): Promise<number> {
+    ): Promise<T[]> {
         try {
             let query = this._knex
                 .del()
-                .from(this._tableName);
+                .from(this._tableName)
+                .returning(this.transformColumnsToArray(columnToSelect));
             query = this.queryBuilder(query, entitiesToDelete);
 
             if (options?.transaction)
                 query = query.transacting(options.transaction);
 
-            const result: number = await query;
-            if (result === 0)
+            const result: T[] = await query;
+            if (result.length === 0)
                 throw new ErrorDatabase({
                     key: ErrorDatabaseKey.MODEL_NOT_DELETED,
                     interpolation: { tableName: this._tableName },
@@ -203,7 +205,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         } catch (err) {
             if (options?.toThrow ?? true)
                 this.forwardException(err);
-            return 0;
+            return [];
         }
     }
 
@@ -226,7 +228,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
     public async find(
         entitiesToSearch: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[],
-        columnToSelect: Partial<Record<keyof T, boolean | string>>,
+        columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
             limit?: number;
             offset?: number;
@@ -261,7 +263,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
     public async findOne(
         entitiesToSearch: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[],
-        columnToSelect: Partial<Record<keyof T, boolean | string>>,
+        columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
             toThrow?: boolean;
             transaction?: Transaction;
@@ -289,7 +291,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
     }
 
     public async findAll(
-        columnToSelect: Partial<Record<keyof T, boolean | string>>,
+        columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
             limit?: number;
             offset?: number;
