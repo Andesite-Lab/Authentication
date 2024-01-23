@@ -61,13 +61,14 @@
       "PASSWORD_MIN_LENGTH": "Le mot de passe doit contenir au moins 8 caractères.",
       "PASSWORD_MAX_LENGTH": "Le mot de passe doit contenir au maximum 32 caractères.",
       "PASSWORD_PATTERN": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
-      "EMAIL_OR_USERNAME_NOT_IN_BODY": "L'email ou le nom d'utilisateur n'est pas dans le corps de la requête.",
-      "PASSWORD_NOT_IN_BODY": "Le mot de passe n'est pas dans le corps de la requête.",
+      "EMAIL_OR_USERNAME_REQUIRED": "L'email ou le nom d'utilisateur est requis.",
+      "PASSWORD_IS_REQUIRED": "Le mot de passe est requis.",
       "INVALID_ROLE": "Le rôle n'est pas valide. (A-Z, a-z, 0-9, _, -, .)",
       "INVALID_PERMISSION": "La permission n'est pas valide. (A-Z, a-z, 0-9, _, -, .)",
       "LIMIT_NOT_A_NUMBER": "La limite doit être un nombre.",
       "OFFSET_NOT_A_NUMBER": "Le décalage doit être un nombre.",
-      "ID_NOT_A_NUMBER": "L'ID doit être un nombre."
+      "ID_NOT_A_NUMBER": "L'ID doit être un nombre.",
+      "UUID_NOT_VALID": "L'UUID n'est pas valide."
     },
     "errorDatabase": {
       "DB_CONNECTION_ERROR": "Erreur de connexion à la base de données.",
@@ -114,11 +115,13 @@
       "tokenHandler": {
         "check": "Le token est valide."
       },
-      "adminRoleHandler": {
-        "createRole": "Rôle créé avec succès.",
-        "getRoles": "Rôles récupérés avec succès.",
-        "getRole": "Rôle récupéré avec succès.",
-        "updateRole": "Rôle mis à jour avec succès."
+      "CRUD": {
+        "insert": "Création {{tableName}} réussie.",
+        "findAll": "Récupération {{tableName}} réussie.",
+        "find": "Récupération {{tableName}} réussie.",
+        "findOne": "Récupération {{tableName}} réussie.",
+        "update": "Mise à jour {{tableName}} réussie.",
+        "delete": "Suppression {{tableName}} réussie."
       },
       "adminPermissionHandler": {
         "createPermission": "Permission créée avec succès.",

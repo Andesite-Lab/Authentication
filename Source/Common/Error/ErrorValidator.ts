@@ -10,13 +10,14 @@ export enum ErrorValidatorKey {
     PASSWORD_MIN_LENGTH = 'PASSWORD_MIN_LENGTH',
     PASSWORD_MAX_LENGTH = 'PASSWORD_MAX_LENGTH',
     PASSWORD_PATTERN = 'PASSWORD_PATTERN',
-    EMAIL_OR_USERNAME_NOT_IN_BODY = 'EMAIL_OR_USERNAME_NOT_IN_BODY',
-    PASSWORD_NOT_IN_BODY = 'PASSWORD_NOT_IN_BODY',
+    EMAIL_OR_USERNAME_REQUIRED = 'EMAIL_OR_USERNAME_REQUIRED',
+    PASSWORD_IS_REQUIRED = 'PASSWORD_IS_REQUIRED',
     INVALID_ROLE = 'INVALID_ROLE',
     INVALID_PERMISSION = 'INVALID_PERMISSION',
     LIMIT_NOT_A_NUMBER = 'LIMIT_NOT_A_NUMBER',
     OFFSET_NOT_A_NUMBER = 'OFFSET_NOT_A_NUMBER',
     ID_NOT_A_NUMBER = 'ID_NOT_A_NUMBER',
+    UUID_NOT_VALID = 'UUID_NOT_VALID',
 }
 
 const ErrorValidatorKeyCode: { [p: string]: number } = {
@@ -29,13 +30,14 @@ const ErrorValidatorKeyCode: { [p: string]: number } = {
     [ErrorValidatorKey.PASSWORD_MIN_LENGTH]: 400,
     [ErrorValidatorKey.PASSWORD_MAX_LENGTH]: 400,
     [ErrorValidatorKey.PASSWORD_PATTERN]: 400,
-    [ErrorValidatorKey.EMAIL_OR_USERNAME_NOT_IN_BODY]: 400,
-    [ErrorValidatorKey.PASSWORD_NOT_IN_BODY]: 400,
+    [ErrorValidatorKey.EMAIL_OR_USERNAME_REQUIRED]: 400,
+    [ErrorValidatorKey.PASSWORD_IS_REQUIRED]: 400,
     [ErrorValidatorKey.INVALID_ROLE]: 400,
     [ErrorValidatorKey.INVALID_PERMISSION]: 400,
     [ErrorValidatorKey.LIMIT_NOT_A_NUMBER]: 400,
     [ErrorValidatorKey.OFFSET_NOT_A_NUMBER]: 400,
     [ErrorValidatorKey.ID_NOT_A_NUMBER]: 400,
+    [ErrorValidatorKey.UUID_NOT_VALID]: 400,
 };
 
 export class ErrorValidator extends ErrorEntity {
