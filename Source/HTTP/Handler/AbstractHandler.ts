@@ -3,8 +3,11 @@ import { validate, ValidationError } from 'class-validator';
 
 import { EnvironmentConfiguration, I18n } from '@/Config';
 import { ErrorEntity } from '@/Common/Error';
+import { BasaltKeyInclusionFilter } from '@basalt-lab/basalt-helper';
 
 export abstract class AbstractHandler {
+    protected readonly _basaltKeyInclusionFilter: BasaltKeyInclusionFilter = new BasaltKeyInclusionFilter();
+
     protected clearCookie(reply: FastifyReply, name: string): void {
         reply.clearCookie(name, {
             path: '/',
