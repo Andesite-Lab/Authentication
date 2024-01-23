@@ -15,10 +15,10 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             method: 'POST',
             url: '/',
             preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.create'], false)],
-            handler: this._handler.createRole,
+            handler: this._handler.insert   ,
             schema: {
                 tags: ['Admin'],
-                summary: 'Add a new role',
+                summary: 'Insert a new role',
                 body: validationMetadatasToSchemas().RoleValidator
             },
             attachValidation: true
@@ -28,10 +28,10 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             method: 'GET',
             url: '/',
             preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
-            handler: this._handler.getRoles,
+            handler: this._handler.findAll,
             schema: {
                 tags: ['Admin'],
-                summary: 'Get all roles'
+                summary: 'Find all roles'
             },
             attachValidation: true
         });
@@ -40,28 +40,13 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             method: 'GET',
             url: '/:id',
             preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
-            handler: this._handler.getRole,
+            handler: this._handler.findOneById,
             schema: {
                 tags: ['Admin'],
-                summary: 'Get a role',
+                summary: 'Find one role',
                 params: validationMetadatasToSchemas().IdValidator
             },
             attachValidation: true
         });
-
-        fastify.route({
-            method: 'PUT',
-            url: '/:id',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.update'], false)],
-            handler: this._handler.updateRole,
-            schema: {
-                tags: ['Admin'],
-                summary: 'Update a role',
-                params: validationMetadatasToSchemas().IdParam,
-                body: validationMetadatasToSchemas().RoleBody
-            },
-            attachValidation: true
-        });
-
     }
 }
