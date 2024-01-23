@@ -3,24 +3,13 @@ import { Knex } from 'knex';
 import { ErrorDatabase, ErrorDatabaseKey } from '@/Common/Error';
 import { IErrorDatabase, Transaction } from '@/Infrastructure/Database';
 import { MainDatabase } from '@/Infrastructure/Database/Main/MainDatabase';
-
-interface IWhereClause {
-    $in?: string[];
-    $nin?: string[];
-    $eq?: string | number | boolean;
-    $neq?: string | number | boolean;
-    $match?: string;
-    $lt?: string | number;
-    $lte?: string | number;
-    $gt?: string | number;
-    $gte?: string | number;
-}
+import { IWhereClauseDTO } from '@/Data/DTO';
 
 export abstract class AbstractModel<T extends NonNullable<unknown>> {
     protected readonly _tableName: string;
     protected _knex: Knex;
 
-    protected constructor(tableName: string) {
+    public constructor(tableName: string) {
         this._tableName = tableName;
         this._knex = MainDatabase.instance.database as Knex;
     }
@@ -60,7 +49,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     }
 
-    private isComplexQuery(entity: Partial<T> | Partial<Record<keyof T, IWhereClause>>): boolean {
+    private isComplexQuery(entity: Partial<T> | Partial<Record<keyof T, IWhereClauseDTO>>): boolean {
         const validKeys: Set<string> = new Set(['$in', '$nin', '$eq', '$neq', '$match', '$lt', '$lte', '$gt', '$gte']);
         return Object.values(entity)
             .some(value =>
@@ -72,9 +61,9 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
             );
     }
 
-    private applyComplexQuery(query: Knex.QueryBuilder, complexQuery: Partial<Record<keyof T, IWhereClause>>): Knex.QueryBuilder {
+    private applyComplexQuery(query: Knex.QueryBuilder, complexQuery: Partial<Record<keyof T, IWhereClauseDTO>>): Knex.QueryBuilder {
         Object.entries(complexQuery).forEach(([key, value], index): void => {
-            const whereClause: IWhereClause = (value as IWhereClause);
+            const whereClause: IWhereClauseDTO = (value as IWhereClauseDTO);
             if (whereClause.$in)
                 query = query.orWhereIn(key, whereClause.$in);
             if (whereClause.$nin)
@@ -103,11 +92,11 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
     protected queryBuilder(
         query: Knex.QueryBuilder,
-        entitiesToSearch: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[]
+        entitiesToSearch: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[]
     ): Knex.QueryBuilder {
-        entitiesToSearch.forEach((entity: Partial<T> | Partial<Record<keyof T, IWhereClause>>, index: number): void => {
+        entitiesToSearch.forEach((entity: Partial<T> | Partial<Record<keyof T, IWhereClauseDTO>>, index: number): void => {
             if (this.isComplexQuery(entity))
-                query = this.applyComplexQuery(query, entity as Partial<Record<keyof T, IWhereClause>>);
+                query = this.applyComplexQuery(query, entity as Partial<Record<keyof T, IWhereClauseDTO>>);
             else
                 query = index === 0 ? query.where(entity as Partial<T>) : query.orWhere(entity as Partial<T>);
         });
@@ -145,7 +134,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
     public async update(
         entity: Partial<T>,
-        entityToUpdate: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[],
+        entityToUpdate: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[],
         columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
             toThrow?: boolean;
@@ -178,7 +167,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
     }
 
     public async delete(
-        entitiesToDelete: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[],
+        entitiesToDelete: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[],
         columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
             toThrow?: boolean;
@@ -227,7 +216,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
     }
 
     public async find(
-        entitiesToSearch: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[],
+        entitiesToSearch: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[],
         columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
             limit?: number;
@@ -262,7 +251,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
     }
 
     public async findOne(
-        entitiesToSearch: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[],
+        entitiesToSearch: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[],
         columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
             toThrow?: boolean;
@@ -325,7 +314,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
     }
 
     public async count(
-        entitiesToSearch?: Partial<T>[] | Partial<Record<keyof T, IWhereClause>>[],
+        entitiesToSearch?: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[],
         options?: {
             limit?: number;
             offset?: number;
