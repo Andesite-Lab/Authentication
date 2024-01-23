@@ -30,11 +30,11 @@ function HasEmailOrUsername(validationOptions?: ValidationOptions) {
 }
 
 @JSONSchema({
-    title: 'LoginBody schema',
+    title: 'LoginValidator schema',
 })
-export class LoginBody {
+export class LoginValidator {
     @HasEmailOrUsername({
-        message: ErrorValidatorKey.EMAIL_OR_USERNAME_NOT_IN_BODY
+        message: ErrorValidatorKey.EMAIL_OR_USERNAME_REQUIRED
     })
     @JSONSchema({
         description: 'Email or username',
@@ -44,7 +44,7 @@ export class LoginBody {
     public usernameOrEmail: EmailOrUsername;
 
     @IsNotEmpty({
-        message: ErrorValidatorKey.PASSWORD_NOT_IN_BODY
+        message: ErrorValidatorKey.PASSWORD_IS_REQUIRED
     })
     @JSONSchema({
         type: 'string',

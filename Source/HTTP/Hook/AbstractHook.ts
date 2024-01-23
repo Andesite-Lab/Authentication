@@ -4,7 +4,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 export abstract class AbstractHook implements IHook {
     protected _callback: Array<(request: FastifyRequest, reply: FastifyReply, payload?: unknown) => void>;
 
-    constructor() {
+    public constructor() {
         this._callback = [];
     }
 

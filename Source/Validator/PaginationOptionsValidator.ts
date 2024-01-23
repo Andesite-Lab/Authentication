@@ -7,9 +7,9 @@ import { JSONSchema } from 'class-validator-jsonschema';
 import { ErrorValidatorKey } from '@/Common/Error';
 
 @JSONSchema({
-    title: 'OptionFindQuery schema',
+    title: 'PaginationOptionsValidator schema',
 })
-export class OptionFindQuery<T> {
+export class PaginationOptionsValidator<T> {
     @IsNumberString({}, {
         message: ErrorValidatorKey.LIMIT_NOT_A_NUMBER
     })

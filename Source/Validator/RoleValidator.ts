@@ -6,16 +6,16 @@ import { JSONSchema } from 'class-validator-jsonschema';
 import { ErrorValidatorKey } from '@/Common/Error';
 
 @JSONSchema({
-    title: 'PermissionBody schema',
+    title: 'RoleValidator schema',
 })
-export class PermissionBody<T> {
+export class RoleValidator<T> {
     @Matches(/^[A-Za-z0-9_.-]+$/, {
-        message: ErrorValidatorKey.INVALID_PERMISSION
+        message: ErrorValidatorKey.INVALID_ROLE
     })
     @JSONSchema({
-        examples: ['admin', 'credential', 'credential.read', 'credential.update', 'credential.delete']
+        examples: ['admin', 'client', 'professional']
     })
-    public permission: string | undefined;
+    public role: string | undefined;
 
     public constructor(body: T) {
         Object.assign(this, body);

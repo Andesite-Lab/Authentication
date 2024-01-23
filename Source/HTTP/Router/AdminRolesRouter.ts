@@ -19,7 +19,7 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             schema: {
                 tags: ['Admin'],
                 summary: 'Add a new role',
-                body: validationMetadatasToSchemas().RoleBody
+                body: validationMetadatasToSchemas().RoleValidator
             },
             attachValidation: true
         });
@@ -44,7 +44,7 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             schema: {
                 tags: ['Admin'],
                 summary: 'Get a role',
-                params: validationMetadatasToSchemas().IdParam
+                params: validationMetadatasToSchemas().IdValidator
             },
             attachValidation: true
         });

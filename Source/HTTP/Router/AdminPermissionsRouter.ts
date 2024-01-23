@@ -19,7 +19,7 @@ export class AdminPermissionsRouter extends AbstractRouter<AdminPermissionsHandl
             schema: {
                 tags: ['Admin'],
                 summary: 'Add a new permission',
-                body: validationMetadatasToSchemas().RoleBody
+                body: validationMetadatasToSchemas().PermissionValidator
             },
             attachValidation: true
         });
@@ -44,7 +44,7 @@ export class AdminPermissionsRouter extends AbstractRouter<AdminPermissionsHandl
             schema: {
                 tags: ['Admin'],
                 summary: 'Get a permission',
-                params: validationMetadatasToSchemas().IdParam
+                params: validationMetadatasToSchemas().IdValidator
             },
             attachValidation: true
         });

@@ -1,16 +1,12 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
-import { BasaltKeyInclusionFilter } from '@basalt-lab/basalt-helper';
 
 import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';
 import { IPermissionDTO } from '@/Data/DTO/Models';
-import { IOptionFindDTO } from '@/Data/DTO';
-import {
-    PermissionBody,
-    OptionFindQuery,
-    IdParam
-} from '@/Validator';
+import { IPaginationOptionsDTO } from '@/Data/DTO';
+import { PermissionValidator, IdValidator, PaginationOptionsValidator } from '@/Validator';
+
 import {
     CreatePermission,
     ReadPermissions,
@@ -18,7 +14,6 @@ import {
 } from '@/Domain/UseCase/AdminPermissions';
 
 export class AdminPermissionsHandler extends AbstractHandler {
-    private readonly _basaltKeyInclusionFilter: BasaltKeyInclusionFilter = new BasaltKeyInclusionFilter();
     private readonly _createPermission: CreatePermission = new CreatePermission();
     private readonly _readPermissionsUseCase: ReadPermissions = new ReadPermissions();
     private readonly _readPermissionUseCase: ReadPermission = new ReadPermission();
@@ -26,7 +21,7 @@ export class AdminPermissionsHandler extends AbstractHandler {
     public createPermission = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
             const dataDTO: IPermissionDTO = this._basaltKeyInclusionFilter.filter<IPermissionDTO>(req.body as IPermissionDTO, ['permission'], true);
-            const roleBody: PermissionBody<IPermissionDTO> = new PermissionBody(dataDTO);
+            const roleBody: PermissionValidator<IPermissionDTO> = new PermissionValidator(dataDTO);
             await this.validate(roleBody, req.headers['accept-language']);
             await this._createPermission.execute(dataDTO.permission);
             this.sendResponse(reply, 200, I18n.translate('http.handler.adminPermissionHandler.createPermission', reply.request.headers['accept-language']));
@@ -42,8 +37,8 @@ export class AdminPermissionsHandler extends AbstractHandler {
 
     public getPermissions = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const dataDTO: IOptionFindDTO = this._basaltKeyInclusionFilter.filter<IOptionFindDTO>(req.query as IOptionFindDTO || {}, ['limit', 'offset'], true);
-            const optionFindQuery: OptionFindQuery<IOptionFindDTO> = new OptionFindQuery(dataDTO);
+            const dataDTO: IPaginationOptionsDTO = this._basaltKeyInclusionFilter.filter<IPaginationOptionsDTO>(req.query as IPaginationOptionsDTO || {}, ['limit', 'offset'], true);
+            const optionFindQuery: PaginationOptionsValidator<IPaginationOptionsDTO> = new PaginationOptionsValidator(dataDTO);
             await this.validate(optionFindQuery, req.headers['accept-language']);
             const permissions: IPermissionDTO[] = await this._readPermissionsUseCase.execute(dataDTO);
             this.sendResponse(
@@ -73,7 +68,7 @@ export class AdminPermissionsHandler extends AbstractHandler {
                     ['id'],
                     true
                 );
-            const idParam: IdParam = new IdParam(dataDTO.id);
+            const idParam: IdValidator = new IdValidator(dataDTO.id);
             await this.validate(idParam, req.headers['accept-language']);
             const permission: IPermissionDTO | undefined = await this._readPermissionUseCase.execute(parseInt(dataDTO.id));
             this.sendResponse(

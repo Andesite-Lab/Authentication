@@ -18,7 +18,7 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             schema: {
                 tags: ['Auth'],
                 summary: 'Register a new user',
-                body: validationMetadatasToSchemas().RegisterBody,
+                body: validationMetadatasToSchemas().RegisterValidator,
                 security: []
             },
             attachValidation: true
@@ -31,7 +31,7 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             schema: {
                 tags: ['Auth'],
                 summary: 'Login a user',
-                body: validationMetadatasToSchemas().LoginBody,
+                body: validationMetadatasToSchemas().LoginValidator,
                 security: []
             },
             attachValidation: true

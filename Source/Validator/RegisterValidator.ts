@@ -10,9 +10,8 @@ import {
 
 import { ErrorValidatorKey } from '@/Common/Error';
 import mailBlacklist from './mailBlacklist.json';
-
 @JSONSchema({
-    title: 'RegisterBody schema',
+    title: 'RegisterValidator schema',
     examples: [
         { email: faker.internet.email(), password: faker.internet.password(), username: faker.string.alphanumeric({ length: 16 }) },
         {
@@ -29,7 +28,7 @@ import mailBlacklist from './mailBlacklist.json';
         },
     ],
 })
-export class RegisterBody<T> {
+export class RegisterValidator<T> {
     @MinLength(4, {
         always: true,
         message: ErrorValidatorKey.USERNAME_MIN_LENGTH
