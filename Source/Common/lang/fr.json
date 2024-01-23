@@ -117,12 +117,14 @@
       "adminRoleHandler": {
         "createRole": "Rôle créé avec succès.",
         "getRoles": "Rôles récupérés avec succès.",
-        "getRole": "Rôle récupéré avec succès."
+        "getRole": "Rôle récupéré avec succès.",
+        "updateRole": "Rôle mis à jour avec succès."
       },
       "adminPermissionHandler": {
         "createPermission": "Permission créée avec succès.",
         "getPermissions": "Permissions récupérées avec succès.",
-        "getPermission": "Permission récupérée avec succès."
+        "getPermission": "Permission récupérée avec succès.",
+        "updatePermission": "Permission mise à jour avec succès."
       }
     }
   }

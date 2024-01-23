@@ -14,7 +14,8 @@ import {
 import {
     CreateRole,
     ReadRoles,
-    ReadRole
+    ReadRole,
+    UpdateRole
 } from '@/Domain/UseCase/AdminRoles';
 
 export class AdminRolesHandler extends AbstractHandler {
@@ -22,6 +23,7 @@ export class AdminRolesHandler extends AbstractHandler {
     private readonly _createRoleUseCase: CreateRole = new CreateRole();
     private readonly _readRolesUseCase: ReadRoles = new ReadRoles();
     private readonly _readRoleUseCase: ReadRole = new ReadRole();
+    private readonly _updateRoleUseCase: UpdateRole = new UpdateRole();
 
     public createRole = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
@@ -111,7 +113,7 @@ export class AdminRolesHandler extends AbstractHandler {
                 this.validate(roleBody, req.headers['accept-language'])
             ]);
 
-            await this._createRoleUseCase.execute(dataDTO.role);
+            await this._updateRoleUseCase.execute(dataDTO.role, parseInt(idParam.id));
             this.sendResponse(reply, 200, I18n.translate('http.handler.adminRoleHandler.updateRole', reply.request.headers['accept-language']));
         } catch (e) {
             if (e instanceof Error)
