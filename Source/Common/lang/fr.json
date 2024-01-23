@@ -63,7 +63,8 @@
       "PASSWORD_PATTERN": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
       "EMAIL_OR_USERNAME_NOT_IN_BODY": "L'email ou le nom d'utilisateur n'est pas dans le corps de la requête.",
       "PASSWORD_NOT_IN_BODY": "Le mot de passe n'est pas dans le corps de la requête.",
-      "INVALID_ROLE": "Le rôle n'est pas valide. (uniquement des caractères alpha)",
+      "INVALID_ROLE": "Le rôle n'est pas valide. (A-Z, a-z, 0-9, _, -, .)",
+      "INVALID_PERMISSION": "La permission n'est pas valide. (A-Z, a-z, 0-9, _, -, .)",
       "LIMIT_NOT_A_NUMBER": "La limite doit être un nombre.",
       "OFFSET_NOT_A_NUMBER": "Le décalage doit être un nombre.",
       "ID_NOT_A_NUMBER": "L'ID doit être un nombre."

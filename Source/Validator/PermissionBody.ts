@@ -1,5 +1,5 @@
 import {
-    IsAlpha
+    Matches
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
 
@@ -9,8 +9,8 @@ import { ErrorValidatorKey } from '@/Common/Error';
     title: 'PermissionBody schema',
 })
 export class PermissionBody<T> {
-    @IsAlpha('fr-FR', {
-        message: ErrorValidatorKey.INVALID_ROLE
+    @Matches(/^[A-Za-z0-9_.-]+$/, {
+        message: ErrorValidatorKey.INVALID_PERMISSION
     })
     @JSONSchema({
         examples: ['admin', 'credential', 'credential.read', 'credential.update', 'credential.delete']

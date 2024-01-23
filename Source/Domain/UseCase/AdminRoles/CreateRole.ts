@@ -6,6 +6,6 @@ export class CreateRole {
     public async execute (role: string): Promise<void> {
         await this._roleModel.insert([{
             role
-        }], {});
+        }]);
     }
 }

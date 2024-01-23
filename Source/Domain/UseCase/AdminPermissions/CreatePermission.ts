@@ -6,6 +6,6 @@ export class CreatePermission {
     public async execute (permission: string): Promise<void> {
         await this._permissionModel.insert([{
             permission
-        }], {});
+        }]);
     }
 }
