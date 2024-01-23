@@ -9,8 +9,9 @@
     "lint": "eslint . --ext .ts",
     "check-types": "tsc --noEmit",
     "dev": "cross-env ESBUILD_ENV=dev node esbuild.config.js & node wait-and-watch.js",
+    "dev::windows": "start cross-env ESBUILD_ENV=dev node esbuild.config.js && start node wait-and-watch.js",
     "build": "tsc --noEmit && cross-env ESBUILD_ENV=prod node esbuild.config.js",
-    "start": "cross-env NODE_ENV=production node Build/index.js"
+    "start": "cross-env NODE_ENV=production --env-file=./.env node Build/App.js"
   },
   "repository": {
     "type": "git",
