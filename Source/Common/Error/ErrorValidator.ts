@@ -39,7 +39,7 @@ const ErrorValidatorKeyCode: { [p: string]: number } = {
 };
 
 export class ErrorValidator extends ErrorEntity {
-    constructor(e: {
+    public constructor(e: {
         key: string,
         detail?: unknown,
         interpolation?: { [key: string]: unknown }

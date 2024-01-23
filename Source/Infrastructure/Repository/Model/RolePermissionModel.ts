@@ -4,7 +4,7 @@ import { IRolePermissionDTO } from '@/Data/DTO/Models';
 import { ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO } from '@/Data/DTO/Models/Fk';
 
 export class RolePermissionModel extends AbstractModel<IRolePermissionDTO>{
-    constructor() {
+    public constructor() {
         super('role_permission');
     }
 

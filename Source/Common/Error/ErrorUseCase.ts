@@ -9,7 +9,7 @@ const ErrorUseCaseKeyCode: { [p: string]: number } = {
 };
 
 export class ErrorUseCase extends ErrorEntity {
-    constructor(e: {
+    public constructor(e: {
         key: string,
         detail?: unknown,
         interpolation?: { [key: string]: unknown }

@@ -25,7 +25,7 @@ import { BasaltLogger } from '@basalt-lab/basalt-logger';
 export class HttpServerManager {
     private readonly _app: FastifyInstance;
 
-    constructor() {
+    public constructor() {
         this._app = fastify({
             ignoreTrailingSlash: true,
             trustProxy: true,

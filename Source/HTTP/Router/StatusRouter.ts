@@ -4,7 +4,7 @@ import { AbstractRouter } from '@/HTTP/Router';
 import { StatusHandler } from '@/HTTP/Handler';
 
 export class StatusRouter extends AbstractRouter<StatusHandler> {
-    constructor(routerPrefix: string = '/status') {
+    public constructor(routerPrefix: string = '/status') {
         super(new StatusHandler(), routerPrefix);
     }
 

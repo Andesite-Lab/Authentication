@@ -3,7 +3,7 @@ import { IDataConsumer } from '@/Consommer/Interface';
 export class ConsumerManager {
     private readonly _consumers: IDataConsumer[] = [];
 
-    constructor() {
+    public constructor() {
         this._consumers = this.initializeConsumer();
     }
 

@@ -25,7 +25,7 @@ const ErrorDatabaseKeyCode: { [p: string]: number } = {
 };
 
 export class ErrorDatabase extends ErrorEntity {
-    constructor(e: {
+    public constructor(e: {
         key: string,
         detail?: unknown,
         interpolation?: { [key: string]: unknown }

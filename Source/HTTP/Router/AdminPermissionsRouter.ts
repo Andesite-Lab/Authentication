@@ -6,7 +6,7 @@ import { AdminPermissionsHandler } from '@/HTTP/Handler';
 import { PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
 
 export class AdminPermissionsRouter extends AbstractRouter<AdminPermissionsHandler> {
-    constructor(routerPrefix: string = '/') {
+    public constructor(routerPrefix: string = '/') {
         super(new AdminPermissionsHandler(), routerPrefix);
     }
 

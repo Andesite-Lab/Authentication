@@ -6,7 +6,7 @@ import { AuthHandler } from '@/HTTP/Handler';
 import { PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
 
 export class AuthRouter extends AbstractRouter<AuthHandler> {
-    constructor(routerPrefix: string = '/auth') {
+    public constructor(routerPrefix: string = '/auth') {
         super(new AuthHandler(), routerPrefix);
     }
 

@@ -13,7 +13,7 @@ const ErrorDragonflyKeyCode: { [p: string]: number } = {
 };
 
 export class ErrorDragonfly extends ErrorEntity {
-    constructor(e: {
+    public constructor(e: {
         key: string,
         detail?: unknown,
         interpolation?: { [key: string]: unknown }

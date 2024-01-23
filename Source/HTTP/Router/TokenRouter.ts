@@ -5,7 +5,7 @@ import { TokenHandler } from '@/HTTP/Handler';
 import { TokenChecker } from '@/HTTP/Middleware';
 
 export class TokenRouter extends AbstractRouter<TokenHandler> {
-    constructor(routerPrefix: string = '/token') {
+    public constructor(routerPrefix: string = '/token') {
         super(new TokenHandler(), routerPrefix);
     }
 
