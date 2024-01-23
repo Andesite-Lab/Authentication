@@ -4,7 +4,7 @@ import { BasaltLogger } from '@basalt-lab/basalt-logger';
 import { AbstractHandler } from '@/HTTP/Handler/AbstractHandler';
 import { Insert, FindAll, FindOne } from '@/Domain/UseCase/CRUD';
 import { I18n } from '@/Config';
-import { PaginationOptionsValidator, IdValidator } from '@/Validator';
+import { PaginationOptionsValidator, IdValidator, UuidValidator } from '@/Validator';
 import { IPaginationOptionsDTO, IWhereClauseDTO } from '@/Data/DTO';
 
 export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends AbstractHandler {
@@ -91,6 +91,36 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
 
             const data: T | undefined = await this._findOneUseCase.execute({
                 id: parseInt(filteredId.id),
+            } as unknown as T);
+            this.sendResponse(
+                reply,
+                200,
+                I18n.translate('http.handler.CRUD.findOne', reply.request.headers['accept-language'], {
+                    tableName: this._tableName,
+                }),
+                {
+                    data,
+                });
+
+        } catch (e) {
+            if (e instanceof Error)
+                BasaltLogger.error({
+                    error: e,
+                    trace: e.stack,
+                });
+            this.sendError(reply, e);
+        }
+    };
+
+    public findOneByUuid = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            const filteredUuid: { uuid: string } = this._basaltKeyInclusionFilter
+                .filter<{ uuid: string }>(req.params as { uuid: string }, ['uuid'], true);
+            const uuidValidator: UuidValidator = new UuidValidator(filteredUuid.uuid);
+            await this.validate(uuidValidator, req.headers['accept-language']);
+
+            const data: T | undefined = await this._findOneUseCase.execute({
+                uuid: filteredUuid.uuid,
             } as unknown as T);
             this.sendResponse(
                 reply,

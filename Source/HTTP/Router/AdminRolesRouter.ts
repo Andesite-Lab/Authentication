@@ -26,7 +26,7 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
 
         fastify.route({
             method: 'GET',
-            url: '/',
+            url: '/all',
             preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
             handler: this._handler.findAll,
             schema: {
