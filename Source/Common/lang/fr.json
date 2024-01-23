@@ -113,8 +113,15 @@
       "tokenHandler": {
         "check": "Le token est valide."
       },
-      "adminHandler": {
-        "createRole": "Le rôle a été créé."
+      "adminRoleHandler": {
+        "createRole": "Rôle créé avec succès.",
+        "getRoles": "Rôles récupérés avec succès.",
+        "getRole": "Rôle récupéré avec succès."
+      },
+      "adminPermissionHandler": {
+        "createPermission": "Permission créée avec succès.",
+        "getPermissions": "Permissions récupérées avec succès.",
+        "getPermission": "Permission récupérée avec succès."
       }
     }
   }

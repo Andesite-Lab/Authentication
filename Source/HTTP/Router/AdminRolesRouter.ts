@@ -6,7 +6,7 @@ import { AdminRolesHandler } from '@/HTTP/Handler';
 import { PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
 
 export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
-    constructor(routerPrefix: string = '/auth') {
+    constructor(routerPrefix: string = '/') {
         super(new AdminRolesHandler(), routerPrefix);
     }
 
@@ -45,6 +45,20 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
                 tags: ['Admin'],
                 summary: 'Get a role',
                 params: validationMetadatasToSchemas().IdParam
+            },
+            attachValidation: true
+        });
+
+        fastify.route({
+            method: 'PUT',
+            url: '/:id',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.update'], false)],
+            handler: this._handler.updateRole,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Update a role',
+                params: validationMetadatasToSchemas().IdParam,
+                body: validationMetadatasToSchemas().RoleBody
             },
             attachValidation: true
         });

@@ -15,21 +15,21 @@ import {
     CreateRole,
     ReadRoles,
     ReadRole
-} from '@/Domain/UseCase';
+} from '@/Domain/UseCase/AdminRoles';
 
 export class AdminRolesHandler extends AbstractHandler {
+    private readonly _basaltKeyInclusionFilter: BasaltKeyInclusionFilter = new BasaltKeyInclusionFilter();
     private readonly _createRoleUseCase: CreateRole = new CreateRole();
     private readonly _readRolesUseCase: ReadRoles = new ReadRoles();
     private readonly _readRoleUseCase: ReadRole = new ReadRole();
 
     public createRole = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const basaltKeyInclusionFilter: BasaltKeyInclusionFilter = new BasaltKeyInclusionFilter();
-            const dataDTO: IRoleDTO = basaltKeyInclusionFilter.filter<IRoleDTO>(req.body as IRoleDTO, ['role'], true);
+            const dataDTO: IRoleDTO = this._basaltKeyInclusionFilter.filter<IRoleDTO>(req.body as IRoleDTO, ['role'], true);
             const roleBody: RoleBody<IRoleDTO> = new RoleBody(dataDTO);
             await this.validate(roleBody, req.headers['accept-language']);
             await this._createRoleUseCase.execute(dataDTO.role);
-            this.sendResponse(reply, 200, I18n.translate('http.handler.adminHandler.createRole', reply.request.headers['accept-language']));
+            this.sendResponse(reply, 200, I18n.translate('http.handler.adminRoleHandler.createRole', reply.request.headers['accept-language']));
         } catch (e) {
             if (e instanceof Error)
                 BasaltLogger.error({
@@ -42,15 +42,14 @@ export class AdminRolesHandler extends AbstractHandler {
 
     public getRoles = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const basaltKeyInclusionFilter: BasaltKeyInclusionFilter = new BasaltKeyInclusionFilter();
-            const dataDTO: IOptionFindDTO = basaltKeyInclusionFilter.filter<IOptionFindDTO>(req.query as IOptionFindDTO || {}, ['limit', 'offset'], true);
+            const dataDTO: IOptionFindDTO = this._basaltKeyInclusionFilter.filter<IOptionFindDTO>(req.query as IOptionFindDTO || {}, ['limit', 'offset'], true);
             const optionFindQuery: OptionFindQuery<IOptionFindDTO> = new OptionFindQuery(dataDTO);
             await this.validate(optionFindQuery, req.headers['accept-language']);
             const roles: IRoleDTO[] = await this._readRolesUseCase.execute(dataDTO);
             this.sendResponse(
                 reply,
                 200,
-                I18n.translate('http.handler.adminHandler.getRoles', reply.request.headers['accept-language']),
+                I18n.translate('http.handler.adminRoleHandler.getRoles', reply.request.headers['accept-language']),
                 {
                     roles,
                     count: roles.length,
@@ -68,8 +67,7 @@ export class AdminRolesHandler extends AbstractHandler {
 
     public getRole = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const basaltKeyInclusionFilter: BasaltKeyInclusionFilter = new BasaltKeyInclusionFilter();
-            const dataDTO: { id: string } = basaltKeyInclusionFilter
+            const dataDTO: { id: string } = this._basaltKeyInclusionFilter
                 .filter<{ id: string }>(
                     req.params as { id: string },
                     ['id'],
@@ -81,7 +79,7 @@ export class AdminRolesHandler extends AbstractHandler {
             this.sendResponse(
                 reply,
                 200,
-                I18n.translate('http.handler.adminHandler.getRoles', reply.request.headers['accept-language']),
+                I18n.translate('http.handler.adminRoleHandler.getRole', reply.request.headers['accept-language']),
                 {
                     role,
                 }
@@ -96,4 +94,32 @@ export class AdminRolesHandler extends AbstractHandler {
         }
     };
 
+    public updateRole = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            const idParam: { id: string } = this._basaltKeyInclusionFilter
+                .filter<{ id: string }>(
+                    req.params as { id: string },
+                    ['id'],
+                    true
+                );
+            const idParamDTO: IdParam = new IdParam(idParam.id);
+            const dataDTO: IRoleDTO = this._basaltKeyInclusionFilter.filter<IRoleDTO>(req.body as IRoleDTO, ['role'], true);
+            const roleBody: RoleBody<IRoleDTO> = new RoleBody(dataDTO);
+
+            await Promise.all([
+                this.validate(idParamDTO, req.headers['accept-language']),
+                this.validate(roleBody, req.headers['accept-language'])
+            ]);
+
+            await this._createRoleUseCase.execute(dataDTO.role);
+            this.sendResponse(reply, 200, I18n.translate('http.handler.adminRoleHandler.updateRole', reply.request.headers['accept-language']));
+        } catch (e) {
+            if (e instanceof Error)
+                BasaltLogger.error({
+                    error: e,
+                    trace: e.stack,
+                });
+            this.sendError(reply, e);
+        }
+    }
 }

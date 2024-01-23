@@ -7,6 +7,6 @@ export class ReadRole {
     public async execute (id: number): Promise<IRoleDTO | undefined> {
         return await this._roleModel.findOne([{
             id
-        }], {});
+        }]);
     }
 }

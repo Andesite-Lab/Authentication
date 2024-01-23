@@ -12,7 +12,7 @@ import {
     Login,
     Logout,
     Delete
-} from '@/Domain/UseCase';
+} from '@/Domain/UseCase/Auth';
 
 export class AuthHandler extends AbstractHandler {
     private readonly _registerUseCase: Register = new Register();
