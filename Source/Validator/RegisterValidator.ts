@@ -5,11 +5,13 @@ import {
     IsEmail,
     IsStrongPassword,
     MaxLength,
-    Matches
+    Matches,
+    IsDefined
 } from 'class-validator';
 
 import { ErrorValidatorKey } from '@/Common/Error';
 import mailBlacklist from './mailBlacklist.json';
+
 @JSONSchema({
     title: 'RegisterValidator schema',
     examples: [
@@ -27,8 +29,12 @@ import mailBlacklist from './mailBlacklist.json';
             address: faker.location.streetAddress(),
         },
     ],
+    required: ['email', 'password', 'username'],
 })
 export class RegisterValidator<T> {
+    @IsDefined({
+        message: ErrorValidatorKey.USERNAME_IS_REQUIRED
+    })
     @MinLength(4, {
         always: true,
         message: ErrorValidatorKey.USERNAME_MIN_LENGTH
@@ -39,17 +45,18 @@ export class RegisterValidator<T> {
 
     })
     @Matches(/^[a-zA-Z0-9_-]*$/, {
-        message: ErrorValidatorKey.USERNAME_MAX_LENGTH
+        message: ErrorValidatorKey.USERNAME_PATTERN
     })
     @JSONSchema({
         type: 'string',
-        minLength: 4,
-        maxLength: 20,
         pattern: '^[a-zA-Z0-9]*$',
         examples: [faker.string.alphanumeric({ length: 16 })],
     })
     public username: string | undefined;
 
+    @IsDefined({
+        message: ErrorValidatorKey.EMAIL_IS_REQUIRED
+    })
     @MaxLength(255, {
         always: true,
         message: ErrorValidatorKey.EMAIL_MAX_LENGTH
@@ -71,6 +78,9 @@ export class RegisterValidator<T> {
     })
     public email: string | undefined;
 
+    @IsDefined({
+        message: ErrorValidatorKey.PASSWORD_IS_REQUIRED
+    })
     @MaxLength(32, {
         always: true,
         message: ErrorValidatorKey.PASSWORD_MAX_LENGTH

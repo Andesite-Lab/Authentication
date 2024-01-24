@@ -1,44 +1,43 @@
 import { ErrorEntity } from '@/Common/Error';
 
 export enum ErrorValidatorKey {
+    USERNAME_IS_REQUIRED = 'USERNAME_IS_REQUIRED',
     USERNAME_MIN_LENGTH = 'USERNAME_MIN_LENGTH',
     USERNAME_MAX_LENGTH = 'USERNAME_MAX_LENGTH',
     USERNAME_PATTERN = 'USERNAME_PATTERN',
+
+    EMAIL_IS_REQUIRED = 'EMAIL_IS_REQUIRED',
     EMAIL_MIN_LENGTH = 'EMAIL_MIN_LENGTH',
     EMAIL_MAX_LENGTH = 'EMAIL_MAX_LENGTH',
     EMAIL_PATTERN_AND_BLACKLIST = 'EMAIL_PATTERN_AND_BLACKLIST',
+
     PASSWORD_MIN_LENGTH = 'PASSWORD_MIN_LENGTH',
     PASSWORD_MAX_LENGTH = 'PASSWORD_MAX_LENGTH',
     PASSWORD_PATTERN = 'PASSWORD_PATTERN',
-    EMAIL_OR_USERNAME_REQUIRED = 'EMAIL_OR_USERNAME_REQUIRED',
     PASSWORD_IS_REQUIRED = 'PASSWORD_IS_REQUIRED',
-    INVALID_ROLE = 'INVALID_ROLE',
-    INVALID_PERMISSION = 'INVALID_PERMISSION',
-    LIMIT_NOT_A_NUMBER = 'LIMIT_NOT_A_NUMBER',
-    OFFSET_NOT_A_NUMBER = 'OFFSET_NOT_A_NUMBER',
-    ID_NOT_A_NUMBER = 'ID_NOT_A_NUMBER',
-    UUID_NOT_VALID = 'UUID_NOT_VALID',
-}
 
-const ErrorValidatorKeyCode: { [p: string]: number } = {
-    [ErrorValidatorKey.USERNAME_MIN_LENGTH]: 400,
-    [ErrorValidatorKey.USERNAME_MAX_LENGTH]: 400,
-    [ErrorValidatorKey.USERNAME_PATTERN]: 400,
-    [ErrorValidatorKey.EMAIL_MIN_LENGTH]: 400,
-    [ErrorValidatorKey.EMAIL_MAX_LENGTH]: 400,
-    [ErrorValidatorKey.EMAIL_PATTERN_AND_BLACKLIST]: 400,
-    [ErrorValidatorKey.PASSWORD_MIN_LENGTH]: 400,
-    [ErrorValidatorKey.PASSWORD_MAX_LENGTH]: 400,
-    [ErrorValidatorKey.PASSWORD_PATTERN]: 400,
-    [ErrorValidatorKey.EMAIL_OR_USERNAME_REQUIRED]: 400,
-    [ErrorValidatorKey.PASSWORD_IS_REQUIRED]: 400,
-    [ErrorValidatorKey.INVALID_ROLE]: 400,
-    [ErrorValidatorKey.INVALID_PERMISSION]: 400,
-    [ErrorValidatorKey.LIMIT_NOT_A_NUMBER]: 400,
-    [ErrorValidatorKey.OFFSET_NOT_A_NUMBER]: 400,
-    [ErrorValidatorKey.ID_NOT_A_NUMBER]: 400,
-    [ErrorValidatorKey.UUID_NOT_VALID]: 400,
-};
+    EMAIL_OR_USERNAME_REQUIRED = 'EMAIL_OR_USERNAME_REQUIRED',
+
+    ROLE_IS_REQUIRED = 'ROLE_IS_REQUIRED',
+    INVALID_ROLE = 'INVALID_ROLE',
+    PERMISSION_IS_REQUIRED = 'PERMISSION_IS_REQUIRED',
+    INVALID_PERMISSION = 'INVALID_PERMISSION',
+    LIMIT_NOT_A_INTEGER = 'LIMIT_NOT_A_INTEGER',
+    OFFSET_NOT_A_INTEGER = 'OFFSET_NOT_A_INTEGER',
+    ID_IS_REQUIRED = 'ID_IS_REQUIRED',
+    ID_NOT_A_INTEGER = 'ID_NOT_A_INTEGER',
+    UUID_IS_REQUIRED = 'UUID_IS_REQUIRED',
+    UUID_NOT_VALID = 'UUID_NOT_VALID',
+    $IN_ARRAY_IS_EMPTY = '$IN_ARRAY_IS_EMPTY',
+    $NIN_ARRAY_IS_EMPTY = '$NIN_ARRAY_IS_EMPTY',
+    $EQ_NOT_VALID = '$EQ_NOT_VALID',
+    $NEQ_NOT_VALID = '$NEQ_NOT_VALID',
+    $MATCH_NOT_VALID = '$MATCH_NOT_VALID',
+    $LT_NOT_VALID = '$LT_NOT_VALID',
+    $LTE_NOT_VALID = '$LTE_NOT_VALID',
+    $GT_NOT_VALID = '$GT_NOT_VALID',
+    $GTE_NOT_VALID = '$GTE_NOT_VALID',
+}
 
 export class ErrorValidator extends ErrorEntity {
     public constructor(e: {
@@ -47,7 +46,7 @@ export class ErrorValidator extends ErrorEntity {
         interpolation?: { [key: string]: unknown }
     }) {
         super({
-            code: ErrorValidatorKeyCode[e.key],
+            code: 400,
             messageKey: `error.errorValidator.${e.key}`,
             detail: e.detail,
             interpolation: e.interpolation,

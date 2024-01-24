@@ -1,4 +1,4 @@
 export interface IPaginationOptionsDTO {
-    limit: string;
-    offset: string;
+    limit: number;
+    offset: number;
 }

@@ -48,5 +48,19 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             },
             attachValidation: true
         });
+
+        // fastify.route({
+        //     method: 'GET',
+        //     url: '/',
+        //     preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
+        //     handler: this._handler.find,
+        //     schema: {
+        //         tags: ['Admin'],
+        //         summary: 'Find by clause role',
+        //         params: validationMetadatasToSchemas().WhereClauseValidator
+        //     },
+        //     attachValidation: true
+        // });
+
     }
 }

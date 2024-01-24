@@ -8,10 +8,10 @@ export class FindAll<T extends NonNullable<unknown>> {
         this._model = new CrudModel(tableName);
     }
 
-    public async execute(paginationOptions: Partial<IPaginationOptionsDTO>): Promise<T[]> {
+    public async execute(paginationOptions: Partial<IPaginationOptionsDTO> | undefined): Promise<T[]> {
         return await this._model.findAll({}, {
-            limit: paginationOptions.limit ? parseInt(paginationOptions.limit) : undefined,
-            offset: paginationOptions.offset ? parseInt(paginationOptions.offset) : undefined,
+            limit: paginationOptions?.limit ? paginationOptions.limit : undefined,
+            offset: paginationOptions?.offset ? paginationOptions.offset : undefined,
         });
     }
 }

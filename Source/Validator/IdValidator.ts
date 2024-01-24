@@ -1,5 +1,6 @@
 import {
-    IsNumberString
+    IsNumberString,
+    IsDefined
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
 
@@ -10,12 +11,14 @@ import { ErrorValidatorKey } from '@/Common/Error';
 })
 export class IdValidator {
     @IsNumberString({}, {
-        message: ErrorValidatorKey.ID_NOT_A_NUMBER
+        message: ErrorValidatorKey.ID_NOT_A_INTEGER
+    })
+    @IsDefined({
+        message: ErrorValidatorKey.ID_IS_REQUIRED
     })
     @JSONSchema({
         examples: ['1', '2', '3', '4', '5']
     })
-
     public id: string | undefined;
 
     public constructor(id: string | undefined) {

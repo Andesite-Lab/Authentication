@@ -1,4 +1,8 @@
-import { IsNotEmpty, registerDecorator, ValidationOptions } from 'class-validator';
+import {
+    registerDecorator,
+    IsDefined,
+    ValidationOptions
+} from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
 import { faker } from '@faker-js/faker';
 
@@ -31,6 +35,7 @@ function HasEmailOrUsername(validationOptions?: ValidationOptions) {
 
 @JSONSchema({
     title: 'LoginValidator schema',
+    required: ['usernameOrEmail', 'password'],
 })
 export class LoginValidator {
     @HasEmailOrUsername({
@@ -43,7 +48,7 @@ export class LoginValidator {
     })
     public usernameOrEmail: EmailOrUsername;
 
-    @IsNotEmpty({
+    @IsDefined({
         message: ErrorValidatorKey.PASSWORD_IS_REQUIRED
     })
     @JSONSchema({

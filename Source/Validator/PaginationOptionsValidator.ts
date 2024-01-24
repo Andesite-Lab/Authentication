@@ -1,5 +1,5 @@
 import {
-    IsNumberString,
+    IsInt,
     IsOptional
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
@@ -10,17 +10,17 @@ import { ErrorValidatorKey } from '@/Common/Error';
     title: 'PaginationOptionsValidator schema',
 })
 export class PaginationOptionsValidator<T> {
-    @IsNumberString({}, {
-        message: ErrorValidatorKey.LIMIT_NOT_A_NUMBER
+    @IsInt({
+        message: ErrorValidatorKey.LIMIT_NOT_A_INTEGER,
     })
     @IsOptional()
-    public limit: string | undefined;
+    public limit: number | undefined;
 
-    @IsNumberString({}, {
-        message: ErrorValidatorKey.OFFSET_NOT_A_NUMBER,
+    @IsInt({
+        message: ErrorValidatorKey.OFFSET_NOT_A_INTEGER,
     })
     @IsOptional()
-    public offset: string | undefined;
+    public offset: number | undefined;
 
     public constructor(body: T) {
         Object.assign(this, body);

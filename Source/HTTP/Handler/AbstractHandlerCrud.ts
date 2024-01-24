@@ -31,12 +31,29 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
         this._findOneUseCase = new FindOne<T>(config.tableName);
     }
 
+    private insertEntities = async (entities: T[], language: string): Promise<void> => {
+        const filteredEntities: T[] = entities.map((entity: T) => this._basaltKeyInclusionFilter.filter<T>(entity, this._keyInclusionFilter, true));
+        const validatedEntities: U[] = filteredEntities.map((entity: T) => new this._validator(entity));
+        await Promise.all(validatedEntities.map(async (entity: U): Promise<void> => await this.validate(entity as object, language)));
+        await this._insertUseCase.execute(filteredEntities);
+    };
+
+    private checkReqPaginationOptions = (obj: unknown): IPaginationOptionsDTO | undefined => {
+        const rawOptions: { options: string } = obj as { options: string };
+        if (!rawOptions.options)
+            return undefined;
+        return this._basaltKeyInclusionFilter
+            .filter<IPaginationOptionsDTO>(
+                JSON.parse(rawOptions.options) as IPaginationOptionsDTO || {},
+                ['limit', 'offset'],
+                true
+            );
+    };
+
     public insert = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const filteredBody: T = this._basaltKeyInclusionFilter.filter<T>(req.body as T, this._keyInclusionFilter, true);
-            const body: U = new this._validator(filteredBody);
-            await this.validate(body as object, req.headers['accept-language']);
-            await this._insertUseCase.execute(filteredBody);
+            const bodies: T[] = Array.isArray(req.body) ? req.body : [req.body];
+            await this.insertEntities(bodies, reply.request.headers['accept-language'] || 'en');
             this.sendResponse(
                 reply,
                 200,
@@ -56,8 +73,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
 
     public findAll = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const paginationOptionsDTO: IPaginationOptionsDTO = this._basaltKeyInclusionFilter
-                .filter<IPaginationOptionsDTO>(req.query as IPaginationOptionsDTO || {}, ['limit', 'offset'], true);
+            const paginationOptionsDTO: IPaginationOptionsDTO | undefined = this.checkReqPaginationOptions(req.query);
             const paginationOptionsValidator: PaginationOptionsValidator<IPaginationOptionsDTO> = new PaginationOptionsValidator(paginationOptionsDTO);
             await this.validate(paginationOptionsValidator, req.headers['accept-language']);
             const data: T[] = await this._findAllUseCase.execute(paginationOptionsDTO);
@@ -88,7 +104,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 .filter<{ id: string }>(req.params as { id: string }, ['id'], true);
             const idValidator: IdValidator = new IdValidator(filteredId.id);
             await this.validate(idValidator, req.headers['accept-language']);
-
             const data: T | undefined = await this._findOneUseCase.execute({
                 id: parseInt(filteredId.id),
             } as unknown as T);
