@@ -228,6 +228,35 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     }
 
+    public async deleteAll(
+        columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
+        options?: {
+            toThrow?: boolean;
+            transaction?: Transaction;
+        }
+    ): Promise<T[]> {
+        try {
+            let query = this._knex
+                .del()
+                .from(this._tableName)
+                .returning(this.transformColumnsToArray(columnToSelect));
+            if (options?.transaction)
+                query = query.transacting(options.transaction);
+
+            const result: T[] = await query;
+            if (result.length === 0)
+                throw new ErrorDatabase({
+                    key: ErrorDatabaseKey.MODEL_NOT_DELETED,
+                    interpolation: { tableName: this._tableName },
+                });
+            return result;
+        } catch (err) {
+            if (options?.toThrow ?? true)
+                this.forwardException(err);
+            return [];
+        }
+    }
+
     public async truncate(options?: {
         toThrow?: boolean;
         transaction?: Transaction;
