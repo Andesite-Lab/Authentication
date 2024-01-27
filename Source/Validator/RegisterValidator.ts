@@ -6,7 +6,7 @@ import {
     IsStrongPassword,
     MaxLength,
     Matches,
-    IsDefined
+    IsEmpty
 } from 'class-validator';
 
 import { ErrorValidatorKey } from '@/Common/Error';
@@ -29,12 +29,11 @@ import mailBlacklist from './mailBlacklist.json';
             address: faker.location.streetAddress(),
         },
     ],
-    required: ['email', 'password', 'username'],
 })
 export class RegisterValidator<T> {
-    @IsDefined({
-        message: ErrorValidatorKey.USERNAME_IS_REQUIRED
-    })
+    // @IsEmpty({
+    //     message: ErrorValidatorKey.USERNAME_IS_REQUIRED
+    // })
     @MinLength(4, {
         always: true,
         message: ErrorValidatorKey.USERNAME_MIN_LENGTH
@@ -54,9 +53,9 @@ export class RegisterValidator<T> {
     })
     public username: string | undefined;
 
-    @IsDefined({
-        message: ErrorValidatorKey.EMAIL_IS_REQUIRED
-    })
+    // @IsEmpty({
+    //     message: ErrorValidatorKey.EMAIL_IS_REQUIRED
+    // })
     @MaxLength(255, {
         always: true,
         message: ErrorValidatorKey.EMAIL_MAX_LENGTH
@@ -78,9 +77,9 @@ export class RegisterValidator<T> {
     })
     public email: string | undefined;
 
-    @IsDefined({
-        message: ErrorValidatorKey.PASSWORD_IS_REQUIRED
-    })
+    // @IsEmpty({
+    //     message: ErrorValidatorKey.PASSWORD_IS_REQUIRED
+    // })
     @MaxLength(32, {
         always: true,
         message: ErrorValidatorKey.PASSWORD_MAX_LENGTH

@@ -1,6 +1,9 @@
 import {
     Matches,
-    IsDefined
+    IsOptional,
+    IsDate,
+    IsInt
+    // IsDefined
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
 
@@ -13,13 +16,29 @@ export class RoleValidator<T> {
     @Matches(/^[A-Za-z0-9_.-]+$/, {
         message: ErrorValidatorKey.INVALID_ROLE
     })
-    @IsDefined({
-        message: ErrorValidatorKey.ROLE_IS_REQUIRED
-    })
     @JSONSchema({
         examples: ['admin', 'client', 'professional']
     })
+    @IsOptional()
     public role: string | undefined;
+
+    @IsDate({
+        message: ErrorValidatorKey.INVALID_DATE
+    })
+    @IsOptional()
+    public createdAt: Date | undefined;
+
+    @IsDate({
+        message: ErrorValidatorKey.INVALID_DATE
+    })
+    @IsOptional()
+    public updatedAt: Date | undefined;
+
+    @IsInt({
+        message: ErrorValidatorKey.ID_NOT_A_INTEGER
+    })
+    @IsOptional()
+    public id: number | undefined;
 
     public constructor(body: T) {
         Object.assign(this, body);

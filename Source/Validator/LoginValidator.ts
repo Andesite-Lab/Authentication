@@ -1,6 +1,6 @@
 import {
     registerDecorator,
-    IsDefined,
+    // IsEmpty,
     ValidationOptions
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
@@ -35,7 +35,6 @@ function HasEmailOrUsername(validationOptions?: ValidationOptions) {
 
 @JSONSchema({
     title: 'LoginValidator schema',
-    required: ['usernameOrEmail', 'password'],
 })
 export class LoginValidator {
     @HasEmailOrUsername({
@@ -48,9 +47,9 @@ export class LoginValidator {
     })
     public usernameOrEmail: EmailOrUsername;
 
-    @IsDefined({
-        message: ErrorValidatorKey.PASSWORD_IS_REQUIRED
-    })
+    // @IsEmpty({
+    //     message: ErrorValidatorKey.PASSWORD_IS_REQUIRED
+    // })
     @JSONSchema({
         type: 'string',
         minLength: 6,
