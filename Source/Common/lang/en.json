@@ -60,16 +60,16 @@
       "EMAIL_MIN_LENGTH": "The email must be at least 10 characters long.",
       "EMAIL_MAX_LENGTH": "The email must be less than 255 characters long.",
       "EMAIL_PATTERN_AND_BLACKLIST": "The email must be a valid email address and not in the blacklist.",
-
       "PASSWORD_MIN_LENGTH": "The password must be at least 8 characters long.",
       "PASSWORD_MAX_LENGTH": "The password must be less than 255 characters long.",
       "PASSWORD_PATTERN": "The password must contain at least one uppercase letter, one lowercase letter, one number and one special character.",
       "EMAIL_OR_USERNAME_REQUIRED": "The email or username is required.",
       "PASSWORD_IS_REQUIRED": "The password is required.",
+      "INVALID_DATE": "The date is invalid.",
       "ROLE_IS_REQUIRED": "The role is required.",
-      "INVALID_ROLE": "The role is invalid. (A-Z, a-z, 0-9, _, -, .)",
+      "INVALID_ROLE": "The role is invalid. (string)(A-Z, a-z, 0-9, _, -, .)",
       "PERMISSION_IS_REQUIRED": "The permission is required.",
-      "INVALID_PERMISSION": "The permission is invalid. (A-Z, a-z, 0-9, _, -, .)",
+      "INVALID_PERMISSION": "The permission is invalid. (string)(A-Z, a-z, 0-9, _, -, .)",
       "LIMIT_NOT_A_INTEGER": "The limit must be an integer.",
       "OFFSET_NOT_A_INTEGER": "The offset must be an integer.",
       "ID_IS_REQUIRED": "The id is required.",
@@ -136,8 +136,12 @@
         "findAll": "{{tableName}} retrieved successfully.",
         "find": "{{tableName}} retrieved successfully.",
         "findOne": "{{tableName}} retrieved successfully.",
+        "updateAll": "{{tableName}} update successful.",
         "update": "{{tableName}} update successful.",
-        "delete": "{{tableName}} deletion successful."
+        "updateOne": "{{tableName}} update successful.",
+        "deleteAll": "{{tableName}} deletion successful.",
+        "delete": "{{tableName}} deletion successful.",
+        "deleteOne": "{{tableName}} deletion successful."
       },
       "adminPermissionHandler": {
         "createPermission": "Permission creation successful.",

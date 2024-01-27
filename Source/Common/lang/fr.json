@@ -65,10 +65,11 @@
       "PASSWORD_PATTERN": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
       "EMAIL_OR_USERNAME_REQUIRED": "L'email ou le nom d'utilisateur est requis.",
       "PASSWORD_IS_REQUIRED": "Le mot de passe est requis.",
+      "INVALID_DATE": "La date n'est pas valide.",
       "ROLE_IS_REQUIRED": "Le rôle est requis.",
-      "INVALID_ROLE": "Le rôle n'est pas valide. (A-Z, a-z, 0-9, _, -, .)",
+      "INVALID_ROLE": "Le rôle n'est pas valide. (string)(A-Z, a-z, 0-9, _, -, .)",
       "PERMISSION_IS_REQUIRED": "La permission est requise.",
-      "INVALID_PERMISSION": "La permission n'est pas valide. (A-Z, a-z, 0-9, _, -, .)",
+      "INVALID_PERMISSION": "La permission n'est pas valide. (string)(A-Z, a-z, 0-9, _, -, .)",
       "LIMIT_NOT_A_INTEGER": "La limite doit être un nombre entier.",
       "OFFSET_NOT_A_INTEGER": "Le décalage doit être un nombre entier.",
       "ID_IS_REQUIRED": "L'ID est requis.",
@@ -135,8 +136,12 @@
         "findAll": "Récupération {{tableName}} réussie.",
         "find": "Récupération {{tableName}} réussie.",
         "findOne": "Récupération {{tableName}} réussie.",
+        "updateAll": "Mise à jour {{tableName}} réussie.",
         "update": "Mise à jour {{tableName}} réussie.",
-        "delete": "Suppression {{tableName}} réussie."
+        "updateOne": "Mise à jour {{tableName}} réussie.",
+        "deleteAll": "Suppression {{tableName}} réussie.",
+        "delete": "Suppression {{tableName}} réussie.",
+        "deleteOne": "Suppression {{tableName}} réussie."
       },
       "adminPermissionHandler": {
         "createPermission": "Permission créée avec succès.",
