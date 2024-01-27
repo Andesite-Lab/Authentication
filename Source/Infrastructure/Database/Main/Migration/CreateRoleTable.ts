@@ -19,9 +19,17 @@ export class CreateRoleTable {
                 .primary()
                 .comment('The id of the role');
         });
+
+        await knex.raw(`
+            CREATE TRIGGER update_role_updated_at
+            BEFORE UPDATE ON role
+            FOR EACH ROW
+            EXECUTE PROCEDURE update_updated_at_column();
+        `);
     }
 
     public static async down(knex: Knex): Promise<void> {
+        await knex.raw('DROP TRIGGER IF EXISTS update_role_updated_at ON role');
         await knex.schema.dropTableIfExists('role');
     }
 }

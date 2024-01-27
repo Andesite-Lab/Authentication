@@ -1,16 +1,18 @@
 import { Knex } from 'knex';
 
 import {
-    CreateCredentialTable,
     CreateCredentialRoleTable,
+    CreateCredentialTable,
+    CreateFunctionUpdatedAt,
     CreatePermissionTable,
     CreateRolePermissionTable,
-    CreateRoleTable
+    CreateRoleTable,
 } from '@/Infrastructure/Database/Main/Migration';
 
 export class MigrationSource implements Knex.MigrationSource<unknown> {
     private migrations: Map<string, Knex.Migration> = new Map<string, Knex.Migration>(
         [
+            ['CreateFunctionUpdatedAt', CreateFunctionUpdatedAt],
             ['CreateCredentialTable', CreateCredentialTable],
             ['CreateRoleTable', CreateRoleTable],
             ['CreatePermissionTable', CreatePermissionTable],

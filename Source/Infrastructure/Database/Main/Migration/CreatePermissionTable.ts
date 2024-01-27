@@ -19,9 +19,16 @@ export class CreatePermissionTable {
                 .primary()
                 .comment('The id of the permission');
         });
+        await knex.raw(`
+            CREATE TRIGGER update_permission_updated_at
+            BEFORE UPDATE ON permission
+            FOR EACH ROW
+            EXECUTE PROCEDURE update_updated_at_column();
+        `);
     }
 
     public static async down(knex: Knex): Promise<void> {
+        await knex.raw('DROP TRIGGER IF EXISTS update_permission_updated_at ON permission');
         await knex.schema.dropTableIfExists('permission');
     }
 }
