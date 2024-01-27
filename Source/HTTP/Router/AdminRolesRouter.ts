@@ -18,7 +18,7 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             handler: this._handler.insert   ,
             schema: {
                 tags: ['Admin'],
-                summary: 'Insert a new role',
+                summary: 'Insert one role or many roles',
                 body: validationMetadatasToSchemas().RoleValidator
             },
             attachValidation: true
