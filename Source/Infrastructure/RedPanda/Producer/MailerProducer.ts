@@ -1,4 +1,5 @@
-import { RedpandaProducer, Topics } from '@/Infrastructure/RedPanda/Producer';
+import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
+import { Topics } from '@/Infrastructure/RedPanda';
 
 export enum MailTypes {
     WELCOME = 'welcome',
@@ -12,7 +13,7 @@ export class MailerProducer {
         mailType: MailTypes,
         scheduledEmailDate: string | undefined = undefined,
     ): Promise<void> {
-        await RedpandaProducer.instance.send({
+        await RedPandaProducer.instance.send({
             topic: Topics.MAILER_MICROSERVICE,
             messages: [
                 {
