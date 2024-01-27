@@ -49,18 +49,56 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             attachValidation: true
         });
 
-        // fastify.route({
-        //     method: 'GET',
-        //     url: '/',
-        //     preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
-        //     handler: this._handler.find,
-        //     schema: {
-        //         tags: ['Admin'],
-        //         summary: 'Find by clause role',
-        //         params: validationMetadatasToSchemas().WhereClauseValidator
-        //     },
-        //     attachValidation: true
-        // });
+        fastify.route({
+            method: 'GET',
+            url: '/',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
+            handler: this._handler.find,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Find by clause role',
+            },
+            attachValidation: true
+        });
+
+        fastify.route({
+            method: 'PUT',
+            url: '/all',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.update'], false)],
+            handler: this._handler.updateAll,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Update all roles',
+                body: validationMetadatasToSchemas().RoleValidator
+            },
+            attachValidation: true
+        });
+
+        fastify.route({
+            method: 'PUT',
+            url: '/:id',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.update'], false)],
+            handler: this._handler.updateOneById,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Update one role',
+                params: validationMetadatasToSchemas().IdValidator,
+                body: validationMetadatasToSchemas().RoleValidator
+            },
+            attachValidation: true
+        });
+
+        fastify.route({
+            method: 'PUT',
+            url: '/',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            handler: this._handler.update,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Update by clause role',
+            },
+            attachValidation: true
+        });
 
     }
 }
