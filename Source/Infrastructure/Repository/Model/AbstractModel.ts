@@ -166,6 +166,36 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     }
 
+    public async updateAll(
+        entity: Partial<T>,
+        columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
+        options?: {
+            toThrow?: boolean;
+            transaction?: Transaction;
+        }
+    ): Promise<T[]> {
+        try {
+            let query = this._knex
+                .update(entity)
+                .from(this._tableName)
+                .returning(this.transformColumnsToArray(columnToSelect));
+            if (options?.transaction)
+                query = query.transacting(options.transaction);
+
+            const result: T[] = await query;
+            if (result.length === 0)
+                throw new ErrorDatabase({
+                    key: ErrorDatabaseKey.MODEL_NOT_UPDATED,
+                    interpolation: { tableName: this._tableName },
+                });
+            return result;
+        } catch (err) {
+            if (options?.toThrow ?? true)
+                this.forwardException(err);
+            return [];
+        }
+    }
+
     public async delete(
         entitiesToDelete: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[],
         columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
