@@ -134,14 +134,16 @@
       "CRUD": {
         "insert": "Création {{tableName}} réussie.",
         "findAll": "Récupération {{tableName}} réussie.",
-        "find": "Récupération {{tableName}} réussie.",
         "findOne": "Récupération {{tableName}} réussie.",
+        "find": "Récupération {{tableName}} réussie.",
         "updateAll": "Mise à jour {{tableName}} réussie.",
-        "update": "Mise à jour {{tableName}} réussie.",
         "updateOne": "Mise à jour {{tableName}} réussie.",
+        "update": "Mise à jour {{tableName}} réussie.",
         "deleteAll": "Suppression {{tableName}} réussie.",
+        "deleteOne": "Suppression {{tableName}} réussie.",
         "delete": "Suppression {{tableName}} réussie.",
-        "deleteOne": "Suppression {{tableName}} réussie."
+        "truncate": "Troncature {{tableName}} réussie.",
+        "count": "Comptage {{tableName}} réussi."
       },
       "adminPermissionHandler": {
         "createPermission": "Permission créée avec succès.",

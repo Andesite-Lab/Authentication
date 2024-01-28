@@ -134,14 +134,16 @@
       "CRUD": {
         "insert": "{{tableName}} insertion successful.",
         "findAll": "{{tableName}} retrieved successfully.",
-        "find": "{{tableName}} retrieved successfully.",
         "findOne": "{{tableName}} retrieved successfully.",
+        "find": "{{tableName}} retrieved successfully.",
         "updateAll": "{{tableName}} update successful.",
-        "update": "{{tableName}} update successful.",
         "updateOne": "{{tableName}} update successful.",
+        "update": "{{tableName}} update successful.",
         "deleteAll": "{{tableName}} deletion successful.",
+        "deleteOne": "{{tableName}} deletion successful.",
         "delete": "{{tableName}} deletion successful.",
-        "deleteOne": "{{tableName}} deletion successful."
+        "truncate": "{{tableName}} truncate successful.",
+        "count": "{{tableName}} count successful."
       },
       "adminPermissionHandler": {
         "createPermission": "Permission creation successful.",
