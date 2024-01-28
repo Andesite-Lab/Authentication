@@ -100,5 +100,66 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
             attachValidation: true
         });
 
+        fastify.route({
+            method: 'DELETE',
+            url: '/all',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            handler: this._handler.deleteAll,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Delete all roles',
+            },
+            attachValidation: true
+        });
+
+        fastify.route({
+            method: 'DELETE',
+            url: '/:id',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            handler: this._handler.deleteOneById,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Delete one role',
+                params: validationMetadatasToSchemas().IdValidator
+            },
+            attachValidation: true
+        });
+
+        fastify.route({
+            method: 'DELETE',
+            url: '/',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            handler: this._handler.delete,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Delete by clause role',
+            },
+            attachValidation: true
+        });
+
+        fastify.route({
+            method: 'DELETE',
+            url: '/truncate',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            handler: this._handler.truncate,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Truncate role',
+            },
+            attachValidation: true
+        });
+
+        fastify.route({
+            method: 'GET',
+            url: '/count',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
+            handler: this._handler.count,
+            schema: {
+                tags: ['Admin'],
+                summary: 'Count role',
+            },
+            attachValidation: true
+        });
+
     }
 }

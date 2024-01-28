@@ -9,7 +9,12 @@ import {
     Insert,
     UpdateAll,
     UpdateOne,
-    Update
+    Update,
+    DeleteAll,
+    DeleteOne,
+    Delete,
+    Truncate,
+    Count
 } from '@/Domain/UseCase/CRUD';
 import { I18n } from '@/Config';
 import { IdValidator, PaginationOptionsValidator, UuidValidator, WhereClauseValidator } from '@/Validator';
@@ -28,6 +33,11 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
     private readonly _updateAllUseCase: UpdateAll<T>;
     private readonly _updateOneUseCase: UpdateOne<T>;
     private readonly _updateUseCase: Update<T>;
+    private readonly _deleteAllUseCase: DeleteAll<T>;
+    private readonly _deleteOneUseCase: DeleteOne<T>;
+    private readonly _deleteUseCase: Delete<T>;
+    private readonly _truncateUseCase: Truncate<T>;
+    private readonly _countUseCase: Count<T>;
 
     public constructor(config: {
         tableName: string
@@ -45,6 +55,11 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
         this._updateAllUseCase = new UpdateAll<T>(config.tableName);
         this._updateOneUseCase = new UpdateOne<T>(config.tableName);
         this._updateUseCase = new Update<T>(config.tableName);
+        this._deleteAllUseCase = new DeleteAll<T>(config.tableName);
+        this._deleteOneUseCase = new DeleteOne<T>(config.tableName);
+        this._deleteUseCase = new Delete<T>(config.tableName);
+        this._truncateUseCase = new Truncate<T>(config.tableName);
+        this._countUseCase = new Count<T>(config.tableName);
     }
 
     private filterDuplicate: (data: T[]) => T[] = (data: T[]) => {
@@ -412,6 +427,163 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                     error: e,
                     trace: e.stack,
                 });
+            this.sendError(reply, e);
+        }
+    };
+
+    public deleteAll = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            await this._deleteAllUseCase.execute();
+            this.sendResponse(
+                reply,
+                200,
+                I18n.translate('http.handler.CRUD.deleteAll', reply.request.headers['accept-language'], {
+                    tableName: this._tableName,
+                })
+            );
+        } catch (e) {
+            this.sendError(reply, e);
+        }
+    };
+
+    public deleteOneById = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            const filteredId: { id: string } = this._basaltKeyInclusionFilter
+                .filter<{ id: string }>(req.params as { id: string }, ['id'], true);
+            const idValidator: IdValidator = new IdValidator(filteredId.id);
+            await this.validate(idValidator, req.headers['accept-language']);
+            await this._deleteOneUseCase.execute({
+                id: parseInt(filteredId.id),
+            } as unknown as T);
+            this.sendResponse(
+                reply,
+                200,
+                I18n.translate('http.handler.CRUD.deleteOne', reply.request.headers['accept-language'], {
+                    tableName: this._tableName,
+                })
+            );
+        } catch (e) {
+            this.sendError(reply, e);
+        }
+    };
+
+    public deleteOneByUuid = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            const filteredUuid: { uuid: string } = this._basaltKeyInclusionFilter
+                .filter<{ uuid: string }>(req.params as { uuid: string }, ['uuid'], true);
+            const uuidValidator: UuidValidator = new UuidValidator(filteredUuid.uuid);
+            await this.validate(uuidValidator, req.headers['accept-language']);
+            await this._deleteOneUseCase.execute({
+                uuid: filteredUuid.uuid,
+            } as unknown as T);
+            this.sendResponse(
+                reply,
+                200,
+                I18n.translate('http.handler.CRUD.deleteOne', reply.request.headers['accept-language'], {
+                    tableName: this._tableName,
+                })
+            );
+        } catch (e) {
+            this.sendError(reply, e);
+        }
+    };
+
+    public delete = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            const entitiesEq: Partial<T>[] = this.checkReqEntitiesEq(req.query);
+            const entitiesConditional: Partial<Record<keyof T, IWhereClauseDTO>>[] = this.checkReqEntitiesConditional(req.query);
+
+            await Promise.all(
+                [
+                    this.validateEntitiesEq(entitiesEq, req.headers['accept-language']),
+                    this.validateEntitiesConditional(entitiesConditional, req.headers['accept-language'])
+                ]
+            );
+
+            let data: T[] = [];
+            if (entitiesEq.length > 0) {
+                const dataEq: T[] = await this._deleteUseCase.execute(entitiesEq);
+                data = data.concat(dataEq);
+            }
+            if (entitiesConditional.length > 0) {
+                const dataCd: T[] = await this._deleteUseCase.execute(entitiesConditional);
+                data = data.concat(dataCd);
+            }
+            data = this.filterDuplicate(data);
+
+            this.sendResponse(
+                reply,
+                200,
+                I18n.translate('http.handler.CRUD.delete', reply.request.headers['accept-language'], {
+                    tableName: this._tableName,
+                }),
+                {
+                    data,
+                    count: data.length,
+                }
+            );
+        } catch (e) {
+            this.sendError(reply, e);
+        }
+    };
+
+    public truncate = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            await this._truncateUseCase.execute();
+            this.sendResponse(
+                reply,
+                200,
+                I18n.translate('http.handler.CRUD.truncate', reply.request.headers['accept-language'], {
+                    tableName: this._tableName,
+                })
+            );
+        } catch (e) {
+            this.sendError(reply, e);
+        }
+    };
+
+    public count = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            const paginationOptionsDTO: IPaginationOptionsDTO | undefined = this.checkReqPaginationOptions(req.query);
+            const paginationOptionsValidator: PaginationOptionsValidator<IPaginationOptionsDTO> = new PaginationOptionsValidator(paginationOptionsDTO);
+
+
+            const entitiesEq: Partial<T>[] = this.checkReqEntitiesEq(req.query);
+            const entitiesConditional: Partial<Record<keyof T, IWhereClauseDTO>>[] = this.checkReqEntitiesConditional(req.query);
+
+            await Promise.all(
+                [
+                    this.validateEntitiesEq(entitiesEq, req.headers['accept-language']),
+                    this.validateEntitiesConditional(entitiesConditional, req.headers['accept-language']),
+                    this.validate(paginationOptionsValidator, req.headers['accept-language'])
+                ]
+            );
+
+            let data: number = 0;
+            if (entitiesEq.length > 0) {
+                const dataEq: number = await this._countUseCase.execute(entitiesEq, paginationOptionsDTO);
+                data += dataEq;
+            }
+            if (entitiesConditional.length > 0) {
+                const dataCd: number = await this._countUseCase.execute(entitiesConditional, paginationOptionsDTO);
+                data += dataCd;
+            }
+            else {
+                const dataCd: number = await this._countUseCase.execute(undefined, paginationOptionsDTO);
+                data += dataCd;
+            }
+
+            this.sendResponse(
+                reply,
+                200,
+                I18n.translate('http.handler.CRUD.count', reply.request.headers['accept-language'], {
+                    tableName: this._tableName,
+                }),
+                {
+                    data,
+                }
+            );
+        } catch (e) {
             this.sendError(reply, e);
         }
     };

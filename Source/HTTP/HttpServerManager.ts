@@ -89,7 +89,7 @@ export class HttpServerManager {
         });
     }
 
-    public async stop(): Promise<void> {
+    public stop(): Promise<void> {
         return this._app.close();
     }
 }
