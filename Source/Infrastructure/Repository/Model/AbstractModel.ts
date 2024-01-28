@@ -395,7 +395,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
             if (options?.transaction)
                 query = query.transacting(options.transaction);
             const result: Record<string, number>[] = await query as unknown as Record<string, number>[];
-            return result[0].count;
+            return parseInt(result[0].count.toString());
         } catch (err) {
             if (options?.toThrow ?? true)
                 this.forwardException(err);
