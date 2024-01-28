@@ -1,0 +1,69 @@
+{
+  "name": "Authentification",
+  "version": "1.0.0",
+  "description": "Authentification - Microservice",
+  "main": "Build/App.js",
+  "types": "Build/App.d.ts",
+  "scripts": {
+    "fix-lint": "eslint --fix . --ext .ts",
+    "lint": "eslint . --ext .ts",
+    "check-types": "tsc --noEmit",
+    "dev": "cross-env ESBUILD_ENV=dev node esbuild.config.js & node wait-and-watch.js",
+    "dev::windows": "start cross-env ESBUILD_ENV=dev node esbuild.config.js && start node wait-and-watch.js",
+    "build": "tsc --noEmit && cross-env ESBUILD_ENV=prod node esbuild.config.js",
+    "start": "cross-env NODE_ENV=production --env-file=./.env node Build/App.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andesite-Lab/Authentification.git"
+  },
+  "keywords": [
+    "andesite",
+    "andesite-authentification",
+    "authentification"
+  ],
+  "author": "Ruby",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Andesite-Lab/Authentification/issues"
+  },
+  "homepage": "https://github.com/Andesite-Lab/Authentification#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.7",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "esbuild": "^0.19.12",
+    "esbuild-plugin-alias": "^0.2.1",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@basalt-lab/basalt-auth": "^1.0.3",
+    "@basalt-lab/basalt-helper": "^1.1.2",
+    "@basalt-lab/basalt-logger": "^1.5.1",
+    "@basalt-lab/basalt-socket": "^1.4.1",
+    "@faker-js/faker": "^8.4.0",
+    "@fastify/cookie": "^9.3.1",
+    "@fastify/cors": "^8.5.0",
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/helmet": "^11.1.1",
+    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^2.1.0",
+    "@types/source-map-support": "^0.5.10",
+    "class-validator": "^0.14.1",
+    "class-validator-jsonschema": "^5.0.0",
+    "commander": "^11.1.0",
+    "cross-env": "^7.0.3",
+    "fastify": "^4.25.2",
+    "i18next": "^23.7.20",
+    "ioredis": "^5.3.2",
+    "kafkajs": "^2.2.4",
+    "knex": "^3.1.0",
+    "pg": "^8.11.3",
+    "source-map-support": "^0.5.21"
+  }
+}
