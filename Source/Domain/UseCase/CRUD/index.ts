@@ -5,3 +5,8 @@ export * from './Find';
 export * from './UpdateAll';
 export * from './UpdateOne';
 export * from './Update';
+export * from './DeleteAll';
+export * from './DeleteOne';
+export * from './Delete';
+export * from './Truncate';
+export * from './Count';

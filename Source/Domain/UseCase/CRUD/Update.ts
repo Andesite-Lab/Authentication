@@ -8,7 +8,7 @@ export class Update<T extends NonNullable<unknown>> {
         this._model = new CrudModel(tableName);
     }
 
-    public async execute(newEntity: T, entitiesToUpdate: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[]): Promise<T[]> {
-        return await this._model.update(newEntity, entitiesToUpdate);
+    public execute(newEntity: T, entitiesToUpdate: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[]): Promise<T[]> {
+        return this._model.update(newEntity, entitiesToUpdate);
     }
 }

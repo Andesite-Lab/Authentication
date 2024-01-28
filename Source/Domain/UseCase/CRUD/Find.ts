@@ -8,7 +8,7 @@ export class Find<T extends NonNullable<unknown>> {
         this._model = new CrudModel(tableName);
     }
 
-    public async execute(entities: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[], option: IPaginationOptionsDTO | undefined): Promise<T[]> {
-        return await this._model.find(entities, {}, option);
+    public execute(entities: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[], option: IPaginationOptionsDTO | undefined): Promise<T[]> {
+        return this._model.find(entities, {}, option);
     }
 }

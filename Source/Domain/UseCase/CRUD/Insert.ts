@@ -7,7 +7,7 @@ export class Insert<T extends NonNullable<unknown>> {
         this._model = new CrudModel(tableName);
     }
 
-    public async execute (entity: T | T[]): Promise<T[]> {
-        return await this._model.insert([...(Array.isArray(entity) ? entity : [entity])]);
+    public execute (entity: T | T[]): Promise<T[]> {
+        return this._model.insert([...(Array.isArray(entity) ? entity : [entity])]);
     }
 }

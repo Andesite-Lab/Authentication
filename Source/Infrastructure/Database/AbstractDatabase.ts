@@ -94,12 +94,12 @@ export class AbstractDatabase {
         }, true);
     }
 
-    public async runSeeders(): Promise<unknown> {
+    public runSeeders(): Promise<unknown> {
         if (!this._database)
             throw new ErrorDatabase({
                 key: ErrorDatabaseKey.DB_NOT_CONNECTED
             });
-        return await this._database.seed.run({
+        return this._database.seed.run({
             seedSource: new SeedSource(),
         });
     }

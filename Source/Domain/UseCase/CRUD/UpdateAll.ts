@@ -7,7 +7,7 @@ export class UpdateAll<T extends NonNullable<unknown>> {
         this._model = new CrudModel(tableName);
     }
 
-    public async execute(newEntity: T): Promise<T[]> {
-        return await this._model.updateAll(newEntity);
+    public execute(newEntity: T): Promise<T[]> {
+        return this._model.updateAll(newEntity);
     }
 }

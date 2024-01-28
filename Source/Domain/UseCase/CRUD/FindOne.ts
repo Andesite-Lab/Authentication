@@ -7,7 +7,7 @@ export class FindOne<T extends NonNullable<unknown>> {
         this._model = new CrudModel(tableName);
     }
 
-    public async execute(entity: T): Promise<T | undefined> {
-        return await this._model.findOne([entity]);
+    public execute(entity: T): Promise<T | undefined> {
+        return this._model.findOne([entity]);
     }
 }
