@@ -1,6 +1,9 @@
 import {
     Matches,
-    IsDefined
+    IsDefined,
+    IsDate,
+    IsOptional,
+    IsInt
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
 
@@ -20,6 +23,24 @@ export class PermissionValidator<T> {
         examples: ['admin', 'credential', 'credential.read', 'credential.update', 'credential.delete']
     })
     public permission: string | undefined;
+
+    @IsDate({
+        message: ErrorValidatorKey.INVALID_DATE
+    })
+    @IsOptional()
+    public createdAt: Date | undefined;
+
+    @IsDate({
+        message: ErrorValidatorKey.INVALID_DATE
+    })
+    @IsOptional()
+    public updatedAt: Date | undefined;
+
+    @IsInt({
+        message: ErrorValidatorKey.ID_NOT_A_INTEGER
+    })
+    @IsOptional()
+    public id: number | undefined;
 
     public constructor(body: T) {
         Object.assign(this, body);
