@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.1](https://github.com/Andesite-Lab/Authentification/compare/v1.0.0...v1.0.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* add log error ([cdb48e8](https://github.com/Andesite-Lab/Authentification/commit/cdb48e8f7f04b366175c5ab81d50c3313e865d34))
+
+
+### Build System
+
+* add and improve scripts + update packages ([3443bb7](https://github.com/Andesite-Lab/Authentification/commit/3443bb7c8ada9ec6f1feccd3aa7ed67a11877b91))
+
+
+### Continuous Integration
+
+* add dockerfile + workflow file ([04a32fc](https://github.com/Andesite-Lab/Authentification/commit/04a32fcbfccae7cb3c4da9d6ea39f463c7e1696a))
+
 ## 1.0.0 (2024-01-28)
 
 
