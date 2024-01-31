@@ -25,7 +25,7 @@ export class SwaggerPlugin implements IPlugin {
                 tags: [
                     { name: 'Admin', description: 'Admin related end-points' },
                     { name: 'Auth', description: 'Auth related end-points' },
-                    { name: 'Status', description: 'Status related end-points' },
+                    { name: 'Microservice', description: 'Microservice related end-points' },
                     { name: 'Token', description: 'Token related end-points' },
                 ],
                 components: {

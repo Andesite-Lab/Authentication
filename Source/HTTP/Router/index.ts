@@ -1,5 +1,5 @@
 export * from './AbstractRouter';
-export * from './StatusRouter';
+export * from './MicroserviceRouter';
 export * from './AuthRouter';
 export * from './TokenRouter';
 export * from './AdminRolesRouter';
