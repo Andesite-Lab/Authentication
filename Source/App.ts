@@ -206,10 +206,9 @@ commander.action(async (): Promise<void> => {
         BasaltLogger.addStrategy('console', new ConsoleLoggerStrategy());
         await app.start();
     } catch (error) {
-        if (error instanceof ErrorEntity) {
+        if (error instanceof ErrorEntity)
             error.message = I18n.translate(error.message, Language.EN);
-            BasaltLogger.error(error);
-        }
+        BasaltLogger.error(error);
         await app.stop();
     }
 
