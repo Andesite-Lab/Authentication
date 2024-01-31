@@ -119,8 +119,9 @@
       }
     },
     "handler": {
-      "statusHandler": {
-        "health": "OK"
+      "microserviceHandler": {
+        "ping": "pong",
+        "info": "Info retrieved successfully."
       },
       "authHandler": {
         "login": "Login successful.",
