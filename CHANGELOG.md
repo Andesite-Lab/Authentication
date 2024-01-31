@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/Andesite-Lab/Authentification/compare/v1.2.0...v1.3.0) (2024-01-31)
+
+
+### Features
+
+* improvement token system ([d5f358e](https://github.com/Andesite-Lab/Authentification/commit/d5f358e77f6a2b47ce1da3d5b78a2fa15887dd9f))
+
 ## [1.2.0](https://github.com/Andesite-Lab/Authentification/compare/v1.1.1...v1.2.0) (2024-01-31)
 
 
