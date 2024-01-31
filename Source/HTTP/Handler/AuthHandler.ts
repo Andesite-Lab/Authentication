@@ -1,6 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
-import { BasaltToken } from '@basalt-lab/basalt-auth';
 
 import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';
@@ -56,9 +55,7 @@ export class AuthHandler extends AbstractHandler {
 
     public logout = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const basaltToken: BasaltToken = new BasaltToken();
-            const tokenUuid: string = basaltToken.getTokenUuid(req.cookies.token as string);
-            this._logoutUseCase.execute(tokenUuid);
+            this._logoutUseCase.execute(req.cookies.token as string);
             this.clearCookie(reply, 'token');
             this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.logout', reply.request.headers['accept-language']));
         } catch (e) {

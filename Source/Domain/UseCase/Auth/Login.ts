@@ -43,8 +43,8 @@ export class Login {
             rolePermission,
         }, `${packageJsonConfiguration.name}-${packageJsonConfiguration.version}`, 'andesite');
 
-        Dragonfly.instance.redis.set(signResult.uuid, signResult.publicKey);
-        Dragonfly.instance.redis.expire(signResult.uuid, this._expiration / 1000);
+        Dragonfly.instance.redis.hset(credentialDTO.uuid, signResult.uuid, signResult.publicKey);
+        Dragonfly.instance.redis.expire(credentialDTO.uuid, this._expiration / 1000);
         return signResult.token;
     }
 }
