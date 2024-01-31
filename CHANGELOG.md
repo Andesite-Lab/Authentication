@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Andesite-Lab/Authentification/compare/v1.1.0...v1.1.1) (2024-01-31)
+
+
+### Bug Fixes
+
+* hash password of seed InitAdminCredential ([1182acf](https://github.com/Andesite-Lab/Authentification/commit/1182acfed1af73980769a85ba0ec1c0ed0cfcca4))
+
 ## [1.1.0](https://github.com/Andesite-Lab/Authentification/compare/v1.0.1...v1.1.0) (2024-01-31)
 
 
