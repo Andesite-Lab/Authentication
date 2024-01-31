@@ -1,6 +1,6 @@
 {
   "name": "Authentification",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Authentification - Microservice",
   "main": "Build/App.js",
   "types": "Build/App.d.ts",
@@ -13,7 +13,6 @@
     "dev::migrate": "cross-env NODE_ENV=development node --env-file=./.env Build/App.js migrate",
     "dev::rollback": "cross-env NODE_ENV=development node --env-file=./.env Build/App.js migrate -ra",
     "dev::seed": "cross-env NODE_ENV=development node --env-file=./.env Build/App.js seed",
-
     "prod::build": "tsc --noEmit && cross-env ESBUILD_ENV=prod node esbuild.config.js",
     "prod::start": "node Build/App.js",
     "prod::migrate": "node Build/App.js migrate",
