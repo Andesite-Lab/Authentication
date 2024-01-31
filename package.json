@@ -8,10 +8,17 @@
     "fix-lint": "eslint --fix . --ext .ts",
     "lint": "eslint . --ext .ts",
     "check-types": "tsc --noEmit",
-    "dev": "cross-env ESBUILD_ENV=dev node esbuild.config.js & node wait-and-watch.js",
+    "dev::start": "cross-env ESBUILD_ENV=dev node esbuild.config.js & node wait-and-watch.js",
     "dev::windows": "start cross-env ESBUILD_ENV=dev node esbuild.config.js && start node wait-and-watch.js",
-    "build": "tsc --noEmit && cross-env ESBUILD_ENV=prod node esbuild.config.js",
-    "start": "cross-env NODE_ENV=production --env-file=./.env node Build/App.js"
+    "dev::migrate": "cross-env NODE_ENV=development node --env-file=./.env Build/App.js migrate",
+    "dev::rollback": "cross-env NODE_ENV=development node --env-file=./.env Build/App.js migrate -ra",
+    "dev::seed": "cross-env NODE_ENV=development node --env-file=./.env Build/App.js seed",
+
+    "prod::build": "tsc --noEmit && cross-env ESBUILD_ENV=prod node esbuild.config.js",
+    "prod::start": "node Build/App.js",
+    "prod::migrate": "node Build/App.js migrate",
+    "prod::rollback": "node Build/App.js migrate -ra",
+    "prod::seed": "node Build/App.js seed"
   },
   "repository": {
     "type": "git",
@@ -30,7 +37,7 @@
   "homepage": "https://github.com/Andesite-Lab/Authentification#readme",
   "devDependencies": {
     "@types/jest": "^29.5.11",
-    "@types/node": "^20.11.7",
+    "@types/node": "^20.11.10",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "esbuild": "^0.19.12",
@@ -59,7 +66,7 @@
     "commander": "^11.1.0",
     "cross-env": "^7.0.3",
     "fastify": "^4.25.2",
-    "i18next": "^23.7.20",
+    "i18next": "^23.8.1",
     "ioredis": "^5.3.2",
     "kafkajs": "^2.2.4",
     "knex": "^3.1.0",
