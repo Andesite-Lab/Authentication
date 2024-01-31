@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Andesite-Lab/Authentification/compare/v1.1.1...v1.2.0) (2024-01-31)
+
+
+### Features
+
+* change status router to microservice and add route info ([59ad59f](https://github.com/Andesite-Lab/Authentification/commit/59ad59fa398f644e6ec7b4d72068ecbd61337274))
+
 ## [1.1.1](https://github.com/Andesite-Lab/Authentification/compare/v1.1.0...v1.1.1) (2024-01-31)
 
 
