@@ -6,7 +6,7 @@ import {
     AdminPermissionsRouter,
     AdminRolesRouter,
     AuthRouter,
-    StatusRouter,
+    MicroserviceRouter,
     TokenRouter,
 } from '@/HTTP/Router';
 import {
@@ -35,7 +35,7 @@ export class HttpServerManager {
 
     private initializeRouter(): IRouter[] {
         return [
-            new StatusRouter('/status'),
+            new MicroserviceRouter('/microservice'),
             new AuthRouter('/auth'),
             new TokenRouter('/token'),
             new AdminRolesRouter('/admin/roles'),
@@ -76,7 +76,7 @@ export class HttpServerManager {
 
     private initialize(): void {
         this.initializePlugin().forEach((plugin: IPlugin) => plugin.configure(this._app));
-        this.initializeRouter().forEach((router: IRouter) => router.configure(this._app, `${EnvironmentConfiguration.env.PREFIX}/http`));
+        this.initializeRouter().forEach((router: IRouter) => router.configure(this._app, `${EnvironmentConfiguration.env.PREFIX}`));
         this.initializeHook().forEach((hook: IHook) => hook.configure(this._app));
     }
 

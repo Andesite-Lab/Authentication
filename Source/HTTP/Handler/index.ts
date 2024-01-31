@@ -1,6 +1,6 @@
 export * from './AbstractHandler';
 export * from './AbstractHandlerCrud';
-export * from './StatusHandler';
+export * from './MicroserviceHandler';
 export * from './AuthHandler';
 export * from './TokenHandler';
 export * from './AdminRolesHandler';
