@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Andesite-Lab/Authentification/compare/v1.0.1...v1.1.0) (2024-01-31)
+
+
+### Features
+
+* add seed InitAdminCredential ([7ec0d98](https://github.com/Andesite-Lab/Authentification/commit/7ec0d98421f0740831506a67bf161c02bdcf875c))
+
 ## [1.0.1](https://github.com/Andesite-Lab/Authentification/compare/v1.0.0...v1.0.1) (2024-01-31)
 
 
