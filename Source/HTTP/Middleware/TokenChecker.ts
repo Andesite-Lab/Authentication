@@ -4,11 +4,12 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { Dragonfly } from '@/Infrastructure/Store';
 import { I18n } from '@/Config';
 import { ErrorEntity, ErrorMiddleware, ErrorMiddlewareKey } from '@/Common/Error';
+import { ITokenPayloadDTO } from '@/Data/DTO';
 
 export class TokenChecker {
 
-    private static async getPublicKey(tokenUuid: string): Promise<string> {
-        const publicKey: string | null = await Dragonfly.instance.redis.get(tokenUuid);
+    private static async getPublicKey(userUuid: string, tokenUuid: string): Promise<string> {
+        const publicKey: string | null = await Dragonfly.instance.redis.hget(userUuid, tokenUuid);
         if (!publicKey)
             throw new ErrorMiddleware({
                 key: ErrorMiddlewareKey.TOKEN_INVALID,
@@ -54,7 +55,8 @@ export class TokenChecker {
         try {
             const token: string = req.cookies.token || '';
             const tokenUuid: string = TokenChecker.getTokenUuid(token);
-            const publicKey: string = await TokenChecker.getPublicKey(tokenUuid);
+            const tokenPayload: ITokenPayloadDTO = new BasaltToken().getPayload(token);
+            const publicKey: string = await TokenChecker.getPublicKey(tokenPayload.uuid, tokenUuid);
             TokenChecker.check(token, publicKey);
         } catch (error) {
             if (error instanceof ErrorEntity)
