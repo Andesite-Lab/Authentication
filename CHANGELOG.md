@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://github.com/Andesite-Lab/Authentification/compare/v1.3.0...v1.4.0) (2024-02-01)
+
+
+### Features
+
+* add suffix token ([10ce021](https://github.com/Andesite-Lab/Authentification/commit/10ce0214b389f5186b742295d0d7ba7a904e28ff))
+* add update credential ([2a23a4a](https://github.com/Andesite-Lab/Authentification/commit/2a23a4a5ff38bb764feb7718dcf12a7f6ba70ba0))
+
 ## [1.3.0](https://github.com/Andesite-Lab/Authentification/compare/v1.2.0...v1.3.0) (2024-01-31)
 
 
