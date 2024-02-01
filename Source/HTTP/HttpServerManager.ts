@@ -36,7 +36,7 @@ export class HttpServerManager {
     private initializeRouter(): IRouter[] {
         return [
             new MicroserviceRouter('/microservice'),
-            new AuthRouter('/auth'),
+            new AuthRouter('/'),
             new TokenRouter('/token'),
             new AdminRolesRouter('/admin/roles'),
             new AdminPermissionsRouter('/admin/permissions'),

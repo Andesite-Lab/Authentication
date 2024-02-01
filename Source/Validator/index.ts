@@ -6,3 +6,4 @@ export * from './IdValidator';
 export * from './UuidValidator';
 export * from './PaginationOptionsValidator';
 export * from './WhereClauseValidator';
+export * from './CredentialValidator';
