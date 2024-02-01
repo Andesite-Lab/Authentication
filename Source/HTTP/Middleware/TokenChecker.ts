@@ -9,7 +9,7 @@ import { ITokenPayloadDTO } from '@/Data/DTO';
 export class TokenChecker {
 
     private static async getPublicKey(userUuid: string, tokenUuid: string): Promise<string> {
-        const publicKey: string | null = await Dragonfly.instance.redis.hget(userUuid, tokenUuid);
+        const publicKey: string | null = await Dragonfly.instance.redis.hget(`${userUuid}:token`, tokenUuid);
         if (!publicKey)
             throw new ErrorMiddleware({
                 key: ErrorMiddlewareKey.TOKEN_INVALID,
