@@ -4,12 +4,18 @@ import { BasaltLogger } from '@basalt-lab/basalt-logger';
 import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';
 import { IRegisterDTO, ILoginDTO } from '@/Data/DTO';
-import { RegisterValidator, LoginValidator } from '@/Validator';
+import { ICrendentialDTO } from '@/Data/DTO/Models';
+import {
+    RegisterValidator,
+    LoginValidator,
+    CredentialValidator
+} from '@/Validator';
 import {
     Register,
     Login,
     Logout,
-    Delete
+    Delete,
+    Update
 } from '@/Domain/UseCase/Auth';
 
 export class AuthHandler extends AbstractHandler {
@@ -17,6 +23,7 @@ export class AuthHandler extends AbstractHandler {
     private readonly _loginUseCase: Login = new Login();
     private readonly _logoutUseCase: Logout = new Logout();
     private readonly _deleteUseCase: Delete = new Delete();
+    private readonly _updateUseCase: Update = new Update();
 
     public register = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
@@ -73,6 +80,28 @@ export class AuthHandler extends AbstractHandler {
             await this._deleteUseCase.execute(req.cookies.token as string);
             this.clearCookie(reply, 'token');
             this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.delete', reply.request.headers['accept-language']));
+        } catch (e) {
+            if (e instanceof Error)
+                BasaltLogger.error({
+                    error: e,
+                    trace: e.stack,
+                });
+            this.sendError(reply, e);
+        }
+    };
+
+    public update = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            const dataDTO: Partial<ICrendentialDTO> = this._basaltKeyInclusionFilter.filter<ICrendentialDTO>(req.body as ICrendentialDTO, ['username', 'email', 'password'], true);
+            const credentialValidator: CredentialValidator<ICrendentialDTO> = new CredentialValidator(dataDTO);
+            await this.validate(credentialValidator, req.headers['accept-language']);
+            const result: Pick<ICrendentialDTO, 'username' | 'email'>[] = await this._updateUseCase.execute(req.cookies.token as string, dataDTO);
+            this.sendResponse(
+                reply,
+                200,
+                I18n.translate('http.handler.authHandler.update', reply.request.headers['accept-language']),
+                result
+            );
         } catch (e) {
             if (e instanceof Error)
                 BasaltLogger.error({

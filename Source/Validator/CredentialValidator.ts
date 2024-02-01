@@ -18,11 +18,8 @@ import mailBlacklist from './mailBlacklist.json';
         { email: faker.internet.email(), password: faker.internet.password(), username: faker.string.alphanumeric({ length: 16 }) },
     ],
 })
-export class RegisterValidator<T> {
-    @IsOptional({
-        always: true,
-        message: ErrorValidatorKey.USERNAME_IS_REQUIRED
-    })
+export class CredentialValidator<T> {
+
     @MinLength(4, {
         always: true,
         message: ErrorValidatorKey.USERNAME_MIN_LENGTH
@@ -35,6 +32,7 @@ export class RegisterValidator<T> {
     @Matches(/^[a-zA-Z0-9_-]*$/, {
         message: ErrorValidatorKey.USERNAME_PATTERN
     })
+    @IsOptional()
     @JSONSchema({
         type: 'string',
         pattern: '^[a-zA-Z0-9]*$',
@@ -42,10 +40,6 @@ export class RegisterValidator<T> {
     })
     public username: string | undefined;
 
-    @IsOptional({
-        always: true,
-        message: ErrorValidatorKey.EMAIL_IS_REQUIRED
-    })
     @MaxLength(255, {
         always: true,
         message: ErrorValidatorKey.EMAIL_MAX_LENGTH
@@ -61,16 +55,14 @@ export class RegisterValidator<T> {
         always: true,
         message: ErrorValidatorKey.EMAIL_PATTERN_AND_BLACKLIST
     })
+    @IsOptional()
     @JSONSchema({
         type: 'string',
         examples: [faker.internet.email()],
     })
     public email: string | undefined;
 
-    @IsOptional({
-        always: true,
-        message: ErrorValidatorKey.PASSWORD_IS_REQUIRED
-    })
+
     @MaxLength(32, {
         always: true,
         message: ErrorValidatorKey.PASSWORD_MAX_LENGTH
@@ -90,6 +82,7 @@ export class RegisterValidator<T> {
             always: true,
             message: ErrorValidatorKey.PASSWORD_PATTERN
         })
+    @IsOptional()
     @JSONSchema({
         type: 'string',
         minLength: 8,

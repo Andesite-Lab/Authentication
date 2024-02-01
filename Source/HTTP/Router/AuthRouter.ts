@@ -61,5 +61,17 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             attachValidation: true
         });
 
+        fastify.route({
+            method: 'PUT',
+            url: '/update',
+            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'credential', 'credential.update'], false)],
+            handler: this._handler.update,
+            schema: {
+                tags: ['Auth'],
+                summary: 'Refresh a user token',
+            },
+            attachValidation: true
+        });
+
     }
 }

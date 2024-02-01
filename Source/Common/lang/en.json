@@ -127,7 +127,8 @@
         "login": "Login successful.",
         "logout": "Logout successful.",
         "register": "Registration successful.",
-        "delete": "Account deletion successful."
+        "delete": "Account deletion successful.",
+        "update": "Account update successful."
       },
       "tokenHandler": {
         "check": "Token is valid."

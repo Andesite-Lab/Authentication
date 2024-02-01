@@ -127,7 +127,8 @@
         "login": "Connexion réussie.",
         "logout": "Déconnexion réussie.",
         "register": "Inscription réussie.",
-        "delete": "Suppression réussie."
+        "delete": "Suppression réussie.",
+        "update": "Mise à jour réussie."
       },
       "tokenHandler": {
         "check": "Le token est valide."

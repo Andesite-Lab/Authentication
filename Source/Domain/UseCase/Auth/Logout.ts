@@ -1,5 +1,6 @@
-import { Dragonfly } from '@/Infrastructure/Store';
 import { BasaltToken } from '@basalt-lab/basalt-auth';
+
+import { Dragonfly } from '@/Infrastructure/Store';
 import { ITokenPayloadDTO } from '@/Data/DTO';
 
 export class Logout {
