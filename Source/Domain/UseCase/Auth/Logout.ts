@@ -7,6 +7,6 @@ export class Logout {
         const basaltToken: BasaltToken = new BasaltToken();
         const tokenUuid: string = basaltToken.getTokenUuid(token);
         const tokenPayload: ITokenPayloadDTO = basaltToken.getPayload(token);
-        Dragonfly.instance.redis.hdel(tokenPayload.uuid, tokenUuid);
+        Dragonfly.instance.redis.hdel(`${tokenPayload.uuid}:token`, tokenUuid);
     }
 }

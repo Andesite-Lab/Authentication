@@ -13,7 +13,7 @@ export class Delete {
     public async execute (token: string): Promise<void> {
         const basaltToken: BasaltToken = new BasaltToken();
         const payloadToken: ITokenPayloadDTO = basaltToken.getPayload(token);
-        Dragonfly.instance.redis.del(payloadToken.uuid);
+        Dragonfly.instance.redis.del(`${payloadToken.uuid}:token`);
         const [credential]: Pick<ICrendentialDTO, 'username' | 'email'>[] = await this._credentialModel.delete([{
             uuid: payloadToken.uuid,
         }], {
