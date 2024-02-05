@@ -4,7 +4,7 @@ import { AbstractRouter } from '@/HTTP/Router';
 import { MicroserviceHandler } from '@/HTTP/Handler';
 
 export class MicroserviceRouter extends AbstractRouter<MicroserviceHandler> {
-    public constructor(routerPrefix: string = '/status') {
+    public constructor(routerPrefix: string = '/microservice') {
         super(new MicroserviceHandler(), routerPrefix);
     }
 
