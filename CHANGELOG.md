@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/Andesite-Lab/Authentication/compare/v1.4.1...v1.4.2) (2024-02-05)
+
+
+### Miscellaneous Chores
+
+* rename to Authentication ([ed5db3f](https://github.com/Andesite-Lab/Authentication/commit/ed5db3f3a3f42f41a0a03d28bbbcf53ab3e8bf54))
+
 ## [1.4.1](https://github.com/Andesite-Lab/Authentication/compare/v1.4.0...v1.4.1) (2024-02-05)
 
 
