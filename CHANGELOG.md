@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/Andesite-Lab/Authentification/compare/v1.4.0...v1.4.1) (2024-02-05)
+
+
+### Code Refactoring
+
+* little clean ([6e8e4da](https://github.com/Andesite-Lab/Authentification/commit/6e8e4daa95c53fe66a9a8eae62252f604693497a))
+* little clean ([#24](https://github.com/Andesite-Lab/Authentification/issues/24)) ([99f5252](https://github.com/Andesite-Lab/Authentification/commit/99f52526632a13a1a7cc3d0351748074cd5121e9))
+
 ## [1.4.0](https://github.com/Andesite-Lab/Authentification/compare/v1.3.0...v1.4.0) (2024-02-01)
 
 
