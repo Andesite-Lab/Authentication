@@ -1,7 +1,7 @@
 {
-  "name": "Authentification",
+  "name": "authentication",
   "version": "1.4.1",
-  "description": "Authentification - Microservice",
+  "description": "Authentication - Microservice",
   "main": "Build/App.js",
   "types": "Build/App.d.ts",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Andesite-Lab/Authentification.git"
+    "url": "git+https://github.com/Andesite-Lab/Authentication.git"
   },
   "keywords": [
     "andesite",
@@ -31,9 +31,9 @@
   "author": "Ruby",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Andesite-Lab/Authentification/issues"
+    "url": "https://github.com/Andesite-Lab/Authentication/issues"
   },
-  "homepage": "https://github.com/Andesite-Lab/Authentification#readme",
+  "homepage": "https://github.com/Andesite-Lab/Authentication#readme",
   "devDependencies": {
     "@types/jest": "^29.5.11",
     "@types/node": "^20.11.10",
