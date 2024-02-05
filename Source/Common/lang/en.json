@@ -21,10 +21,6 @@
     },
     "signal": {
       "SIGINT": "SIGINT (Ctrl-C) received."
-    },
-    "httpServer": {
-      "HTTP_SERVER_LISTENING": "HTTP server listening on port {{port}} in {{mode}} mode. (Prefix: {{prefix}}) PID: {{pid}}",
-      "HTTP_SERVER_CLOSE": "HTTP server closed."
     }
   },
   "error": {
@@ -113,6 +109,9 @@
     }
   },
   "http": {
+    "LISTENING": "HTTP server listening on port {{port}} in {{mode}} mode. (Prefix: {{prefix}}) PID: {{pid}}",
+    "CLOSE": "HTTP server closed.",
+
     "plugin": {
       "RateLimitPlugin": {
         "RATE_LIMIT": "Rate limit {{max}} exceeded. Try again in {{timeWindow}} seconds."

@@ -21,10 +21,6 @@
     },
     "signal": {
       "SIGINT": "SIGINT (Ctrl-C) reçu."
-    },
-    "httpServer": {
-      "HTTP_SERVER_LISTENING": "Le serveur HTTP est en écoute sur le port {{port}} en mode {{mode}}. (Prefix: {{prefix}}) PID: {{pid}}",
-      "HTTP_SERVER_CLOSE": "Le serveur HTTP est arrêté."
     }
   },
   "error": {
@@ -113,6 +109,9 @@
     }
   },
   "http": {
+    "LISTENING": "Le serveur HTTP est en écoute sur le port {{port}} en mode {{mode}}. (Prefix: {{prefix}}) PID: {{pid}}",
+    "CLOSE": "Le serveur HTTP est arrêté.",
+
     "plugin": {
       "RateLimitPlugin": {
         "RATE_LIMIT": "Rate limit {{max}} atteint. Veuillez réessayer dans {{max}} secondes."
