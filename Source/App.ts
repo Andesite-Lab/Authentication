@@ -46,7 +46,7 @@ class App {
 
     public async runHttpServer(): Promise<void> {
         await this._httpServerManager.start(EnvironmentConfiguration.env.HTTP_PORT);
-        BasaltLogger.log(I18n.translate('app.httpServer.HTTP_SERVER_LISTENING', Language.EN, {
+        BasaltLogger.log(I18n.translate('http.LISTENING', Language.EN, {
             port: EnvironmentConfiguration.env.HTTP_PORT,
             mode: EnvironmentConfiguration.env.NODE_ENV,
             prefix: EnvironmentConfiguration.env.PREFIX,
@@ -66,7 +66,7 @@ class App {
 
     public async stopHttpServer(): Promise<void> {
         await this._httpServerManager?.stop();
-        BasaltLogger.log(I18n.translate('app.httpServer.HTTP_SERVER_CLOSE', Language.EN));
+        BasaltLogger.log(I18n.translate('http.CLOSE', Language.EN));
     }
 
     public async runMigrations(): Promise<void> {

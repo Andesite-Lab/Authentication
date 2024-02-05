@@ -33,7 +33,7 @@ export class Login {
         const raw: Pick<ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO, 'role' | 'permission'>[] =
             await this._rolePermissionModel.findAllJoinRoleAndPermissionByCredential(credentialDTO.uuid, {
                 role: true,
-                permission: true,
+                permission: true
             });
         const rolePermission: Record<string, string[]> = BasaltAuthorization.instance.groupPermissionByRole(raw);
         const basaltToken: BasaltToken = new BasaltToken();
