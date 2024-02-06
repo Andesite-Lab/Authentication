@@ -1,5 +1,5 @@
 import { MainDatabase } from '@/Infrastructure/Database/Main/MainDatabase';
-import { CredentialModel, RoleModel, CredentialRoleModel } from '@/Infrastructure/Repository/Model';
+import { CredentialModel, CredentialRoleModel, RoleModel } from '@/Infrastructure/Repository/Model';
 import { ICrendentialDTO, IRoleDTO } from '@/Data/DTO/Models';
 
 export class CredentialCreationTransaction {

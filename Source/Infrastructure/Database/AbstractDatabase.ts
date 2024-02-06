@@ -1,9 +1,11 @@
 import { Knex, knex } from 'knex';
-import Transaction = Knex.Transaction;
+import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { ErrorDatabase, ErrorDatabaseKey } from '@/Common/Error';
 import { MigrationSource } from '@/Infrastructure/Database/Main/Migration';
 import { SeedSource } from '@/Infrastructure/Database/Main/Seed';
+import { I18n, Language } from '@/Config';
+import Transaction = Knex.Transaction;
 
 export type { Transaction };
 
@@ -54,6 +56,7 @@ export class AbstractDatabase {
                         detail: err
                     });
                 });
+            BasaltLogger.log(I18n.translate('infrastructure.database.connected', Language.EN));
             return this;
         } catch (error) {
             throw new ErrorDatabase({
@@ -66,6 +69,7 @@ export class AbstractDatabase {
     public disconnect(): void {
         try {
             this._database?.destroy();
+            BasaltLogger.log(I18n.translate('infrastructure.database.disconnected', Language.EN));
         } catch (error) {
             throw new ErrorDatabase({
                 key: ErrorDatabaseKey.DB_DISCONNECT_ERROR,
@@ -74,33 +78,45 @@ export class AbstractDatabase {
         }
     }
 
-    public runMigrations(): Promise<unknown> {
+    public async runMigrations(): Promise<void> {
         if (!this._database)
             throw new ErrorDatabase({
                 key: ErrorDatabaseKey.DB_NOT_CONNECTED
             });
-        return this._database.migrate.latest({
+        const result = await this._database.migrate.latest({
             migrationSource: new MigrationSource()
+        });
+        BasaltLogger.log({
+            message: I18n.translate('infrastructure.database.migrations_run', Language.EN),
+            result
         });
     }
 
-    public rollbackAllMigration(): Promise<unknown> {
+    public async rollbackAllMigration(): Promise<void> {
         if (!this._database)
             throw new ErrorDatabase({
                 key: ErrorDatabaseKey.DB_NOT_CONNECTED
             });
-        return this._database.migrate.rollback({
+        const result = await this._database.migrate.rollback({
             migrationSource: new MigrationSource(),
         }, true);
+        BasaltLogger.log({
+            message: I18n.translate('infrastructure.database.migrations_rollback_all', Language.EN),
+            result
+        });
     }
 
-    public runSeeders(): Promise<unknown> {
+    public async runSeeders(): Promise<void> {
         if (!this._database)
             throw new ErrorDatabase({
                 key: ErrorDatabaseKey.DB_NOT_CONNECTED
             });
-        return this._database.seed.run({
+        const result = await this._database.seed.run({
             seedSource: new SeedSource(),
+        });
+        BasaltLogger.log({
+            message: I18n.translate('infrastructure.database.seeders_run', Language.EN),
+            result
         });
     }
 }

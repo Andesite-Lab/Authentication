@@ -1,9 +1,9 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { ITokenPayloadDTO } from '@/Data/DTO';
 import { BasaltAuthorization } from '@/Common';
-import { ErrorEntity, ErrorMiddlewareKey, ErrorMiddleware } from '@/Common/Error';
+import { ErrorEntity, ErrorMiddleware, ErrorMiddlewareKey } from '@/Common/Error';
 import { I18n } from '@/Config';
 
 export class PermissionChecker {

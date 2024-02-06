@@ -2,40 +2,42 @@
   "app": {
     "start": "{{name}} Started.",
     "stop": "{{name}} Stopped.",
-    "redpanda": {
-      "REDPANDA_PRODUCER_CONNECTED": "RedPanda Producer connected.",
-      "REDPANDA_PRODUCER_DISCONNECTED": "RedPanda Producer disconnected.",
-      "REDPANDA_CONSUMER_CONNECTED": "RedPanda Consumer connected.",
-      "REDPANDA_CONSUMER_DISCONNECTED": "RedPanda Consumer disconnected."
-    },
-    "database": {
-      "DB_CONNECTED": "Database connected.",
-      "DB_DISCONNECTED": "Database disconnected.",
-      "DB_MIGRATIONS_RUN": "Database migrations run.",
-      "DB_MIGRATIONS_ROLLBACK_ALL": "Database migrations rollback all.",
-      "DB_SEEDERS_RUN": "Database seeds run."
-    },
-    "dragonfly": {
-      "DRAGONFLY_CONNECTED": "Dragonfly connected.",
-        "DRAGONFLY_DISCONNECTED": "Dragonfly disconnected."
-    },
     "signal": {
       "SIGINT": "SIGINT (Ctrl-C) received."
     }
   },
+  "infrastructure": {
+    "redpanda": {
+      "producer_connected": "RedPanda Producer connected.",
+      "producer_disconnected": "RedPanda Producer disconnected.",
+      "consumer_connected": "RedPanda Consumer connected.",
+      "consumer_disconnected": "RedPanda Consumer disconnected."
+    },
+    "database": {
+      "connected": "Database connected.",
+      "disconnected": "Database disconnected.",
+      "migrations_run": "Database migrations run.",
+      "migrations_rollback_all": "Database migrations rollback all.",
+      "seeders_run": "Database seeds run."
+    },
+    "dragonfly": {
+      "connected": "Dragonfly connected.",
+      "disconnected": "Dragonfly disconnected."
+    }
+  },
   "error": {
     "errorConfig": {
-      "DB_HOST_NOT_FOUND": "DB_HOST variable d'environnement non trouvée.",
-      "DB_NAME_NOT_FOUND": "DB_NAME variable d'environnement non trouvée.",
-      "DB_PASSWORD_NOT_FOUND": "DB_PASSWORD variable d'environnement non trouvée.",
-      "DB_USER_NOT_FOUND": "DB_USER variable d'environnement non trouvée.",
-      "DB_PORT_NOT_FOUND": "DB_PORT variable d'environnement non trouvée.",
-      "COOKIE_SECRET_NOT_FOUND": "COOKIE_SECRET variable d'environnement non trouvée.",
-      "HOST_NOT_FOUND": "HOST variable d'environnement non trouvée.",
-      "HTTP_PORT_NOT_FOUND": "HTTP_PORT variable d'environnement non trouvée.",
-      "NODE_ENV_NOT_FOUND": "NODE_ENV variable d'environnement non trouvée.",
-      "RED_PANDA_BROKER_NOT_FOUND": "RED_PANDA_BROKER variable d'environnement non trouvée.",
-      "WS_PORT_NOT_FOUND": "WS_PORT variable d'environnement non trouvée."
+      "NODE_ENV_NOT_FOUND": "NODE_ENV environment variable not found.",
+      "DB_HOST_NOT_FOUND": "DB_HOST environment variable not found.",
+      "DB_NAME_NOT_FOUND": "DB_NAME environment variable not found.",
+      "DB_PASSWORD_NOT_FOUND": "DB_PASSWORD environment variable not found.",
+      "DB_USER_NOT_FOUND": "DB_USER environment variable not found.",
+      "DB_PORT_NOT_FOUND": "DB_PORT environment variable not found.",
+      "HTTP_PORT_NOT_FOUND": "HTTP_PORT environment variable not found.",
+      "RED_PANDA_BROKER_NOT_FOUND": "RED_PANDA_BROKER environment variable not found.",
+      "WS_PORT_NOT_FOUND": "WS_PORT environment variable not found.",
+      "DRAGONFLY_HOST_NOT_FOUND": "DRAGONFLY_HOST environment variable not found.",
+      "DRAGONFLY_PORT_NOT_FOUND": "DRAGONFLY_PORT environment variable not found."
     },
     "errorInfrastructure": {
       "KAFKA_PRODUCER_CONNECTION_ERROR": "Kafka producer connection error.",
@@ -145,12 +147,6 @@
         "delete": "{{tableName}} deletion successful.",
         "truncate": "{{tableName}} truncate successful.",
         "count": "{{tableName}} count successful."
-      },
-      "adminPermissionHandler": {
-        "createPermission": "Permission creation successful.",
-        "getPermissions": "Permissions retrieved successfully.",
-        "getPermission": "Permission retrieved successfully.",
-        "updatePermission": "Permission update successful."
       }
     }
   }

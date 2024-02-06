@@ -7,20 +7,28 @@ export enum MailTypes {
     DELETE_ACCOUNT = 'delete-account',
 }
 
+export interface IOptionsMailerProducer {
+    to: string;
+    cc?: string;
+    mailType: MailTypes;
+    language: string;
+    scheduledEmailDate?: string;
+}
+
+
 export class MailerProducer {
     public async execute(
         object: unknown,
-        mailType: MailTypes,
-        scheduledEmailDate: string | undefined = undefined,
+        options: IOptionsMailerProducer
     ): Promise<void> {
+        options.scheduledEmailDate = options.scheduledEmailDate || new Date().toISOString();
         await RedPandaProducer.instance.send({
             topic: Topics.MAILER_MICROSERVICE,
             messages: [
                 {
                     value: JSON.stringify({
                         object,
-                        mailType,
-                        scheduledEmailDate,
+                        options,
                     }),
                 },
             ],

@@ -1,14 +1,9 @@
 import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
-import { IPlugin, IRouter, IHook } from '@/HTTP/Interface';
-import { EnvironmentConfiguration } from '@/Config';
-import {
-    AdminPermissionsRouter,
-    AdminRolesRouter,
-    AuthRouter,
-    MicroserviceRouter,
-    TokenRouter,
-} from '@/HTTP/Router';
+import { IHook, IPlugin, IRouter } from '@/HTTP/Interface';
+import { EnvironmentConfiguration, I18n, Language } from '@/Config';
+import { AdminPermissionsRouter, AdminRolesRouter, AuthRouter, MicroserviceRouter, TokenRouter, } from '@/HTTP/Router';
 import {
     CookiePlugin,
     CorsPlugin,
@@ -20,7 +15,6 @@ import {
 } from '@/HTTP/Plugin';
 import { IOnRequestHttpDTO } from '@/Data/DTO';
 import { OnSendHook } from '@/HTTP/Hook';
-import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 export class HttpServerManager {
     private readonly _app: FastifyInstance;
@@ -80,16 +74,23 @@ export class HttpServerManager {
         this.initializeHook().forEach((hook: IHook) => hook.configure(this._app));
     }
 
-    public async start(port: number): Promise<string> {
+    public async start(): Promise<void> {
         this.initialize();
         await this._app.ready();
-        return this._app.listen({
+        await this._app.listen({
             host: '0.0.0.0',
-            port
+            port: EnvironmentConfiguration.env.HTTP_PORT,
         });
+        BasaltLogger.log(I18n.translate('http.LISTENING', Language.EN, {
+            port: EnvironmentConfiguration.env.HTTP_PORT,
+            mode: EnvironmentConfiguration.env.NODE_ENV,
+            prefix: EnvironmentConfiguration.env.PREFIX,
+            pid: process.pid,
+        }));
     }
 
-    public stop(): Promise<void> {
-        return this._app.close();
+    public async stop(): Promise<void> {
+        await this._app.close();
+        BasaltLogger.log(I18n.translate('http.CLOSE', Language.EN));
     }
 }
