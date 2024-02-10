@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/Andesite-Lab/Authentication/compare/v1.4.3...v1.4.4) (2024-02-10)
+
+
+### Bug Fixes
+
+* add cookie secret ([d1f45bf](https://github.com/Andesite-Lab/Authentication/commit/d1f45bf6299a3c16f0640d90f6b170fce51162c0))
+
 ## [1.4.3](https://github.com/Andesite-Lab/Authentication/compare/v1.4.2...v1.4.3) (2024-02-10)
 
 
