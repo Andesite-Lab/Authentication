@@ -8,12 +8,16 @@ export class Register {
     private readonly _credentialCreationTransaction: CredentialCreationTransaction = new CredentialCreationTransaction();
     private readonly _mailerProducer: MailerProducer = new MailerProducer();
 
-    public async execute (body: IRegisterDTO): Promise<void> {
+    public async execute (body: IRegisterDTO, language: string = 'en'): Promise<void> {
         body.password = await BasaltPassword.hashPassword(body.password);
         await this._credentialCreationTransaction.execute(body);
         await this._mailerProducer.execute({
             username: body.username,
             email: body.email,
-        },MailTypes.WELCOME);
+        },{
+            to: body.email,
+            mailType: MailTypes.WELCOME,
+            language
+        });
     }
 }

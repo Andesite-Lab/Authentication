@@ -5,7 +5,6 @@ import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import { IPlugin } from '@/HTTP/Interface';
 import { EnvironmentConfiguration, packageJsonConfiguration } from '@/Config';
 
-
 export class SwaggerPlugin implements IPlugin {
     configure(app: FastifyInstance): void {
         app.register(fastifySwagger, {
@@ -21,7 +20,7 @@ export class SwaggerPlugin implements IPlugin {
                         name: packageJsonConfiguration.author,
                     },
                 },
-                servers: [ { url: `http://${EnvironmentConfiguration.env.HOST}:${EnvironmentConfiguration.env.HTTP_PORT}` } ],
+                servers: [ { url: `https://${EnvironmentConfiguration.env.DOMAIN}:${EnvironmentConfiguration.env.HTTP_PORT}` } ],
                 tags: [
                     { name: 'Admin', description: 'Admin related end-points' },
                     { name: 'Auth', description: 'Auth related end-points' },

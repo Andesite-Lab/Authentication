@@ -10,7 +10,7 @@ export class Delete {
     private readonly _credentialModel: CredentialModel = new CredentialModel();
     private readonly _mailerProducer: MailerProducer = new MailerProducer();
 
-    public async execute (token: string): Promise<void> {
+    public async execute (token: string, language: string = 'en'): Promise<void> {
         const basaltToken: BasaltToken = new BasaltToken();
         const payloadToken: ITokenPayloadDTO = basaltToken.getPayload(token);
         Dragonfly.instance.redis.del(`${payloadToken.uuid}:token`);
@@ -23,6 +23,10 @@ export class Delete {
         await this._mailerProducer.execute({
             username: credential.username,
             email: credential.email,
-        },MailTypes.DELETE_ACCOUNT);
+        },{
+            to: credential.email,
+            mailType: MailTypes.DELETE_ACCOUNT,
+            language
+        });
     }
 }

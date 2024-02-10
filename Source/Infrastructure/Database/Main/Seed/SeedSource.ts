@@ -1,9 +1,6 @@
 import { Knex } from 'knex';
 
-import {
-    RoleAndPermission,
-    InitAdminCredential
-} from '@/Infrastructure/Database/Main/Seed';
+import { InitAdminCredential, RoleAndPermission } from '@/Infrastructure/Database/Main/Seed';
 
 export class SeedSource implements Knex.SeedSource<unknown> {
     private seeds: Map<string, Knex.Seed> = new Map<string, Knex.Seed>(

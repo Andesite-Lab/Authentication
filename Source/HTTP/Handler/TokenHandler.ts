@@ -1,4 +1,4 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { AbstractHandler } from '@/HTTP/Handler';

@@ -1,14 +1,14 @@
 import {
-    version,
     author,
     dependencies,
-    devDependencies,
-    name,
     description,
-    main,
+    devDependencies,
     keywords,
     license,
-    scripts
+    main,
+    name,
+    scripts,
+    version
 } from '../../package.json';
 
 export interface IPackageJson {

@@ -2,29 +2,32 @@
   "app": {
     "start": "{{name}} Démarré",
     "stop": "{{name}} Arrêté",
-    "redpanda": {
-      "REDPANDA_PRODUCER_CONNECTED": "RedPanda Producer connecté.",
-      "REDPANDA_PRODUCER_DISCONNECTED": "RedPanda Producer déconnecté.",
-      "REDPANDA_CONSUMER_CONNECTED": "RedPanda Consumer connecté.",
-      "REDPANDA_CONSUMER_DISCONNECTED": "RedPanda Consumer déconnecté."
-    },
-    "database": {
-      "DB_CONNECTED": "Database connectée.",
-      "DB_DISCONNECTED": "Database déconnectée.",
-      "DB_MIGRATIONS_RUN": "Database migrations run.",
-      "DB_MIGRATIONS_ROLLBACK_ALL": "Database migrations rollback all.",
-      "DB_SEEDERS_RUN": "Database seeds run."
-    },
-    "dragonfly": {
-      "DRAGONFLY_CONNECTED": "Dragonfly connecté.",
-        "DRAGONFLY_DISCONNECTED": "Dragonfly déconnecté."
-    },
     "signal": {
       "SIGINT": "SIGINT (Ctrl-C) reçu."
     }
   },
+  "infrastructure": {
+    "redpanda": {
+      "producer_connected": "RedPanda Producer connecté.",
+      "producer_disconnected": "RedPanda Producer déconnecté.",
+      "consumer_connected": "RedPanda Consumer connecté.",
+      "consumer_disconnected": "RedPanda Consumer déconnecté."
+    },
+    "database": {
+      "connected": "Database connectée.",
+      "disconnected": "Database déconnectée.",
+      "migrations_run": "Database migrations run.",
+      "migrations_rollback_all": "Database migrations rollback all.",
+      "seeders_run": "Database seeds run."
+    },
+    "dragonfly": {
+      "connected": "Dragonfly connecté.",
+      "disconnected": "Dragonfly déconnecté."
+    }
+  },
   "error": {
     "errorConfig": {
+      "NODE_ENV_NOT_FOUND": "NODE_ENV environment variable not found.",
       "DB_HOST_NOT_FOUND": "DB_HOST environment variable not found.",
       "DB_NAME_NOT_FOUND": "DB_NAME environment variable not found.",
       "DB_PASSWORD_NOT_FOUND": "DB_PASSWORD environment variable not found.",
@@ -33,7 +36,6 @@
       "COOKIE_SECRET_NOT_FOUND": "COOKIE_SECRET environment variable not found.",
       "HOST_NOT_FOUND": "HOST environment variable not found.",
       "HTTP_PORT_NOT_FOUND": "HTTP_PORT environment variable not found.",
-      "NODE_ENV_NOT_FOUND": "NODE_ENV environment variable not found.",
       "RED_PANDA_BROKER_NOT_FOUND": "RED_PANDA_BROKER environment variable not found.",
       "WS_PORT_NOT_FOUND": "WS_PORT environment variable not found."
     },
@@ -145,12 +147,6 @@
         "delete": "Suppression {{tableName}} réussie.",
         "truncate": "Troncature {{tableName}} réussie.",
         "count": "Comptage {{tableName}} réussi."
-      },
-      "adminPermissionHandler": {
-        "createPermission": "Permission créée avec succès.",
-        "getPermissions": "Permissions récupérées avec succès.",
-        "getPermission": "Permission récupérée avec succès.",
-        "updatePermission": "Permission mise à jour avec succès."
       }
     }
   }

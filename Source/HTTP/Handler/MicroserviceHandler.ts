@@ -1,4 +1,4 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';

@@ -1,7 +1,9 @@
 import { Kafka, Producer, ProducerRecord } from 'kafkajs';
+import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
-import { kafkaConfiguration } from '@/Config';
+import { I18n, kafkaConfiguration, Language } from '@/Config';
 import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
+import { RedPandaLoggerStrategy } from '@/Common';
 
 export class RedPandaProducer {
     private static _instance: RedPandaProducer;
@@ -24,6 +26,8 @@ export class RedPandaProducer {
         try {
             this._isConnected = true;
             await this._producer.connect();
+            BasaltLogger.addStrategy('RedPanda', new RedPandaLoggerStrategy());
+            BasaltLogger.log(I18n.translate('infrastructure.redpanda.producer_connected', Language.EN));
         } catch (error) {
             throw new ErrorInfrastructure({
                 key: ErrorInfrastructureKey.KAFKA_PRODUCER_CONNECTION_ERROR,
@@ -36,6 +40,9 @@ export class RedPandaProducer {
         try {
             await this._producer.disconnect();
             this._isConnected = false;
+            if (BasaltLogger.strategies.has('RedPanda'))
+                BasaltLogger.removeStrategy('RedPanda');
+            BasaltLogger.log(I18n.translate('infrastructure.redpanda.producer_disconnected', Language.EN));
         } catch (error) {
             throw new ErrorInfrastructure({
                 key: ErrorInfrastructureKey.KAFKA_PRODUCER_DISCONNECT_ERROR,
