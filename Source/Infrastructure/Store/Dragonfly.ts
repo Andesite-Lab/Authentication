@@ -1,5 +1,7 @@
 import Redis from 'ioredis';
-import { EnvironmentConfiguration } from '@/Config';
+import { BasaltLogger } from '@basalt-lab/basalt-logger';
+
+import { EnvironmentConfiguration, I18n, Language } from '@/Config';
 import { ErrorDragonfly, ErrorDragonflyKey } from '@/Common/Error';
 
 export class Dragonfly {
@@ -27,6 +29,7 @@ export class Dragonfly {
                 port: EnvironmentConfiguration.env.DRAGONFLY_PORT,
 
             });
+            BasaltLogger.log(I18n.translate('infrastructure.dragonfly.connected', Language.EN));
         } catch (error) {
             throw new ErrorDragonfly({
                 key: ErrorDragonflyKey.DRAGONFLY_CONNECTION_ERROR,
@@ -38,6 +41,7 @@ export class Dragonfly {
     public disconnect(): void {
         try {
             this._redis?.disconnect();
+            BasaltLogger.log(I18n.translate('infrastructure.dragonfly.disconnected', Language.EN));
         } catch (error) {
             throw new ErrorDragonfly({
                 key: ErrorDragonflyKey.DRAGONFLY_DISCONNECT_ERROR,

@@ -38,7 +38,7 @@ export class TokenChecker {
         }
     }
 
-    public static getTokenUuid(token: string): string {
+    private static getTokenUuid(token: string): string {
         try {
             const basaltToken: BasaltToken = new BasaltToken();
             return basaltToken.getTokenUuid(token);

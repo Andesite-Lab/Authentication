@@ -1,22 +1,12 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';
-import { IRegisterDTO, ILoginDTO } from '@/Data/DTO';
+import { ILoginDTO, IRegisterDTO } from '@/Data/DTO';
 import { ICrendentialDTO } from '@/Data/DTO/Models';
-import {
-    RegisterValidator,
-    LoginValidator,
-    CredentialValidator
-} from '@/Validator';
-import {
-    Register,
-    Login,
-    Logout,
-    Delete,
-    Update
-} from '@/Domain/UseCase/Auth';
+import { CredentialValidator, LoginValidator, RegisterValidator } from '@/Validator';
+import { Delete, Login, Logout, Register, Update } from '@/Domain/UseCase/Auth';
 
 export class AuthHandler extends AbstractHandler {
     private readonly _registerUseCase: Register = new Register();
@@ -30,7 +20,7 @@ export class AuthHandler extends AbstractHandler {
             const dataDTO: IRegisterDTO = this._basaltKeyInclusionFilter.filter<IRegisterDTO>(req.body as IRegisterDTO, ['username', 'email', 'password'], true);
             const registerValidator: RegisterValidator<IRegisterDTO> = new RegisterValidator(dataDTO);
             await this.validate(registerValidator, req.headers['accept-language']);
-            await this._registerUseCase.execute(dataDTO);
+            await this._registerUseCase.execute(dataDTO, req.headers['accept-language']);
             this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.register', reply.request.headers['accept-language']));
         } catch (e) {
             if (e instanceof Error)
@@ -77,7 +67,7 @@ export class AuthHandler extends AbstractHandler {
 
     public delete = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            await this._deleteUseCase.execute(req.cookies.token as string);
+            await this._deleteUseCase.execute(req.cookies.token as string, req.headers['accept-language']);
             this.clearCookie(reply, 'token');
             this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.delete', reply.request.headers['accept-language']));
         } catch (e) {

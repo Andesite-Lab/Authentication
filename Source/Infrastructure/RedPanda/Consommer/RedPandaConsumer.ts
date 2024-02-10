@@ -1,6 +1,6 @@
-import { Consumer, Kafka } from 'kafkajs';
+import { Consumer, Kafka, KafkaMessage } from 'kafkajs';
 
-import { kafkaConfiguration } from '@/Config';
+import { kafkaConfiguration, packageJsonConfiguration } from '@/Config';
 import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
 
 export class RedPandaConsumer {
@@ -11,7 +11,7 @@ export class RedPandaConsumer {
 
     private constructor() {
         this._kafka = new Kafka(kafkaConfiguration);
-        this._consumer = this._kafka.consumer({ groupId: 'test-group' });
+        this._consumer = this._kafka.consumer({ groupId: packageJsonConfiguration.name });
     }
 
     public static get instance(): RedPandaConsumer {
@@ -64,5 +64,21 @@ export class RedPandaConsumer {
                 detail: error
             });
         }
+    }
+
+    public async eachMessage(callback: (message: KafkaMessage) => void): Promise<void> {
+        await this._consumer.run({
+            eachMessage: async ({ message }): Promise<void> => {
+                callback(message);
+            }
+        });
+    }
+
+    public async eachBatch(callback: (messages: KafkaMessage[]) => void): Promise<void> {
+        await this._consumer.run({
+            eachBatch: async ({ batch }): Promise<void> => {
+                callback(batch.messages);
+            }
+        });
     }
 }
