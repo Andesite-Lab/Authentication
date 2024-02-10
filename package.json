@@ -1,6 +1,6 @@
 {
   "name": "authentication",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Authentication - Microservice",
   "main": "Build/App.js",
   "types": "Build/App.d.ts",
