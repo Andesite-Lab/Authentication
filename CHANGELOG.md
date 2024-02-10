@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/Andesite-Lab/Authentication/compare/v1.4.2...v1.4.3) (2024-02-10)
+
+
+### Code Refactoring
+
+* code improvement ([71901d1](https://github.com/Andesite-Lab/Authentication/commit/71901d1bb6b52cd78fdb895e67b3a34f9d51d7e4))
+
 ## [1.4.2](https://github.com/Andesite-Lab/Authentication/compare/v1.4.1...v1.4.2) (2024-02-05)
 
 
