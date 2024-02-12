@@ -81,7 +81,7 @@ export class HttpServerManager {
             host: '0.0.0.0',
             port: EnvironmentConfiguration.env.HTTP_PORT,
         });
-        BasaltLogger.log(I18n.translate('http.LISTENING', Language.EN, {
+        BasaltLogger.log(I18n.translate('http.listening', Language.EN, {
             port: EnvironmentConfiguration.env.HTTP_PORT,
             mode: EnvironmentConfiguration.env.NODE_ENV,
             prefix: EnvironmentConfiguration.env.PREFIX,
@@ -91,6 +91,6 @@ export class HttpServerManager {
 
     public async stop(): Promise<void> {
         await this._app.close();
-        BasaltLogger.log(I18n.translate('http.CLOSE', Language.EN));
+        BasaltLogger.log(I18n.translate('http.close', Language.EN));
     }
 }
