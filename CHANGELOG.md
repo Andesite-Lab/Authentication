@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.5.0](https://github.com/Andesite-Lab/Authentication/compare/v1.4.4...v1.5.0) (2024-02-12)
+
+
+### Features
+
+* add translation ([cc4885f](https://github.com/Andesite-Lab/Authentication/commit/cc4885f36ce82a533005f4d789df166d8cc7e60b))
+
+
+### Bug Fixes
+
+* correction of dockerfile (assets to public) ([2ca99a0](https://github.com/Andesite-Lab/Authentication/commit/2ca99a053e85b634d158cae4a01b2ada89adb97c))
+* correction of key ([bd03308](https://github.com/Andesite-Lab/Authentication/commit/bd03308379047366551097ec96059b0f7d861196))
+
+
+### Code Refactoring
+
+* change location of logo ([72abc11](https://github.com/Andesite-Lab/Authentication/commit/72abc11d485a020e65facccd74edfa060b04dcdb))
+
+
+### Build System
+
+* update packages ([743bb87](https://github.com/Andesite-Lab/Authentication/commit/743bb87ed72cbf53bc1c336729b5428d90c265df))
+
 ## [1.4.4](https://github.com/Andesite-Lab/Authentication/compare/v1.4.3...v1.4.4) (2024-02-10)
 
 
