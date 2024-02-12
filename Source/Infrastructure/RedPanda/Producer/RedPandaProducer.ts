@@ -30,7 +30,7 @@ export class RedPandaProducer {
             BasaltLogger.log(I18n.translate('infrastructure.redpanda.producer_connected', Language.EN));
         } catch (error) {
             throw new ErrorInfrastructure({
-                key: ErrorInfrastructureKey.KAFKA_PRODUCER_CONNECTION_ERROR,
+                key: ErrorInfrastructureKey.RED_PANDA_PRODUCER_CONNECTION_ERROR,
                 detail: error
             });
         }
@@ -45,7 +45,7 @@ export class RedPandaProducer {
             BasaltLogger.log(I18n.translate('infrastructure.redpanda.producer_disconnected', Language.EN));
         } catch (error) {
             throw new ErrorInfrastructure({
-                key: ErrorInfrastructureKey.KAFKA_PRODUCER_DISCONNECT_ERROR,
+                key: ErrorInfrastructureKey.RED_PANDA_PRODUCER_DISCONNECT_ERROR,
                 detail: error
             });
         }
@@ -55,16 +55,16 @@ export class RedPandaProducer {
         try {
             if (!this._isConnected)
                 throw new ErrorInfrastructure({
-                    key: ErrorInfrastructureKey.KAFKA_PRODUCER_IS_NOT_CONNECTED
+                    key: ErrorInfrastructureKey.RED_PANDA_PRODUCER_IS_NOT_CONNECTED
                 });
             await this._producer.send(record);
         } catch (error) {
             if (!this._isConnected)
                 throw new ErrorInfrastructure({
-                    key: ErrorInfrastructureKey.KAFKA_PRODUCER_IS_NOT_CONNECTED
+                    key: ErrorInfrastructureKey.RED_PANDA_PRODUCER_IS_NOT_CONNECTED
                 });
             throw new ErrorInfrastructure({
-                key: ErrorInfrastructureKey.KAFKA_PRODUCER_SEND_ERROR,
+                key: ErrorInfrastructureKey.RED_PANDA_PRODUCER_SEND_ERROR,
                 detail: error
             });
         }
