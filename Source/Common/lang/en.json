@@ -1,0 +1,152 @@
+{
+  "app": {
+    "signal": {
+      "SIGINT": "SIGINT (Ctrl-C) received."
+    },
+    "start": "{{name}} Started.",
+    "stop": "{{name}} Stopped."
+  },
+  "error": {
+    "errorConfig": {
+      "DB_HOST_NOT_FOUND": "DB_HOST environment variable not found.",
+      "DB_NAME_NOT_FOUND": "DB_NAME environment variable not found.",
+      "DB_PASSWORD_NOT_FOUND": "DB_PASSWORD environment variable not found.",
+      "DB_PORT_NOT_FOUND": "DB_PORT environment variable not found.",
+      "DB_USER_NOT_FOUND": "DB_USER environment variable not found.",
+      "DRAGONFLY_HOST_NOT_FOUND": "DRAGONFLY_HOST environment variable not found.",
+      "DRAGONFLY_PORT_NOT_FOUND": "DRAGONFLY_PORT environment variable not found.",
+      "HTTP_PORT_NOT_FOUND": "HTTP_PORT environment variable not found.",
+      "NODE_ENV_NOT_FOUND": "NODE_ENV environment variable not found.",
+      "RED_PANDA_BROKER_NOT_FOUND": "RED_PANDA_BROKER environment variable not found.",
+      "WS_PORT_NOT_FOUND": "WS_PORT environment variable not found."
+    },
+    "errorDatabase": {
+      "DB_CONNECTION_ERROR": "Database connection error.",
+      "DB_DISCONNECT_ERROR": "Database disconnect error.",
+      "MODEL_NOT_CREATED": "Model {{tableName}} not created.",
+      "MODEL_NOT_DELETED": "Model {{tableName}} not deleted.",
+      "MODEL_NOT_FOUND": "Model {{tableName}} not found.",
+      "MODEL_NOT_UPDATED": "Model {{tableName}}  not updated.",
+      "MODEL_UNIQUE_CONSTRAINT_ERROR": "Model {{tableName}} unique constraint error [{{constraint}}].",
+      "OTHER_DATABASE_ERROR": "Other database error."
+    },
+    "errorDragonfly": {
+      "DRAGONFLY_CONNECTION_ERROR": "Dragonfly connection error.",
+      "DRAGONFLY_DISCONNECT_ERROR": "Dragonfly disconnect error.",
+      "DRAGONFLY_NOT_CONNECTED": "Dragonfly is not connected."
+    },
+    "errorInfrastructure": {
+      "RED_PANDA_CONSUMER_CONNECTION_ERROR": "RedPanda consumer connection error.",
+      "RED_PANDA_CONSUMER_DISCONNECT_ERROR": "RedPanda consumer disconnect error.",
+      "RED_PANDA_CONSUMER_IS_NOT_CONNECTED": "RedPanda consumer is not connected.",
+      "RED_PANDA_CONSUMER_SUBSCRIBE_ERROR": "RedPanda consumer subscribe error.",
+      "RED_PANDA_PRODUCER_CONNECTION_ERROR": "RedPanda producer connection error.",
+      "RED_PANDA_PRODUCER_DISCONNECT_ERROR": "RedPanda producer disconnect error.",
+      "RED_PANDA_PRODUCER_IS_NOT_CONNECTED": "RedPanda producer is not connected.",
+      "RED_PANDA_PRODUCER_SEND_ERROR": "RedPanda producer send error."
+    },
+    "errorMiddleware": {
+      "PERMISSION_DENIED": "Permission denied.",
+      "TOKEN_EXPIRED": "Token is expired",
+      "TOKEN_INVALID": "Token is invalid.",
+      "TOKEN_INVALID_SIGNATURE": "Token signature is invalid.",
+      "TOKEN_INVALID_STRUCTURE": "Token structure is invalid."
+    },
+    "errorUseCase": {
+      "PASSWORD_NOT_VALID": "The password is not valid."
+    },
+    "errorValidator": {
+      "$EQ_NOT_VALID": "The $eq is not valid. (string, number, boolean)",
+      "$GTE_NOT_VALID": "The $gte is not valid. (number)",
+      "$GT_NOT_VALID": "The $gt is not valid. (number)",
+      "$IN_ARRAY_IS_EMPTY": "The $in array is empty.",
+      "$LTE_NOT_VALID": "The $lte is not valid. (number)",
+      "$LT_NOT_VALID": "The $lt is not valid. (number)",
+      "$MATCH_NOT_VALID": "The $match is not valid. (string)",
+      "$NEQ_NOT_VALID": "The $neq is not valid. (string, number, boolean)",
+      "$NIN_ARRAY_IS_EMPTY": "The $nin array is empty.",
+      "EMAIL_IS_REQUIRED": "The email is required.",
+      "EMAIL_MAX_LENGTH": "The email must be less than 255 characters long.",
+      "EMAIL_MIN_LENGTH": "The email must be at least 10 characters long.",
+      "EMAIL_OR_USERNAME_REQUIRED": "The email or username is required.",
+      "EMAIL_PATTERN_AND_BLACKLIST": "The email must be a valid email address and not in the blacklist.",
+      "ID_IS_REQUIRED": "The id is required.",
+      "ID_NOT_A_INTEGER": "The id must be an integer.",
+      "INVALID_DATE": "The date is invalid.",
+      "INVALID_PERMISSION": "The permission is invalid. (string)(A-Z, a-z, 0-9, _, -, .)",
+      "INVALID_ROLE": "The role is invalid. (string)(A-Z, a-z, 0-9, _, -, .)",
+      "LIMIT_NOT_A_INTEGER": "The limit must be an integer.",
+      "OFFSET_NOT_A_INTEGER": "The offset must be an integer.",
+      "PASSWORD_IS_REQUIRED": "The password is required.",
+      "PASSWORD_MAX_LENGTH": "The password must be less than 255 characters long.",
+      "PASSWORD_MIN_LENGTH": "The password must be at least 8 characters long.",
+      "PASSWORD_PATTERN": "The password must contain at least one uppercase letter, one lowercase letter, one number and one special character.",
+      "PERMISSION_IS_REQUIRED": "The permission is required.",
+      "ROLE_IS_REQUIRED": "The role is required.",
+      "USERNAME_IS_REQUIRED": "The username is required.",
+      "USERNAME_MAX_LENGTH": "The username must be less than 20 characters long.",
+      "USERNAME_MIN_LENGTH": "The username must be at least 3 characters long.",
+      "USERNAME_PATTERN": "The username must contain only letters, numbers, underscores and hyphens.",
+      "UUID_IS_REQUIRED": "The uuid is required.",
+      "UUID_NOT_VALID": "The uuid is not valid."
+    }
+  },
+  "http": {
+    "close": "HTTP server closed.",
+    "handler": {
+      "CRUD": {
+        "count": "{{tableName}} count successful.",
+        "delete": "{{tableName}} deletion successful.",
+        "deleteAll": "{{tableName}} deletion successful.",
+        "deleteOne": "{{tableName}} deletion successful.",
+        "find": "{{tableName}} retrieved successfully.",
+        "findAll": "{{tableName}} retrieved successfully.",
+        "findOne": "{{tableName}} retrieved successfully.",
+        "insert": "{{tableName}} insertion successful.",
+        "truncate": "{{tableName}} truncate successful.",
+        "update": "{{tableName}} update successful.",
+        "updateAll": "{{tableName}} update successful.",
+        "updateOne": "{{tableName}} update successful."
+      },
+      "authHandler": {
+        "delete": "Account deletion successful.",
+        "login": "Login successful.",
+        "logout": "Logout successful.",
+        "register": "Registration successful.",
+        "update": "Account update successful."
+      },
+      "microserviceHandler": {
+        "info": "Info retrieved successfully.",
+        "ping": "pong"
+      },
+      "tokenHandler": {
+        "check": "Token is valid."
+      }
+    },
+    "listening": "HTTP server listening on port {{port}} in {{mode}} mode. (Prefix: {{prefix}}) PID: {{pid}}",
+    "plugin": {
+      "RateLimitPlugin": {
+        "RATE_LIMIT": "Rate limit {{max}} exceeded. Try again in {{timeWindow}} seconds."
+      }
+    }
+  },
+  "infrastructure": {
+    "database": {
+      "connected": "Database connected.",
+      "disconnected": "Database disconnected.",
+      "migrations_rollback_all": "Database migrations rollback all.",
+      "migrations_run": "Database migrations run.",
+      "seeders_run": "Database seeds run."
+    },
+    "dragonfly": {
+      "connected": "Dragonfly connected.",
+      "disconnected": "Dragonfly disconnected."
+    },
+    "redpanda": {
+      "consumer_connected": "RedPanda Consumer connected.",
+      "consumer_disconnected": "RedPanda Consumer disconnected.",
+      "producer_connected": "RedPanda Producer connected.",
+      "producer_disconnected": "RedPanda Producer disconnected."
+    }
+  }
+}
