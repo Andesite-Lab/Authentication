@@ -110,6 +110,7 @@
         "updateOne": "{{tableName}} mise à jour réussie."
       },
       "authHandler": {
+        "blacklist-check": "Le jeton n'est pas sur liste noire.",
         "delete": "Suppression de compte réussie.",
         "login": "Connexion réussie.",
         "logout": "Déconnexion réussie.",

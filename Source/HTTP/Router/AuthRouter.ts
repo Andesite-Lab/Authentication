@@ -3,7 +3,7 @@ import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 
 import { AbstractRouter } from '@/HTTP/Router';
 import { AuthHandler } from '@/HTTP/Handler';
-import { PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
+import { BlacklistedChecker, PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
 
 export class AuthRouter extends AbstractRouter<AuthHandler> {
     public constructor(routerPrefix: string = '/auth') {
@@ -83,6 +83,17 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
                 summary: 'Check a token',
             },
             attachValidation: true
+        });
+
+        fastify.route({
+            method: 'GET',
+            url: '/blacklist-check',
+            preHandler: BlacklistedChecker.execute,
+            handler: this._handler.blacklistCheck,
+            schema: {
+                tags: ['Auth'],
+                summary: 'Check if credential is blacklist',
+            },
         });
 
     }

@@ -110,6 +110,7 @@
         "updateOne": "{{tableName}} update successful."
       },
       "authHandler": {
+        "blacklist-check": "Token is not in blacklist.",
         "delete": "Account deletion successful.",
         "login": "Login successful.",
         "logout": "Logout successful.",

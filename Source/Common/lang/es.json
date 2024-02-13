@@ -110,6 +110,7 @@
         "updateOne": "{{tableName}} actualización exitosa."
       },
       "authHandler": {
+        "blacklist-check": "El token no está en la lista negra.",
         "delete": "Eliminación de cuenta exitosa.",
         "login": "Inicio de sesión exitoso.",
         "logout": "Cierre de sesión exitoso.",
