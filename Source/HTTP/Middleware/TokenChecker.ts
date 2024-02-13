@@ -60,11 +60,6 @@ export class TokenChecker {
             const publicKey: string = await TokenChecker.getPublicKey(tokenPayload.uuid, tokenUuid);
             TokenChecker.check(token, publicKey);
         } catch (error) {
-            if (error instanceof Error)
-                BasaltLogger.error({
-                    error,
-                    trace: error.stack,
-                });
             if (error instanceof ErrorEntity)
                 reply.status(error.code).send({
                     content: I18n.translate(error.message, reply.request.headers['accept-language'], error.interpolation),
