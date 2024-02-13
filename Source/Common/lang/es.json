@@ -47,6 +47,7 @@
     },
     "errorMiddleware": {
       "PERMISSION_DENIED": "Permiso denegado.",
+      "TOKEN_BLACKLISTED": "El token está en la lista negra.",
       "TOKEN_EXPIRED": "El token ha expirado.",
       "TOKEN_INVALID": "El token no es válido.",
       "TOKEN_INVALID_SIGNATURE": "La firma del token no es válida.",

@@ -47,6 +47,7 @@
     },
     "errorMiddleware": {
       "PERMISSION_DENIED": "Permission denied.",
+      "TOKEN_BLACKLISTED": "Token is blacklisted.",
       "TOKEN_EXPIRED": "Token is expired",
       "TOKEN_INVALID": "Token is invalid.",
       "TOKEN_INVALID_SIGNATURE": "Token signature is invalid.",

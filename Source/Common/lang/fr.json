@@ -47,6 +47,7 @@
     },
     "errorMiddleware": {
       "PERMISSION_DENIED": "Permission refusée.",
+      "TOKEN_BLACKLISTED": "Le jeton est sur liste noire.",
       "TOKEN_EXPIRED": "Le jeton a expiré.",
       "TOKEN_INVALID": "Le jeton n'est pas valide.",
       "TOKEN_INVALID_SIGNATURE": "La signature du jeton n'est pas valide.",
