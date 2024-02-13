@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.6.0](https://github.com/Andesite-Lab/Authentication/compare/v1.5.0...v1.6.0) (2024-02-13)
+
+
+### Features
+
+* add BasaltLogger into middleware ([0c90174](https://github.com/Andesite-Lab/Authentication/commit/0c9017430d1cb2966595a016dda0ea769a6e55b9))
+* add endpoint + reply with gif if banned ([0498ffe](https://github.com/Andesite-Lab/Authentication/commit/0498ffe2349ec1744d196d8d9c70c4a5387da6a2))
+* add endpoint blacklist check ([77b148c](https://github.com/Andesite-Lab/Authentication/commit/77b148c220d72cb365e2f72905636fcc651f5391))
+* add middleware BlacklistedChecker (translation, ...) ([138457a](https://github.com/Andesite-Lab/Authentication/commit/138457a44ce14a93c491eee8eb121b3290e34691))
+* add middleware BlackListedChecker in every endpoint ([11551b2](https://github.com/Andesite-Lab/Authentication/commit/11551b23afbe27a7dceb132847f634a64179dbc7))
+
+
+### Bug Fixes
+
+* add check instance knex ([77bd605](https://github.com/Andesite-Lab/Authentication/commit/77bd605136a324bba625d9b498e491be5e7ee491))
+* remove basalt logger to middleware ([227093b](https://github.com/Andesite-Lab/Authentication/commit/227093bd0fdae1be16710e7a7a57f1f0e6159635))
+
+
+### Code Refactoring
+
+* endpoint reorganization ([d96dba7](https://github.com/Andesite-Lab/Authentication/commit/d96dba74f514cb580c28c072c7f687432046176d))
+* move BasaltLogger to sendError for  handler ([79398ed](https://github.com/Andesite-Lab/Authentication/commit/79398edc25bcc630a671f87e654026929f067830))
+
+
+### Build System
+
+* update packages ([9a07630](https://github.com/Andesite-Lab/Authentication/commit/9a0763016f8a57f319b754fe31519b2dc02fd2e9))
+
 ## [1.5.0](https://github.com/Andesite-Lab/Authentication/compare/v1.4.4...v1.5.0) (2024-02-12)
 
 
