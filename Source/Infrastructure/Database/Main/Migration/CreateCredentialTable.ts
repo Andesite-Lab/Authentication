@@ -19,10 +19,10 @@ export class CreateCredentialTable {
             table.string('password')
                 .notNullable()
                 .comment('The password encrypt of the user');
-            table.boolean('banned')
+            table.boolean('blacklisted')
                 .notNullable()
                 .defaultTo(false)
-                .comment('If the user is banned');
+                .comment('If the user is blacklisted');
             table.uuid('uuid')
                 .notNullable()
                 .defaultTo(knex.raw('gen_random_uuid()'))

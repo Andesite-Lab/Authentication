@@ -1,5 +1,4 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { AbstractHandler } from '@/HTTP/Handler/AbstractHandler';
 import {
@@ -148,11 +147,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 }
             );
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -175,11 +169,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 }
             );
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -204,11 +193,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 });
 
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -234,11 +218,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 });
 
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -284,11 +263,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 }
             );
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -308,11 +282,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 })
             );
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -341,11 +310,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 })
             );
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -374,11 +338,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 })
             );
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -422,11 +381,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 }
             );
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -546,7 +500,6 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
         try {
             const paginationOptionsDTO: IPaginationOptionsDTO | undefined = this.checkReqPaginationOptions(req.query);
             const paginationOptionsValidator: PaginationOptionsValidator<IPaginationOptionsDTO> = new PaginationOptionsValidator(paginationOptionsDTO);
-
 
             const entitiesEq: Partial<T>[] = this.checkReqEntitiesEq(req.query);
             const entitiesConditional: Partial<Record<keyof T, IWhereClauseDTO>>[] = this.checkReqEntitiesConditional(req.query);

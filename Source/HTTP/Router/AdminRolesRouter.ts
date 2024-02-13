@@ -3,7 +3,7 @@ import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 
 import { AbstractRouter } from '@/HTTP/Router';
 import { AdminRolesHandler } from '@/HTTP/Handler';
-import { PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
+import { PermissionChecker, TokenChecker, BlacklistedChecker } from '@/HTTP/Middleware';
 
 export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
     public constructor(routerPrefix: string = '/') {
@@ -14,10 +14,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'POST',
             url: '/',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.create'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.create'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.insert   ,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Insert one role or many roles',
                 body: validationMetadatasToSchemas().RoleValidator
             },
@@ -27,10 +31,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'GET',
             url: '/all',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.read'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.findAll,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Find all roles'
             },
             attachValidation: true
@@ -39,10 +47,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'GET',
             url: '/:id',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.read'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.findOneById,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Find one role',
                 params: validationMetadatasToSchemas().IdValidator
             },
@@ -52,10 +64,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'GET',
             url: '/',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.read'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.find,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Find by clause role',
             },
             attachValidation: true
@@ -64,10 +80,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'PUT',
             url: '/all',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.update'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.update'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.updateAll,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Update all roles',
                 body: validationMetadatasToSchemas().RoleValidator
             },
@@ -77,10 +97,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'PUT',
             url: '/:id',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.update'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.update'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.updateOneById,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Update one role',
                 params: validationMetadatasToSchemas().IdValidator,
                 body: validationMetadatasToSchemas().RoleValidator
@@ -91,10 +115,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'PUT',
             url: '/',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.delete'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.update,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Update by clause role',
             },
             attachValidation: true
@@ -103,10 +131,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'DELETE',
             url: '/all',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.delete'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.deleteAll,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Delete all roles',
             },
             attachValidation: true
@@ -115,10 +147,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'DELETE',
             url: '/:id',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.delete'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.deleteOneById,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Delete one role',
                 params: validationMetadatasToSchemas().IdValidator
             },
@@ -128,10 +164,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'DELETE',
             url: '/',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.delete'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.delete,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Delete by clause role',
             },
             attachValidation: true
@@ -140,10 +180,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'DELETE',
             url: '/truncate',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.delete'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.delete'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.truncate,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Truncate role',
             },
             attachValidation: true
@@ -152,10 +196,14 @@ export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
         fastify.route({
             method: 'GET',
             url: '/count',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'role', 'role.read'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'role', 'role.read'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.count,
             schema: {
-                tags: ['Admin'],
+                tags: ['Admin-Role'],
                 summary: 'Count role',
             },
             attachValidation: true

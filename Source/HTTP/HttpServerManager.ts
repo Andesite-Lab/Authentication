@@ -3,7 +3,7 @@ import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { IHook, IPlugin, IRouter } from '@/HTTP/Interface';
 import { EnvironmentConfiguration, I18n, Language } from '@/Config';
-import { AdminPermissionsRouter, AdminRolesRouter, AuthRouter, MicroserviceRouter, TokenRouter, } from '@/HTTP/Router';
+import { AdminPermissionsRouter, AdminRolesRouter, AuthRouter, MicroserviceRouter } from '@/HTTP/Router';
 import {
     CookiePlugin,
     CorsPlugin,
@@ -31,7 +31,6 @@ export class HttpServerManager {
         return [
             new MicroserviceRouter('/microservice'),
             new AuthRouter('/'),
-            new TokenRouter('/token'),
             new AdminRolesRouter('/admin/roles'),
             new AdminPermissionsRouter('/admin/permissions'),
         ];
@@ -45,7 +44,7 @@ export class HttpServerManager {
             new HelmetPlugin(),
             new RateLimitPlugin(),
             new SwaggerPlugin(),
-            new SwaggerUiPlugin(),
+            new SwaggerUiPlugin()
         ];
     }
 

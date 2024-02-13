@@ -46,6 +46,7 @@
       "RED_PANDA_PRODUCER_SEND_ERROR": "Errore di invio del produttore RedPanda."
     },
     "errorMiddleware": {
+      "CREDENTIAL_BLACKLISTED": "conto in lista nera.",
       "PERMISSION_DENIED": "Permesso negato.",
       "TOKEN_EXPIRED": "Il token è scaduto.",
       "TOKEN_INVALID": "Il token non è valido.",
@@ -109,18 +110,18 @@
         "updateOne": "{{tableName}} aggiornamento riuscito."
       },
       "authHandler": {
+        "blacklist-check": "L'account non è nella blacklist.",
         "delete": "Eliminazione dell'account riuscita.",
         "login": "Accesso riuscito.",
         "logout": "Logout riuscito.",
         "register": "Registrazione riuscita.",
+        "token-blacklist-check": "Il token è valido e l'account non è nella blacklist.",
+        "token-check": "Il token è valido.",
         "update": "Aggiornamento dell'account riuscito."
       },
       "microserviceHandler": {
         "info": "Informazioni recuperate con successo.",
         "ping": "pong"
-      },
-      "tokenHandler": {
-        "check": "Il token è valido."
       }
     },
     "listening": "Il server HTTP è in ascolto sulla porta {{port}} in modalità {{mode}}. (Prefisso: {{prefix}}) PID: {{pid}}",
