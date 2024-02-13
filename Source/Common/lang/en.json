@@ -46,8 +46,8 @@
       "RED_PANDA_PRODUCER_SEND_ERROR": "RedPanda producer send error."
     },
     "errorMiddleware": {
+      "CREDENTIAL_BLACKLISTED": "Credential blacklisted.",
       "PERMISSION_DENIED": "Permission denied.",
-      "TOKEN_BLACKLISTED": "Token is blacklisted.",
       "TOKEN_EXPIRED": "Token is expired",
       "TOKEN_INVALID": "Token is invalid.",
       "TOKEN_INVALID_SIGNATURE": "Token signature is invalid.",
@@ -110,11 +110,12 @@
         "updateOne": "{{tableName}} update successful."
       },
       "authHandler": {
-        "blacklist-check": "Token is not in blacklist.",
+        "blacklist-check": "The account is not on the blacklist.",
         "delete": "Account deletion successful.",
         "login": "Login successful.",
         "logout": "Logout successful.",
         "register": "Registration successful.",
+        "token-blacklist-check": "The token is valid and the account is not on the blacklist.",
         "token-check": "Token is valid.",
         "update": "Account update successful."
       },

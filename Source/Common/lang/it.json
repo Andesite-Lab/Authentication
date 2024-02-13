@@ -46,8 +46,8 @@
       "RED_PANDA_PRODUCER_SEND_ERROR": "Errore di invio del produttore RedPanda."
     },
     "errorMiddleware": {
+      "CREDENTIAL_BLACKLISTED": "conto in lista nera.",
       "PERMISSION_DENIED": "Permesso negato.",
-      "TOKEN_BLACKLISTED": "Il token è nella blacklist.",
       "TOKEN_EXPIRED": "Il token è scaduto.",
       "TOKEN_INVALID": "Il token non è valido.",
       "TOKEN_INVALID_SIGNATURE": "La firma del token non è valida.",
@@ -110,11 +110,12 @@
         "updateOne": "{{tableName}} aggiornamento riuscito."
       },
       "authHandler": {
-        "blacklist-check": "Il token non è in blacklist.",
+        "blacklist-check": "L'account non è nella blacklist.",
         "delete": "Eliminazione dell'account riuscita.",
         "login": "Accesso riuscito.",
         "logout": "Logout riuscito.",
         "register": "Registrazione riuscita.",
+        "token-blacklist-check": "Il token è valido e l'account non è nella blacklist.",
         "token-check": "Il token è valido.",
         "update": "Aggiornamento dell'account riuscito."
       },

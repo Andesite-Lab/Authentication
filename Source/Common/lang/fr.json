@@ -46,8 +46,8 @@
       "RED_PANDA_PRODUCER_SEND_ERROR": "Erreur d'envoi du producteur RedPanda."
     },
     "errorMiddleware": {
+      "CREDENTIAL_BLACKLISTED": "Le compte est sur liste noire.",
       "PERMISSION_DENIED": "Permission refusée.",
-      "TOKEN_BLACKLISTED": "Le jeton est sur liste noire.",
       "TOKEN_EXPIRED": "Le jeton a expiré.",
       "TOKEN_INVALID": "Le jeton n'est pas valide.",
       "TOKEN_INVALID_SIGNATURE": "La signature du jeton n'est pas valide.",
@@ -110,11 +110,12 @@
         "updateOne": "{{tableName}} mise à jour réussie."
       },
       "authHandler": {
-        "blacklist-check": "Le jeton n'est pas sur liste noire.",
+        "blacklist-check": "Le compte n'est pas sur la liste noir.",
         "delete": "Suppression de compte réussie.",
         "login": "Connexion réussie.",
         "logout": "Déconnexion réussie.",
         "register": "Inscription réussie.",
+        "token-blacklist-check": "Le jeton est valide et le compte n'est pas sur la liste noire.",
         "token-check": "Le jeton est valide.",
         "update": "Mise à jour du compte réussie."
       },

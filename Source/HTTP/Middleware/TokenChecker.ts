@@ -1,6 +1,5 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { Dragonfly } from '@/Infrastructure/Store';
 import { I18n } from '@/Config';

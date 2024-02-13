@@ -96,5 +96,15 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             },
         });
 
+        fastify.route({
+            method: 'GET',
+            url: '/token-and-blacklist-check',
+            preHandler: [TokenChecker.execute, BlacklistedChecker.execute],
+            handler: this._handler.blacklistCheck,
+            schema: {
+                tags: ['Auth'],
+                summary: 'Check if credential is blacklist',
+            },
+        });
     }
 }

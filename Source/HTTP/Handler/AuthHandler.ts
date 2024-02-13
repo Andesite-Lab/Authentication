@@ -86,7 +86,15 @@ export class AuthHandler extends AbstractHandler {
 
     public blacklistCheck = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.token-check', reply.request.headers['accept-language']));
+            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.blacklist-check', reply.request.headers['accept-language']));
+        } catch (e) {
+            this.sendError(reply, e);
+        }
+    };
+
+    public tokenAndBlacklistCheck = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+        try {
+            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.token-blacklist-check', reply.request.headers['accept-language']));
         } catch (e) {
             this.sendError(reply, e);
         }

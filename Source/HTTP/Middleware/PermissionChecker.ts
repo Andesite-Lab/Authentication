@@ -1,6 +1,5 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { ITokenPayloadDTO } from '@/Data/DTO';
 import { BasaltAuthorization } from '@/Common';
@@ -43,8 +42,8 @@ export class PermissionChecker {
             } catch (error) {
                 if (error instanceof ErrorEntity)
                     reply.status(error.code).send({
-                        code: error.code,
-                        content: I18n.translate(error.message, reply.request.headers['accept-language'], error.interpolation)
+                        content: I18n.translate(error.message, reply.request.headers['accept-language'], error.interpolation),
+                        statusCode: error.code
                     });
             }
         };

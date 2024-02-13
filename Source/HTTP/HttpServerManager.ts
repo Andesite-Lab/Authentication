@@ -44,7 +44,7 @@ export class HttpServerManager {
             new HelmetPlugin(),
             new RateLimitPlugin(),
             new SwaggerPlugin(),
-            new SwaggerUiPlugin(),
+            new SwaggerUiPlugin()
         ];
     }
 

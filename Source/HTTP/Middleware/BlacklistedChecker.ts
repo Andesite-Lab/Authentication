@@ -1,16 +1,17 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { BasaltLogger } from '@basalt-lab/basalt-logger';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { randomInt } from 'crypto';
 
 import { PermissionChecker } from '@/HTTP/Middleware/PermissionChecker';
 import { ITokenPayloadDTO } from '@/Data/DTO';
 import { CredentialModel } from '@/Infrastructure/Repository/Model';
 import { ICrendentialDTO } from '@/Data/DTO/Models';
 import { ErrorEntity, ErrorMiddleware, ErrorMiddlewareKey } from '@/Common/Error';
-import { I18n } from '@/Config';
-
 
 export class BlacklistedChecker {
     private static _credentialModel: CredentialModel = new CredentialModel();
+    private static _imagesBuffer: Map<string, Buffer> = new Map<string, Buffer>();
 
     private static async checkBlacklisted(uuid: string) {
         const credentialDTO: Pick<ICrendentialDTO, 'blacklisted'> | undefined = await BlacklistedChecker._credentialModel.findOne([{
@@ -20,7 +21,7 @@ export class BlacklistedChecker {
         });
         if (credentialDTO && credentialDTO.blacklisted)
             throw new ErrorMiddleware({
-                key: ErrorMiddlewareKey.TOKEN_BLACKLISTED,
+                key: ErrorMiddlewareKey.CREDENTIAL_BLACKLISTED,
             });
     }
 
@@ -30,11 +31,18 @@ export class BlacklistedChecker {
             const tokenPayload: ITokenPayloadDTO = PermissionChecker.getPayload(token);
             await BlacklistedChecker.checkBlacklisted(tokenPayload.uuid);
         } catch (error) {
+            const pathImages: string = join(__dirname, '../Public/Images');
+            const random: number = randomInt(1, 6);
+            const pathBlacklisted: string = `${pathImages}/black-listed-${random}.gif`;
+
+            if (!BlacklistedChecker._imagesBuffer.has(pathBlacklisted))
+                BlacklistedChecker._imagesBuffer.set(pathBlacklisted, readFileSync(pathBlacklisted));
+            const blacklistedImage: Buffer = BlacklistedChecker._imagesBuffer.get(pathBlacklisted) as Buffer;
+
             if (error instanceof ErrorEntity)
-                reply.status(error.code).send({
-                    code: error.code,
-                    content: I18n.translate(error.message, reply.request.headers['accept-language'], error.interpolation)
-                });
+                reply.status(error.code)
+                    .type('image/gif')
+                    .send(blacklistedImage);
         }
     }
 }
