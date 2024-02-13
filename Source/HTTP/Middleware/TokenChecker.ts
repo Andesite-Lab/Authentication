@@ -1,5 +1,6 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { Dragonfly } from '@/Infrastructure/Store';
 import { I18n } from '@/Config';
@@ -59,6 +60,11 @@ export class TokenChecker {
             const publicKey: string = await TokenChecker.getPublicKey(tokenPayload.uuid, tokenUuid);
             TokenChecker.check(token, publicKey);
         } catch (error) {
+            if (error instanceof Error)
+                BasaltLogger.error({
+                    error,
+                    trace: error.stack,
+                });
             if (error instanceof ErrorEntity)
                 reply.status(error.code).send({
                     content: I18n.translate(error.message, reply.request.headers['accept-language'], error.interpolation),
