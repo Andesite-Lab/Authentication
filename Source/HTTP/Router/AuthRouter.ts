@@ -52,7 +52,11 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
         fastify.route({
             method: 'DELETE',
             url: '/delete',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'credential', 'credential.delete'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'credential', 'credential.delete'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.delete,
             schema: {
                 tags: ['Auth'],
@@ -64,11 +68,15 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
         fastify.route({
             method: 'PUT',
             url: '/update',
-            preHandler: [TokenChecker.execute, PermissionChecker.execute(['admin', 'credential', 'credential.update'], false)],
+            preHandler: [
+                TokenChecker.execute,
+                PermissionChecker.execute(['admin', 'credential', 'credential.update'], false),
+                BlacklistedChecker.execute
+            ],
             handler: this._handler.update,
             schema: {
                 tags: ['Auth'],
-                summary: 'Refresh a user token',
+                summary: 'Update a user',
             },
             attachValidation: true
         });
