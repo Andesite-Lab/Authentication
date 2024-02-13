@@ -114,14 +114,12 @@
         "login": "Accesso riuscito.",
         "logout": "Logout riuscito.",
         "register": "Registrazione riuscita.",
+        "token-check": "Il token è valido.",
         "update": "Aggiornamento dell'account riuscito."
       },
       "microserviceHandler": {
         "info": "Informazioni recuperate con successo.",
         "ping": "pong"
-      },
-      "tokenHandler": {
-        "check": "Il token è valido."
       }
     },
     "listening": "Il server HTTP è in ascolto sulla porta {{port}} in modalità {{mode}}. (Prefisso: {{prefix}}) PID: {{pid}}",

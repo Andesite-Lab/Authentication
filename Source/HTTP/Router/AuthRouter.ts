@@ -73,5 +73,17 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             attachValidation: true
         });
 
+        fastify.route({
+            method: 'GET',
+            url: '/token-check',
+            preHandler: TokenChecker.execute,
+            handler: this._handler.tokenCheck,
+            schema: {
+                tags: ['Auth'],
+                summary: 'Check a token',
+            },
+            attachValidation: true
+        });
+
     }
 }

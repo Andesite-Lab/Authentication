@@ -20,12 +20,12 @@ export class SwaggerPlugin implements IPlugin {
                         name: packageJsonConfiguration.author,
                     },
                 },
-                servers: [ { url: `https://${EnvironmentConfiguration.env.DOMAIN}:${EnvironmentConfiguration.env.HTTP_PORT}` } ],
+                servers: [ { url: `${EnvironmentConfiguration.env.NODE_ENV == 'development' ? 'http' : 'https'}://${EnvironmentConfiguration.env.DOMAIN}:${EnvironmentConfiguration.env.HTTP_PORT}` } ],
                 tags: [
-                    { name: 'Admin', description: 'Admin related end-points' },
+                    { name: 'Admin-Role', description: 'Admin Role related end-points' },
+                    { name: 'Admin-Permission', description: 'Admin Permission related end-points' },
                     { name: 'Auth', description: 'Auth related end-points' },
                     { name: 'Microservice', description: 'Microservice related end-points' },
-                    { name: 'Token', description: 'Token related end-points' },
                 ],
                 components: {
                     schemas: {

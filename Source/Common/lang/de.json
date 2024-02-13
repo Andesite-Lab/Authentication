@@ -114,14 +114,12 @@
         "login": "Anmeldung erfolgreich.",
         "logout": "Abmeldung erfolgreich.",
         "register": "Registrierung erfolgreich.",
+        "token-check": "Token ist gültig.",
         "update": "Konto-Aktualisierung erfolgreich."
       },
       "microserviceHandler": {
         "info": "Info erfolgreich abgerufen.",
         "ping": "Ping erfolgreich."
-      },
-      "tokenHandler": {
-        "check": "Token ist gültig."
       }
     },
     "listening": "HTTP-Server hört auf Port {{port}} im {{mode}}-Modus. (Präfix: {{prefix}}) PID: {{pid}}",

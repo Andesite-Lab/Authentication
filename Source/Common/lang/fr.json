@@ -114,14 +114,12 @@
         "login": "Connexion réussie.",
         "logout": "Déconnexion réussie.",
         "register": "Inscription réussie.",
+        "token-check": "Le jeton est valide.",
         "update": "Mise à jour du compte réussie."
       },
       "microserviceHandler": {
         "info": "Informations récupérées avec succès.",
         "ping": "pong"
-      },
-      "tokenHandler": {
-        "check": "Le jeton est valide."
       }
     },
     "listening": "Le serveur HTTP écoute sur le port {{port}} en mode {{mode}}. (Préfixe: {{prefix}}) PID: {{pid}}",
