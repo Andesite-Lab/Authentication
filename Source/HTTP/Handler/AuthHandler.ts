@@ -1,5 +1,4 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { AbstractHandler } from '@/HTTP/Handler';
 import { I18n } from '@/Config/I18n';
@@ -23,11 +22,6 @@ export class AuthHandler extends AbstractHandler {
             await this._registerUseCase.execute(dataDTO, req.headers['accept-language']);
             this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.register', reply.request.headers['accept-language']));
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -41,11 +35,6 @@ export class AuthHandler extends AbstractHandler {
             this.addCookie(reply, 'token', token, 1000 * 60 * 60 * 24);
             this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.login', reply.request.headers['accept-language']));
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -56,11 +45,6 @@ export class AuthHandler extends AbstractHandler {
             this.clearCookie(reply, 'token');
             this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.logout', reply.request.headers['accept-language']));
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -71,11 +55,6 @@ export class AuthHandler extends AbstractHandler {
             this.clearCookie(reply, 'token');
             this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.delete', reply.request.headers['accept-language']));
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
@@ -93,11 +72,6 @@ export class AuthHandler extends AbstractHandler {
                 result
             );
         } catch (e) {
-            if (e instanceof Error)
-                BasaltLogger.error({
-                    error: e,
-                    trace: e.stack,
-                });
             this.sendError(reply, e);
         }
     };
