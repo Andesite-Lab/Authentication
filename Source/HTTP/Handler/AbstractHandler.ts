@@ -1,9 +1,10 @@
 import { FastifyReply } from 'fastify';
 import { validate, ValidationError } from 'class-validator';
+import { BasaltKeyInclusionFilter } from '@basalt-lab/basalt-helper';
+import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
 import { EnvironmentConfiguration, I18n } from '@/Config';
 import { ErrorEntity } from '@/Common/Error';
-import { BasaltKeyInclusionFilter } from '@basalt-lab/basalt-helper';
 
 export abstract class AbstractHandler {
     protected readonly _basaltKeyInclusionFilter: BasaltKeyInclusionFilter = new BasaltKeyInclusionFilter();
@@ -30,6 +31,11 @@ export abstract class AbstractHandler {
     }
 
     protected sendError(reply: FastifyReply, error: unknown): void {
+        if (error instanceof Error)
+            BasaltLogger.error({
+                error,
+                trace: error.stack,
+            });
         if (error instanceof ErrorEntity)
             reply.status(error.code).send({
                 content: I18n.translate(error.message, reply.request.headers['accept-language'], error.interpolation),

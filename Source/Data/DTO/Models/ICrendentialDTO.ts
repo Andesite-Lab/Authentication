@@ -2,6 +2,6 @@ export interface ICrendentialDTO {
     username: string;
     email: string;
     password: string;
-    banned: boolean;
+    blacklisted: boolean;
     uuid: string;
 }
