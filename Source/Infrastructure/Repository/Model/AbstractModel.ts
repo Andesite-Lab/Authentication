@@ -107,6 +107,15 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         return query;
     }
 
+    protected checkInstance(): void {
+        if (!this._knex)
+            this._knex = MainDatabase.instance.database as Knex;
+        if (!this._knex)
+            throw new ErrorDatabase({
+                key: ErrorDatabaseKey.DB_CONNECTION_ERROR,
+            });
+    }
+
     public async insert(
         entity: Partial<T>[],
         columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
@@ -116,6 +125,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
+            this.checkInstance();
             let query = this._knex
                 .insert(entity)
                 .into(this._tableName)
@@ -146,6 +156,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
+            this.checkInstance();
             let query = this._knex
                 .update(entity)
                 .from(this._tableName)
@@ -179,6 +190,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
+            this.checkInstance();
             let query = this._knex
                 .update(entity)
                 .from(this._tableName)
@@ -209,6 +221,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
+            this.checkInstance();
             let query = this._knex
                 .del()
                 .from(this._tableName)
@@ -240,6 +253,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
+            this.checkInstance();
             let query = this._knex
                 .del()
                 .from(this._tableName)
@@ -266,6 +280,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         transaction?: Transaction;
     }): Promise<void> {
         try {
+            this.checkInstance();
             let query =  this._knex
                 .truncate()
                 .from(this._tableName);
@@ -289,6 +304,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
+            this.checkInstance();
             let query: Knex.QueryBuilder = this._knex
                 .select(this.transformColumnsToArray(columnToSelect))
                 .from(this._tableName);
@@ -322,6 +338,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T | undefined> {
         try {
+            this.checkInstance();
             let query = this._knex
                 .first(this.transformColumnsToArray(columnToSelect))
                 .from<T>(this._tableName);
@@ -352,6 +369,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
+            this.checkInstance();
             let query = this._knex
                 .select(this.transformColumnsToArray(columnToSelect))
                 .from(this._tableName);
@@ -386,6 +404,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<number> {
         try {
+            this.checkInstance();
             let query = this._knex
                 .count<Record<string, number>>({ count: '*' })
                 .from(this._tableName);
