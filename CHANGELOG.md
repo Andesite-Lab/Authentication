@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/Andesite-Lab/Authentication/compare/v1.6.0...v1.6.1) (2024-02-14)
+
+
+### Continuous Integration
+
+* add multiplaforms image (amd,arm,darwin..) ([9c3bb92](https://github.com/Andesite-Lab/Authentication/commit/9c3bb92502fdfa652a6a705c66ac84a138623cc1))
+
 ## [1.6.0](https://github.com/Andesite-Lab/Authentication/compare/v1.5.0...v1.6.0) (2024-02-13)
 
 
