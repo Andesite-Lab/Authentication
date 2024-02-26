@@ -8,11 +8,10 @@
   },
   "error": {
     "errorConfig": {
-      "DB_HOST_NOT_FOUND": "DB_HOST Umgebungsvariable nicht gefunden.",
-      "DB_NAME_NOT_FOUND": "DB_NAME Umgebungsvariable nicht gefunden.",
-      "DB_PASSWORD_NOT_FOUND": "DB_PASSWORD Umgebungsvariable nicht gefunden.",
-      "DB_PORT_NOT_FOUND": "DB_PORT Umgebungsvariable nicht gefunden.",
-      "DB_USER_NOT_FOUND": "DB_USER Umgebungsvariable nicht gefunden.",
+      "DB_SERVER_HOST_NOT_FOUND": "DB_SERVER_HOST Umgebungsvariable nicht gefunden.",
+      "DB_SERVER_PASSWORD_NOT_FOUND": "DB_SERVER_PASSWORD Umgebungsvariable nicht gefunden.",
+      "DB_SERVER_PORT_NOT_FOUND": "DB_SERVER_PORT Umgebungsvariable nicht gefunden.",
+      "DB_SERVER_USER_NOT_FOUND": "DB_SERVER_USER Umgebungsvariable nicht gefunden.",
       "DRAGONFLY_HOST_NOT_FOUND": "DRAGONFLY_HOST Umgebungsvariable nicht gefunden.",
       "DRAGONFLY_PORT_NOT_FOUND": "DRAGONFLY_PORT Umgebungsvariable nicht gefunden.",
       "HTTP_PORT_NOT_FOUND": "HTTP_PORT Umgebungsvariable nicht gefunden.",
@@ -20,22 +19,20 @@
       "RED_PANDA_BROKER_NOT_FOUND": "RED_PANDA_BROKER Umgebungsvariable nicht gefunden.",
       "WS_PORT_NOT_FOUND": "WS_PORT Umgebungsvariable nicht gefunden."
     },
-    "errorDatabase": {
-      "DB_CONNECTION_ERROR": "Datenbankverbindungsfehler.",
-      "DB_DISCONNECT_ERROR": "Fehler beim Trennen der Verbindung zur Datenbank",
-      "MODEL_NOT_CREATED": "Modell {{tableName}} nicht erstellt.",
-      "MODEL_NOT_DELETED": "Modell {{tableName}} nicht gelöscht.",
-      "MODEL_NOT_FOUND": "Modell {{tableName}} nicht gefunden.",
-      "MODEL_NOT_UPDATED": "Modell {{tableName}} nicht aktualisiert.",
-      "MODEL_UNIQUE_CONSTRAINT_ERROR": "Modell {{tableName}} Eindeutigkeitsfehler [{{constraint}}].",
-      "OTHER_DATABASE_ERROR": "Anderer Datenbankfehler."
-    },
-    "errorDragonfly": {
+    "errorInfrastructure": {
+      "DATABASE_CONNECTION_ERROR": "Fehler bei der Verbindung zur Datenbank {{databaseName}}.",
+      "DATABASE_DISCONNECT_ERROR": "Fehler beim Trennen der Verbindung zur Datenbank {{databaseName}}.",
+      "DATABASE_MODEL_NOT_CREATED": "Modell {{tableName}} nicht erstellt, in der Datenbank {{databaseName}}.",
+      "DATABASE_MODEL_NOT_DELETED": "Modell {{tableName}} nicht gelöscht, in der Datenbank {{databaseName}}.",
+      "DATABASE_MODEL_NOT_FOUND": "Modell {{tableName}} nicht gefunden, in der Datenbank {{databaseName}}.",
+      "DATABASE_MODEL_NOT_UPDATED": "Modell {{tableName}} nicht aktualisiert, in der Datenbank {{databaseName}}.",
+      "DATABASE_MODEL_UNIQUE_CONSTRAINT_ERROR": "Modell {{tableName}} Eindeutigkeitsfehler [{{constraint}}], in der Datenbank {{databaseName}}.",
+      "DATABASE_NOT_CONNECTED": "Datenbank {{databaseName}} ist nicht verbunden.",
+      "DATABASE_NOT_FOUND_IN_DATABASE_MANAGER": "Datenbank {{databaseName}} nicht im Datenbank-Manager gefunden.",
+      "DATABASE_OTHER_DATABASE_ERROR": "Anderer Datenbankfehler, in der Datenbank {{databaseName}}.",
       "DRAGONFLY_CONNECTION_ERROR": "Dragonfly-Verbindungsfehler.",
       "DRAGONFLY_DISCONNECT_ERROR": "Dragonfly-Trennungsfehler.",
-      "DRAGONFLY_NOT_CONNECTED": "Dragonfly ist nicht verbunden."
-    },
-    "errorInfrastructure": {
+      "DRAGONFLY_NOT_CONNECTED": "Dragonfly ist nicht verbunden.",
       "RED_PANDA_CONSUMER_CONNECTION_ERROR": "RedPanda-Verbraucherverbindungsfehler.",
       "RED_PANDA_CONSUMER_DISCONNECT_ERROR": "RedPanda-Verbraucher-Trennungsfehler.",
       "RED_PANDA_CONSUMER_IS_NOT_CONNECTED": "RedPanda-Verbraucher ist nicht verbunden.",
@@ -96,18 +93,18 @@
     "close": "HTTP-Server geschlossen.",
     "handler": {
       "CRUD": {
-        "count": "{{tableName}}-Zählung erfolgreich.",
-        "delete": "{{tableName}}-Löschung erfolgreich.",
-        "deleteAll": "{{tableName}}-Löschung erfolgreich.",
-        "deleteOne": "{{tableName}}-Löschung erfolgreich.",
-        "find": "{{tableName}}-Abruf erfolgreich.",
-        "findAll": "{{tableName}}-Abruf erfolgreich.",
-        "findOne": "{{tableName}}-Abruf erfolgreich.",
-        "insert": "{{tableName}}-Einfügung erfolgreich.",
-        "truncate": "{{tableName}}-Trunkierung erfolgreich.",
-        "update": "{{tableName}}-Aktualisierung erfolgreich.",
-        "updateAll": "{{tableName}}-Aktualisierung erfolgreich.",
-        "updateOne": "{{tableName}}-Aktualisierung erfolgreich."
+        "count": "Zählung erfolgreich. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "delete": "{{x}} Modelle erfolgreich gelöscht. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "deleteAll": "Alle {{x}} Modelle erfolgreich gelöscht. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "deleteOne": "Modell erfolgreich gelöscht. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "find": "{{x}} Modelle erfolgreich gefunden. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "findAll": "Alle {{x}} Modelle erfolgreich gefunden. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "findOne": "Modell erfolgreich gefunden. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "insert": "Einfügen erfolgreich von {{x}} Elementen. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "truncate": "Trunkierung erfolgreich. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "update": "Aktualisierung von {{x}} Elementen erfolgreich. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "updateAll": "Aktualisierung erfolgreich von allen {{x}} Modellen. Database::{{databaseName}} -> Table::{{tableName}}.",
+        "updateOne": "Aktualisierung erfolgreich des Modells. Database::{{databaseName}} -> Table::{{tableName}}."
       },
       "authHandler": {
         "blacklist-check": "Das Konto ist nicht auf der Blacklist.",
@@ -133,11 +130,11 @@
   },
   "infrastructure": {
     "database": {
-      "connected": "Datenbank verbunden.",
-      "disconnected": "Datenbank getrennt.",
-      "migrations_rollback_all": "Datenbank-Migrationen alle zurückrollen.",
-      "migrations_run": "Datenbank-Migrationen ausgeführt.",
-      "seeders_run": "Datenbank-Saatgut ausgeführt."
+      "connected": "Datenbank {{databaseName}} verbunden.",
+      "disconnected": "Datenbank {{databaseName}} getrennt.",
+      "rollback_all_migrations": "Datenbank {{databaseName}}-Migrationen rollen alles zurück.",
+      "run_all_mirations": "Datenbank {{databaseName}}-Migrationen ausgeführt.",
+      "run_all_seeds": "Datenbank {{databaseName}}-Saatgut ausgeführt."
     },
     "dragonfly": {
       "connected": "Dragonfly verbunden.",

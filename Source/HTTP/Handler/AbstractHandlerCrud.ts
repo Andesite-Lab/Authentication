@@ -1,6 +1,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { AbstractHandler } from '@/HTTP/Handler/AbstractHandler';
+import { Hash } from '@/Common';
+import { I18n } from '@/Config';
+import { IPaginationOptionsDTO, IWhereClauseDTO } from '@/Data/DTO';
 import {
     Count,
     Delete,
@@ -15,13 +17,12 @@ import {
     UpdateAll,
     UpdateOne
 } from '@/Domain/UseCase/CRUD';
-import { I18n } from '@/Config';
+import { AbstractHandler } from '@/HTTP/Handler/AbstractHandler';
 import { IdValidator, PaginationOptionsValidator, UuidValidator, WhereClauseValidator } from '@/Validator';
-import { IPaginationOptionsDTO, IWhereClauseDTO } from '@/Data/DTO';
-import { Hash } from '@/Common';
 
 export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends AbstractHandler {
     private readonly _tableName: string;
+    private readonly _databaseName: string;
     private readonly _keyInclusionFilter: (keyof T)[];
     private readonly _keyInclusionFilterWhereClause: (keyof IWhereClauseDTO)[] = ['$in', '$nin', '$eq', '$neq', '$match', '$lt', '$lte', '$gt', '$gte'];
     private readonly _validator: new (data: T) => U;
@@ -39,26 +40,28 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
     private readonly _countUseCase: Count<T>;
 
     public constructor(config: {
-        tableName: string
+        tableName: string,
+        databaseName: string,
         keyInclusionFilter: (keyof T)[],
         validator: new (data: T) => U
     }) {
         super();
         this._tableName = config.tableName;
+        this._databaseName = config.databaseName;
         this._keyInclusionFilter = config.keyInclusionFilter;
         this._validator = config.validator;
-        this._findAllUseCase = new FindAll<T>(config.tableName);
-        this._findOneUseCase = new FindOne<T>(config.tableName);
-        this._findUseCase = new Find<T>(config.tableName);
-        this._insertUseCase = new Insert<T>(config.tableName);
-        this._updateAllUseCase = new UpdateAll<T>(config.tableName);
-        this._updateOneUseCase = new UpdateOne<T>(config.tableName);
-        this._updateUseCase = new Update<T>(config.tableName);
-        this._deleteAllUseCase = new DeleteAll<T>(config.tableName);
-        this._deleteOneUseCase = new DeleteOne<T>(config.tableName);
-        this._deleteUseCase = new Delete<T>(config.tableName);
-        this._truncateUseCase = new Truncate<T>(config.tableName);
-        this._countUseCase = new Count<T>(config.tableName);
+        this._findAllUseCase = new FindAll<T>(config.tableName, config.databaseName);
+        this._findOneUseCase = new FindOne<T>(config.tableName, config.databaseName);
+        this._findUseCase = new Find<T>(config.tableName, config.databaseName);
+        this._insertUseCase = new Insert<T>(config.tableName, config.databaseName);
+        this._updateAllUseCase = new UpdateAll<T>(config.tableName, config.databaseName);
+        this._updateOneUseCase = new UpdateOne<T>(config.tableName, config.databaseName);
+        this._updateUseCase = new Update<T>(config.tableName, config.databaseName);
+        this._deleteAllUseCase = new DeleteAll<T>(config.tableName, config.databaseName);
+        this._deleteOneUseCase = new DeleteOne<T>(config.tableName, config.databaseName);
+        this._deleteUseCase = new Delete<T>(config.tableName, config.databaseName);
+        this._truncateUseCase = new Truncate<T>(config.tableName, config.databaseName);
+        this._countUseCase = new Count<T>(config.tableName, config.databaseName);
     }
 
     private filterDuplicate: (data: T[]) => T[] = (data: T[]) => {
@@ -139,7 +142,9 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.insert', reply.request.headers['accept-language'], {
-                    tableName: this._tableName,
+                    x: data.length,
+                    databaseName: this._databaseName,
+                    tableName: this._tableName
                 }),
                 {
                     data,
@@ -161,6 +166,8 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.findAll', reply.request.headers['accept-language'], {
+                    x: data.length,
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 }),
                 {
@@ -186,6 +193,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.findOne', reply.request.headers['accept-language'], {
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 }),
                 {
@@ -211,6 +219,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.findOne', reply.request.headers['accept-language'], {
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 }),
                 {
@@ -255,6 +264,8 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.find', reply.request.headers['accept-language'], {
+                    x: data.length,
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 }),
                 {
@@ -273,11 +284,13 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
             const validatedBody: U = new this._validator(filteredBody);
 
             await this.validate(validatedBody as object, reply.request.headers['accept-language'] || 'en');
-            await this._updateAllUseCase.execute(filteredBody);
+            const data: T[] = await this._updateAllUseCase.execute(filteredBody);
             this.sendResponse(
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.updateAll', reply.request.headers['accept-language'], {
+                    x: data.length,
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 })
             );
@@ -306,6 +319,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.updateOne', reply.request.headers['accept-language'], {
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 })
             );
@@ -334,6 +348,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.updateOne', reply.request.headers['accept-language'], {
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 })
             );
@@ -373,6 +388,8 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.update', reply.request.headers['accept-language'], {
+                    x: data.length,
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 }),
                 {
@@ -387,11 +404,13 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
 
     public deleteAll = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            await this._deleteAllUseCase.execute();
+            const data: T[] = await this._deleteAllUseCase.execute();
             this.sendResponse(
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.deleteAll', reply.request.headers['accept-language'], {
+                    x: data.length,
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 })
             );
@@ -413,6 +432,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.deleteOne', reply.request.headers['accept-language'], {
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 })
             );
@@ -434,6 +454,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.deleteOne', reply.request.headers['accept-language'], {
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 })
             );
@@ -469,6 +490,8 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.delete', reply.request.headers['accept-language'], {
+                    x: data.length,
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 }),
                 {
@@ -488,6 +511,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.truncate', reply.request.headers['accept-language'], {
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 })
             );
@@ -530,6 +554,7 @@ export class AbstractHandlerCrud<T extends NonNullable<unknown>, U> extends Abst
                 reply,
                 200,
                 I18n.translate('http.handler.CRUD.count', reply.request.headers['accept-language'], {
+                    databaseName: this._databaseName,
                     tableName: this._tableName,
                 }),
                 {

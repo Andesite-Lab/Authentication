@@ -1,9 +1,9 @@
-import { FastifyInstance } from 'fastify';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import { FastifyInstance } from 'fastify';
 
-import { AbstractRouter } from '@/HTTP/Router';
 import { AdminRolesHandler } from '@/HTTP/Handler';
-import { PermissionChecker, TokenChecker, BlacklistedChecker } from '@/HTTP/Middleware';
+import { BlacklistedChecker, PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
+import { AbstractRouter } from '@/HTTP/Router';
 
 export class AdminRolesRouter extends AbstractRouter<AdminRolesHandler> {
     public constructor(routerPrefix: string = '/') {

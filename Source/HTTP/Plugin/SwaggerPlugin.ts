@@ -1,9 +1,9 @@
-import { FastifyInstance } from 'fastify';
 import fastifySwagger from '@fastify/swagger';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import { FastifyInstance } from 'fastify';
 
-import { IPlugin } from '@/HTTP/Interface';
 import { EnvironmentConfiguration, packageJsonConfiguration } from '@/Config';
+import { IPlugin } from '@/HTTP/Interface';
 
 export class SwaggerPlugin implements IPlugin {
     configure(app: FastifyInstance): void {

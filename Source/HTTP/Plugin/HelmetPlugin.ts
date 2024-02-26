@@ -1,5 +1,5 @@
-import { FastifyInstance } from 'fastify';
 import helmet from '@fastify/helmet';
+import { FastifyInstance } from 'fastify';
 
 import { IPlugin } from '@/HTTP/Interface';
 

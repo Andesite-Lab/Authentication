@@ -6,6 +6,7 @@ export class AdminPermissionsHandler extends AbstractHandlerCrud<IPermissionDTO,
     public constructor() {
         super({
             tableName: 'permission',
+            databaseName: 'authentication',
             keyInclusionFilter: ['permission', 'createdAt', 'updatedAt', 'id'],
             validator: PermissionValidator,
         });

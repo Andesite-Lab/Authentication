@@ -1,11 +1,11 @@
-import { AbstractModel } from '@/Infrastructure/Repository/Model';
-import { ErrorDatabase, ErrorDatabaseKey } from '@/Common/Error';
+import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
 import { IRolePermissionDTO } from '@/Data/DTO/Models';
 import { ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO } from '@/Data/DTO/Models/Fk';
+import { AbstractModel } from '@/Infrastructure/Repository/Model';
 
 export class RolePermissionModel extends AbstractModel<IRolePermissionDTO>{
     public constructor() {
-        super('role_permission');
+        super('role_permission', 'authentication');
     }
 
     public async findAllJoinRoleAndPermissionByCredential(
@@ -24,8 +24,8 @@ export class RolePermissionModel extends AbstractModel<IRolePermissionDTO>{
                 .where('credential_role.credentialUuid', credentialUuid);
 
             if (!result)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_FOUND,
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_FOUND,
                 });
             return result;
         } catch (err) {

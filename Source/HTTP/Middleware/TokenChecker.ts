@@ -1,10 +1,10 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { Dragonfly } from '@/Infrastructure/Store';
-import { I18n } from '@/Config';
 import { ErrorEntity, ErrorMiddleware, ErrorMiddlewareKey } from '@/Common/Error';
+import { I18n } from '@/Config';
 import { ITokenPayloadDTO } from '@/Data/DTO';
+import { Dragonfly } from '@/Infrastructure/Store';
 
 export class TokenChecker {
 

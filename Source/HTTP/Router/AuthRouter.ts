@@ -1,9 +1,9 @@
-import { FastifyInstance } from 'fastify';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import { FastifyInstance } from 'fastify';
 
-import { AbstractRouter } from '@/HTTP/Router';
 import { AuthHandler } from '@/HTTP/Handler';
 import { BlacklistedChecker, PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
+import { AbstractRouter } from '@/HTTP/Router';
 
 export class AuthRouter extends AbstractRouter<AuthHandler> {
     public constructor(routerPrefix: string = '/auth') {

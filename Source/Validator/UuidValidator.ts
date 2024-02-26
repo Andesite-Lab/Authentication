@@ -1,9 +1,9 @@
+import { faker } from '@faker-js/faker';
 import {
-    IsUUID,
-    IsDefined
+    IsDefined,
+    IsUUID
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
-import { faker } from '@faker-js/faker';
 
 import { ErrorValidatorKey } from '@/Common/Error';
 

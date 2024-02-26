@@ -1,10 +1,10 @@
+import { faker } from '@faker-js/faker';
 import {
     registerDecorator,
     // IsEmpty,
     ValidationOptions
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
-import { faker } from '@faker-js/faker';
 
 import { ErrorValidatorKey } from '@/Common/Error';
 

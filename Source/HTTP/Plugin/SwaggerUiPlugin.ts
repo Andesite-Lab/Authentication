@@ -1,10 +1,10 @@
-import { FastifyInstance } from 'fastify';
 import { fastifySwaggerUi, FastifySwaggerUiOptions } from '@fastify/swagger-ui';
+import { FastifyInstance } from 'fastify';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import { IPlugin } from '@/HTTP/Interface';
 import { EnvironmentConfiguration, packageJsonConfiguration } from '@/Config';
+import { IPlugin } from '@/HTTP/Interface';
 
 export class SwaggerUiPlugin implements IPlugin {
     configure(app: FastifyInstance): void {

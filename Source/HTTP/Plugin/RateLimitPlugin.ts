@@ -1,8 +1,8 @@
-import { FastifyInstance } from 'fastify';
 import rateLimit from '@fastify/rate-limit';
+import { FastifyInstance } from 'fastify';
 
-import { IPlugin } from '@/HTTP/Interface';
 import { I18n } from '@/Config';
+import { IPlugin } from '@/HTTP/Interface';
 
 export class RateLimitPlugin implements IPlugin {
     configure(app: FastifyInstance): void {

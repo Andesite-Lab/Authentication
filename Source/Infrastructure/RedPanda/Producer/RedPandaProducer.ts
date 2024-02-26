@@ -1,9 +1,9 @@
-import { Kafka, Producer, ProducerRecord } from 'kafkajs';
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
+import { Kafka, Producer, ProducerRecord } from 'kafkajs';
 
-import { I18n, kafkaConfiguration, Language } from '@/Config';
-import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
 import { RedPandaLoggerStrategy } from '@/Common';
+import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
+import { I18n, kafkaConfiguration, Language } from '@/Config';
 
 export class RedPandaProducer {
     private static _instance: RedPandaProducer;

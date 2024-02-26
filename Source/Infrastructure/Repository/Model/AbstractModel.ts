@@ -1,17 +1,19 @@
 import { Knex } from 'knex';
 
-import { ErrorDatabase, ErrorDatabaseKey } from '@/Common/Error';
-import { IErrorDatabase, Transaction } from '@/Infrastructure/Database';
-import { MainDatabase } from '@/Infrastructure/Database/Main/MainDatabase';
+import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
 import { IWhereClauseDTO } from '@/Data/DTO';
+import { DatabaseManager, IErrorDatabase, Transaction } from '@/Infrastructure/Database';
 
 export abstract class AbstractModel<T extends NonNullable<unknown>> {
     protected readonly _tableName: string;
+    protected readonly _databaseName: string;
     protected _knex: Knex;
 
-    public constructor(tableName: string) {
+    public constructor(tableName: string, databaseName: string) {
         this._tableName = tableName;
-        this._knex = MainDatabase.instance.database as Knex;
+        this._databaseName = databaseName;
+        const database : Knex = DatabaseManager.instance.getDatabaseInstance(databaseName);
+        this._knex = database;
     }
 
     protected transformColumnsToArray<K extends string>(
@@ -29,12 +31,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
     }
 
     protected forwardException(err: unknown): void {
-        if (err instanceof ErrorDatabase)
+        if (err instanceof ErrorInfrastructure)
             throw err;
         switch ((err as IErrorDatabase)['code']) { // https://docs.postgresql.fr/9.6/errcodes-appendix.html
         case '23505':
-            throw new ErrorDatabase({
-                key: ErrorDatabaseKey.MODEL_UNIQUE_CONSTRAINT_ERROR,
+            throw new ErrorInfrastructure({
+                key: ErrorInfrastructureKey.DATABASE_MODEL_UNIQUE_CONSTRAINT_ERROR,
                 interpolation: {
                     tableName: this._tableName,
                     constraint: (err as IErrorDatabase).constraint,
@@ -42,8 +44,11 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
                 detail: err,
             });
         default:
-            throw new ErrorDatabase({
-                key: ErrorDatabaseKey.OTHER_DATABASE_ERROR,
+            throw new ErrorInfrastructure({
+                key: ErrorInfrastructureKey.DATABASE_OTHER_DATABASE_ERROR,
+                interpolation: {
+                    databaseName: this._databaseName
+                },
                 detail: err
             });
         }
@@ -107,15 +112,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         return query;
     }
 
-    protected checkInstance(): void {
-        if (!this._knex)
-            this._knex = MainDatabase.instance.database as Knex;
-        if (!this._knex)
-            throw new ErrorDatabase({
-                key: ErrorDatabaseKey.DB_CONNECTION_ERROR,
-            });
-    }
-
     public async insert(
         entity: Partial<T>[],
         columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
@@ -125,7 +121,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
-            this.checkInstance();
             let query = this._knex
                 .insert(entity)
                 .into(this._tableName)
@@ -134,9 +129,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
                 query = query.transacting(options.transaction);
             const result: T[] = await query;
             if (result.length === 0)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_CREATED,
-                    interpolation: { tableName: this._tableName },
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_CREATED,
+                    interpolation: {
+                        tableName: this._tableName,
+                        databaseName: this._databaseName
+                    },
                 });
             return result;
         } catch (err) {
@@ -156,7 +154,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
-            this.checkInstance();
             let query = this._knex
                 .update(entity)
                 .from(this._tableName)
@@ -169,9 +166,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
             const result: T[] = await query;
             if (result.length === 0)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_UPDATED,
-                    interpolation: { tableName: this._tableName },
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_UPDATED,
+                    interpolation: {
+                        tableName: this._tableName,
+                        databaseName: this._databaseName
+                    },
                 });
             return result;
         } catch (err) {
@@ -190,7 +190,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
-            this.checkInstance();
             let query = this._knex
                 .update(entity)
                 .from(this._tableName)
@@ -200,9 +199,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
             const result: T[] = await query;
             if (result.length === 0)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_UPDATED,
-                    interpolation: { tableName: this._tableName },
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_UPDATED,
+                    interpolation: {
+                        tableName: this._tableName,
+                        databaseName: this._databaseName
+                    },
                 });
             return result;
         } catch (err) {
@@ -221,7 +223,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
-            this.checkInstance();
             let query = this._knex
                 .del()
                 .from(this._tableName)
@@ -233,9 +234,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
             const result: T[] = await query;
             if (result.length === 0)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_DELETED,
-                    interpolation: { tableName: this._tableName },
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_DELETED,
+                    interpolation: {
+                        tableName: this._tableName,
+                        databaseName: this._databaseName
+                    },
                 });
             return result;
         } catch (err) {
@@ -253,7 +257,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
-            this.checkInstance();
             let query = this._knex
                 .del()
                 .from(this._tableName)
@@ -263,9 +266,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
 
             const result: T[] = await query;
             if (result.length === 0)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_DELETED,
-                    interpolation: { tableName: this._tableName },
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_DELETED,
+                    interpolation: {
+                        tableName: this._tableName,
+                        databseName: this._databaseName
+                    },
                 });
             return result;
         } catch (err) {
@@ -280,7 +286,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         transaction?: Transaction;
     }): Promise<void> {
         try {
-            this.checkInstance();
             let query =  this._knex
                 .truncate()
                 .from(this._tableName);
@@ -304,7 +309,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
-            this.checkInstance();
             let query: Knex.QueryBuilder = this._knex
                 .select(this.transformColumnsToArray(columnToSelect))
                 .from(this._tableName);
@@ -317,9 +321,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
                 query = query.transacting(options.transaction);
             const result = await query;
             if (result.length === 0)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_FOUND,
-                    interpolation: { tableName: this._tableName },
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_FOUND,
+                    interpolation: {
+                        tableName: this._tableName,
+                        databaseName: this._databaseName
+                    },
                 });
             return result;
         } catch (err) {
@@ -338,7 +345,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T | undefined> {
         try {
-            this.checkInstance();
             let query = this._knex
                 .first(this.transformColumnsToArray(columnToSelect))
                 .from<T>(this._tableName);
@@ -347,9 +353,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
                 query = query.transacting(options.transaction);
             const result = await query;
             if (!result)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_FOUND,
-                    interpolation: { tableName: this._tableName },
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_FOUND,
+                    interpolation: {
+                        tableName: this._tableName,
+                        databaseName: this._databaseName
+                    },
                 });
             return result;
         } catch (err) {
@@ -369,7 +378,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<T[]> {
         try {
-            this.checkInstance();
             let query = this._knex
                 .select(this.transformColumnsToArray(columnToSelect))
                 .from(this._tableName);
@@ -382,9 +390,12 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
                 query = query.transacting(options.transaction);
             const result = await query;
             if (result.length === 0)
-                throw new ErrorDatabase({
-                    key: ErrorDatabaseKey.MODEL_NOT_FOUND,
-                    interpolation: { tableName: this._tableName },
+                throw new ErrorInfrastructure({
+                    key: ErrorInfrastructureKey.DATABASE_MODEL_NOT_FOUND,
+                    interpolation: {
+                        tableName: this._tableName,
+                        databaseName: this._databaseName
+                    },
                 });
             return result;
         } catch (err) {
@@ -404,7 +415,6 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
         }
     ): Promise<number> {
         try {
-            this.checkInstance();
             let query = this._knex
                 .count<Record<string, number>>({ count: '*' })
                 .from(this._tableName);

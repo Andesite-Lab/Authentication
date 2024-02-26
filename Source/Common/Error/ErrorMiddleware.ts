@@ -1,4 +1,4 @@
-import { ErrorEntity } from '@/Common/Error';
+import { ErrorEntity } from './ErrorEntity';
 
 export enum ErrorMiddlewareKey {
     CREDENTIAL_BLACKLISTED = 'CREDENTIAL_BLACKLISTED',

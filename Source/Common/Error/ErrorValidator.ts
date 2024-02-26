@@ -1,4 +1,4 @@
-import { ErrorEntity } from '@/Common/Error';
+import { ErrorEntity } from './ErrorEntity';
 
 export enum ErrorValidatorKey {
     USERNAME_IS_REQUIRED = 'USERNAME_IS_REQUIRED',

@@ -6,6 +6,7 @@ export class AdminRolesHandler extends AbstractHandlerCrud<IRoleDTO, RoleValidat
     public constructor() {
         super({
             tableName: 'role',
+            databaseName: 'authentication',
             keyInclusionFilter: ['role', 'createdAt', 'updatedAt', 'id'],
             validator: RoleValidator,
         });

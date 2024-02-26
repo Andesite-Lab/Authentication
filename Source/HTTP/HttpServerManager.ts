@@ -1,9 +1,10 @@
-import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
+import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
-import { IHook, IPlugin, IRouter } from '@/HTTP/Interface';
 import { EnvironmentConfiguration, I18n, Language } from '@/Config';
-import { AdminPermissionsRouter, AdminRolesRouter, AuthRouter, MicroserviceRouter } from '@/HTTP/Router';
+import { IOnRequestHttpDTO } from '@/Data/DTO';
+import { OnSendHook } from '@/HTTP/Hook';
+import { IHook, IPlugin, IRouter } from '@/HTTP/Interface';
 import {
     CookiePlugin,
     CorsPlugin,
@@ -13,8 +14,7 @@ import {
     SwaggerPlugin,
     SwaggerUiPlugin
 } from '@/HTTP/Plugin';
-import { IOnRequestHttpDTO } from '@/Data/DTO';
-import { OnSendHook } from '@/HTTP/Hook';
+import { AdminPermissionsRouter, AdminRolesRouter, AuthRouter, MicroserviceRouter } from '@/HTTP/Router';
 
 export class HttpServerManager {
     private readonly _app: FastifyInstance;
@@ -69,7 +69,7 @@ export class HttpServerManager {
 
     private initialize(): void {
         this.initializePlugin().forEach((plugin: IPlugin) => plugin.configure(this._app));
-        this.initializeRouter().forEach((router: IRouter) => router.configure(this._app, `${EnvironmentConfiguration.env.PREFIX}`));
+        this.initializeRouter().forEach((router: IRouter) => router.configure(this._app, `${EnvironmentConfiguration.env.BASE_URL}`));
         this.initializeHook().forEach((hook: IHook) => hook.configure(this._app));
     }
 
@@ -83,7 +83,7 @@ export class HttpServerManager {
         BasaltLogger.log(I18n.translate('http.listening', Language.EN, {
             port: EnvironmentConfiguration.env.HTTP_PORT,
             mode: EnvironmentConfiguration.env.NODE_ENV,
-            prefix: EnvironmentConfiguration.env.PREFIX,
+            prefix: EnvironmentConfiguration.env.BASE_URL,
             pid: process.pid,
         }));
     }

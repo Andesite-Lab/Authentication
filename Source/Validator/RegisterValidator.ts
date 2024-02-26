@@ -1,13 +1,13 @@
-import { JSONSchema } from 'class-validator-jsonschema';
 import { faker } from '@faker-js/faker';
 import {
-    MinLength,
     IsEmail,
+    IsOptional,
     IsStrongPassword,
-    MaxLength,
     Matches,
-    IsOptional
+    MaxLength,
+    MinLength
 } from 'class-validator';
+import { JSONSchema } from 'class-validator-jsonschema';
 
 import { ErrorValidatorKey } from '@/Common/Error';
 import mailBlacklist from './mailBlacklist.json';

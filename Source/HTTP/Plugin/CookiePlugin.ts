@@ -1,6 +1,6 @@
-import { FastifyInstance } from 'fastify';
 import cookie from '@fastify/cookie';
 import { randomUUID } from 'crypto';
+import { FastifyInstance } from 'fastify';
 
 import { IPlugin } from '@/HTTP/Interface';
 

@@ -1,9 +1,9 @@
 import {
-    IsOptional,
     ArrayNotEmpty,
-    IsString,
-    IsNumber,
     IsBoolean,
+    IsNumber,
+    IsOptional,
+    IsString,
     ValidateIf,
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';

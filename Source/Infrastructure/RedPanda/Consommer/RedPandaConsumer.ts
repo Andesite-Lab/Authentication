@@ -1,7 +1,7 @@
 import { Consumer, Kafka, KafkaMessage } from 'kafkajs';
 
-import { kafkaConfiguration, packageJsonConfiguration } from '@/Config';
 import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
+import { kafkaConfiguration, packageJsonConfiguration } from '@/Config';
 
 export class RedPandaConsumer {
     private static _instance: RedPandaConsumer;

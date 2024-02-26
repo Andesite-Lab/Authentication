@@ -1,9 +1,9 @@
 import {
-    Matches,
-    IsDefined,
     IsDate,
+    IsDefined,
+    IsInt,
     IsOptional,
-    IsInt
+    Matches
 } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
 
