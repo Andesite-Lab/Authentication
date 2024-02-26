@@ -10,7 +10,7 @@ export class SwaggerUiPlugin implements IPlugin {
     configure(app: FastifyInstance): void {
         const pathLogo: string = join(__dirname, '../Public/Logo');
         const swaggerUiOptions: FastifySwaggerUiOptions = {
-            routePrefix: `${EnvironmentConfiguration.env.PREFIX}/swagger`,
+            routePrefix: `${EnvironmentConfiguration.env.BASE_URL}/swagger`,
             theme: {
                 title: `${packageJsonConfiguration.name} - API`,
                 favicon: [
