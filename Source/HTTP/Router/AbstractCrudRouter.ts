@@ -38,7 +38,7 @@ export abstract class AbstractCrudRouter<T extends NonNullable<unknown>> extends
 
     private readonly _crudOperationWithPermission: Partial<CrudOperationWithPermission>;
     private readonly _databaseName: string;
-    private readonly _schema: JSONSchemaType<T> | undefined;
+    private readonly _schema: unknown | undefined;
     private readonly _tableName: string;
     private readonly _tags: string;
 
@@ -49,7 +49,7 @@ export abstract class AbstractCrudRouter<T extends NonNullable<unknown>> extends
         tableName: string,
         primaryKeyName?: [keyof T, 'NUMBER' | 'STRING'],
         databaseName: string,
-        schema?: JSONSchemaType<T>
+        schema?: unknown
     }) 
     {
         super(new CrudHandler<T>(
