@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.7.0](https://github.com/Andesite-Lab/Authentication/compare/v1.6.1...v1.7.0) (2024-03-07)
+
+
+### Features
+
+* add new features (schema, crud router etc) ([c91c10a](https://github.com/Andesite-Lab/Authentication/commit/c91c10ab36b9b458a756d132c77106003a9d75b4))
+* Add new files and update existing files ... ([bd3f68e](https://github.com/Andesite-Lab/Authentication/commit/bd3f68e1cad15f80314bbf3d6fa6534e619a19e1))
+
+
+### Bug Fixes
+
+* Update Swagger route prefix to use BASE_URL ([5fa36bf](https://github.com/Andesite-Lab/Authentication/commit/5fa36bf4c7a59304fc965996303c0b80c962f69c))
+
+
+### Build System
+
+* Update .gitignore and package.json and tsconfig ([bcd2a32](https://github.com/Andesite-Lab/Authentication/commit/bcd2a32ecd06b78c9a66e02ba5631dbee42610d1))
+* update packages + scripts ([d239208](https://github.com/Andesite-Lab/Authentication/commit/d239208128ff9d6b2291710bc86ac995c18d3d77))
+
 ## [1.6.1](https://github.com/Andesite-Lab/Authentication/compare/v1.6.0...v1.6.1) (2024-02-14)
 
 
