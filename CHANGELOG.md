@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/Andesite-Lab/Authentication/compare/v1.7.0...v1.7.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* correction type ([9f71f44](https://github.com/Andesite-Lab/Authentication/commit/9f71f44e23071b99aad0ea3fde21f19eea1cb959))
+
 ## [1.7.0](https://github.com/Andesite-Lab/Authentication/compare/v1.6.1...v1.7.0) (2024-03-07)
 
 
