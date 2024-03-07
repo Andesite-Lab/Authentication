@@ -1,5 +1,5 @@
-import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
 import { Topics } from '@/Infrastructure/RedPanda';
+import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
 
 export enum MailTypes {
     WELCOME = 'welcome',
@@ -17,7 +17,7 @@ export interface IOptionsMailerProducer {
 
 
 export class MailerProducer {
-    public async execute(
+    public static async execute(
         object: unknown,
         options: IOptionsMailerProducer
     ): Promise<void> {

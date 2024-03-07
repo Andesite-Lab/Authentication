@@ -1,50 +1,58 @@
+import { BasaltToken, BasaltTokenExpiry, IBasaltTokenSignResult } from '@basalt-lab/basalt-auth';
 import { BasaltPassword } from '@basalt-lab/basalt-helper';
-import { BasaltToken, IBasaltTokenSignResult } from '@basalt-lab/basalt-auth';
 
-import { CredentialModel, RolePermissionModel } from '@/Infrastructure/Repository/Model';
+import { BasaltAuthorization } from '@/Common/Tools';
 import { ErrorUseCase, ErrorUseCaseKey } from '@/Common/Error';
-import { BasaltAuthorization } from '@/Common';
-import { Dragonfly } from '@/Infrastructure/Store';
-import { packageJsonConfiguration } from '@/Config';
+import { packageJsonConfig } from '@/Config';
 import { ILoginDTO } from '@/Data/DTO';
-import { ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO } from '@/Data/DTO/Models/Fk';
-import { ICrendentialDTO } from '@/Data/DTO/Models';
+import { ICrendentialDTO, IRoleDTO, IPermissionDTO } from '@/Data/DTO/Model/StaticDB/authentication';
+import { CredentialModel, RolePermissionModel } from '@/Infrastructure/Repository/Model';
+import { Dragonfly } from '@/Infrastructure/Store';
 
 export class Login {
-    private readonly _credentialModel: CredentialModel = new CredentialModel();
-    private readonly _rolePermissionModel: RolePermissionModel = new RolePermissionModel();
-    private readonly _expiration: number = 1000 * 60 * 60 * 24; // 1d
-
-    public async execute (body: Partial<ILoginDTO>): Promise<string> {
+    private getCredential(body: Partial<ILoginDTO>): Promise<Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'>> {
         const credentialToSearch: Partial<ICrendentialDTO> = body.username ? { username: body.username } : { email: body.email };
 
-        const credentialDTO: Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'> =
-            await this._credentialModel.findOne([credentialToSearch], {
-                uuid: true,
-                password: true,
-                username: true,
-            }) as Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'>;
+        const credentialModel: CredentialModel = new CredentialModel();
+        return credentialModel.findOne([credentialToSearch], {
+            uuid: true,
+            password: true,
+            username: true,
+        }) as Promise<Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'>>;
+    }
 
-        if (!await BasaltPassword.verifyPassword(body.password as string, credentialDTO.password))
+    private getRolePermission(credentialUUID: string): Promise<Pick<(IRoleDTO & IPermissionDTO), 'role' | 'permission'>[]> {
+        const rolePermissionModel: RolePermissionModel = new RolePermissionModel();
+        return rolePermissionModel.findAllJoinRoleAndPermissionByCredential(credentialUUID, {
+            role: true,
+            permission: true
+        });
+    }
+
+    private checkPassword(password: string, hash: string): Promise<boolean> {
+        return BasaltPassword.verifyPassword(password, hash);
+    }
+
+    public async execute (body: Partial<ILoginDTO>): Promise<string> {
+        const credentialDTO: Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'> = await this.getCredential(body);
+        
+        if (!await this.checkPassword(body.password as string, credentialDTO.password))
             throw new ErrorUseCase({
                 key: ErrorUseCaseKey.PASSWORD_NOT_VALID,
             });
-
-        const raw: Pick<ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO, 'role' | 'permission'>[] =
-            await this._rolePermissionModel.findAllJoinRoleAndPermissionByCredential(credentialDTO.uuid, {
-                role: true,
-                permission: true
-            });
+        
+        const raw: Pick<(IRoleDTO & IPermissionDTO), 'role' | 'permission'>[] = await this.getRolePermission(credentialDTO.uuid);
         const rolePermission: Record<string, string[]> = BasaltAuthorization.instance.groupPermissionByRole(raw);
+
         const basaltToken: BasaltToken = new BasaltToken();
-        const signResult: IBasaltTokenSignResult = basaltToken.sign(this._expiration, {
+        const signResult: IBasaltTokenSignResult = basaltToken.sign({
             uuid: credentialDTO.uuid,
             username: credentialDTO.username,
             rolePermission,
-        }, `${packageJsonConfiguration.name}-${packageJsonConfiguration.version}`, 'andesite');
+        }, BasaltTokenExpiry.ONE_DAY, `${packageJsonConfig.name}-${packageJsonConfig.version}`, 'andesite');
 
         Dragonfly.instance.redis.hset(`${credentialDTO.uuid}:token`, signResult.uuid, signResult.publicKey);
-        Dragonfly.instance.redis.expire(`${credentialDTO.uuid}:token`, this._expiration / 1000);
+        Dragonfly.instance.redis.expire(`${credentialDTO.uuid}:token`, BasaltTokenExpiry.ONE_DAY / 1000);
         return signResult.token;
     }
 }

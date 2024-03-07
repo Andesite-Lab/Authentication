@@ -1,10 +1,9 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { ITokenPayloadDTO } from '@/Data/DTO';
-import { BasaltAuthorization } from '@/Common';
+import { BasaltAuthorization, I18n } from '@/Common/Tools';
 import { ErrorEntity, ErrorMiddleware, ErrorMiddlewareKey } from '@/Common/Error';
-import { I18n } from '@/Config';
+import { ITokenPayloadDTO } from '@/Data/DTO';
 
 export class PermissionChecker {
 
@@ -24,7 +23,12 @@ export class PermissionChecker {
     public static execute(permissionsToSearch: string[], multiple: boolean) {
         return function (req: FastifyRequest, reply: FastifyReply, next: () => void): void {
             try {
-                const token: string = req.cookies.token || '';
+                const authorization: string | undefined = req.headers?.authorization;
+                if (!authorization)
+                    throw new ErrorMiddleware({
+                        key: ErrorMiddlewareKey.TOKEN_NO_FOUND,
+                    });
+                const token: string = authorization.split(' ')[1];
                 const tokenPayload: ITokenPayloadDTO = PermissionChecker.getPayload(token);
                 if (!multiple) {
                     if (!BasaltAuthorization.instance.checkContainOneOfPermissions(permissionsToSearch, tokenPayload.rolePermission))

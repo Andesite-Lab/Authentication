@@ -1,5 +1,6 @@
 export * from './AbstractRouter';
-export * from './MicroserviceRouter';
-export * from './AuthRouter';
+export * from './AbstractCrudRouter';
+// export * from './AdminPermissionsRouter';
 export * from './AdminRolesRouter';
-export * from './AdminPermissionsRouter';
+export * from './AuthRouter';
+export * from './MicroserviceRouter';

@@ -1,15 +1,13 @@
-import { MainDatabase } from '@/Infrastructure/Database/Main/MainDatabase';
+import { ICrendentialDTO, IRoleDTO } from '@/Data/DTO/Model/StaticDB/authentication';
+import { DatabaseManager } from '@/Infrastructure/Database';
 import { CredentialModel, CredentialRoleModel, RoleModel } from '@/Infrastructure/Repository/Model';
-import { ICrendentialDTO, IRoleDTO } from '@/Data/DTO/Models';
 
 export class CredentialCreationTransaction {
-
     public async execute(credentialDTO: Partial<ICrendentialDTO>): Promise<void> {
-        const knex = MainDatabase.instance.database;
         const credentialModel: CredentialModel = new CredentialModel();
         const roleModel: RoleModel = new RoleModel();
         const credentialRoleModel: CredentialRoleModel = new CredentialRoleModel();
-
+        const knex = DatabaseManager.instance.getDatabaseInstance('authentication');
         await knex?.transaction(async (transaction): Promise<void> => {
             const [credential]: Pick<ICrendentialDTO, 'uuid'>[] = await credentialModel.insert([credentialDTO], { uuid: true }, {
                 transaction

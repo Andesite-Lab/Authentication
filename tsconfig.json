@@ -4,6 +4,7 @@
     "**/*.spec.ts",
     "Build/",
     ".idea",
+    ".vscode",
     ".eslintignore",
     ".eslintrc",
     ".nvmrc",
@@ -19,6 +20,7 @@
     "paths": {
       "@/*": ["./*"]
     },
+    "forceConsistentCasingInFileNames": true,
     "allowUmdGlobalAccess": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

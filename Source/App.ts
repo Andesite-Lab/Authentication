@@ -1,12 +1,13 @@
+import { BasaltLogger, ConsoleLoggerStrategy } from '@basalt-lab/basalt-logger';
 import { Command } from 'commander';
 import { argv, exit } from 'process';
-import { BasaltLogger, ConsoleLoggerStrategy } from '@basalt-lab/basalt-logger';
 
-import { EnvironmentConfiguration, I18n, Language, packageJsonConfiguration } from '@/Config';
-import { HttpServerManager } from '@/HTTP/HttpServerManager';
-import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
-import { MainDatabase } from '@/Infrastructure/Database/Main/MainDatabase';
 import { ErrorEntity } from '@/Common/Error';
+import { I18n, Language } from '@/Common/Tools';
+import { EnvironmentConfiguration, packageJsonConfig } from '@/Config';
+import { HttpServerManager } from '@/HTTP/HttpServerManager';
+import { DatabaseManager } from '@/Infrastructure/Database';
+import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
 import { Dragonfly } from '@/Infrastructure/Store';
 
 if (EnvironmentConfiguration.env.NODE_ENV === 'development')
@@ -19,8 +20,8 @@ class App {
         // Connect to brokers and initialize producer
         await RedPandaProducer.instance.connect();
 
-        // Connect to database
-        MainDatabase.instance.connect();
+        // Connect static databases
+        DatabaseManager.instance.connectDatabases();
 
         // Connect to dragonfly
         Dragonfly.instance.connect();
@@ -30,13 +31,13 @@ class App {
 
         BasaltLogger.log({
             message: I18n.translate('app.start', Language.EN, {
-                name: packageJsonConfiguration.name
+                name: packageJsonConfig.name
             }),
-            prefix: EnvironmentConfiguration.env.PREFIX,
+            baseUrl: EnvironmentConfiguration.env.BASE_URL,
             httpPort: EnvironmentConfiguration.env.HTTP_PORT,
             wsPort: EnvironmentConfiguration.env.WS_PORT,
-            dbHost: EnvironmentConfiguration.env.DB_HOST,
-            dbPort: EnvironmentConfiguration.env.DB_PORT,
+            dbServerHost: EnvironmentConfiguration.env.DB_SERVER_HOST,
+            dbServerPort: EnvironmentConfiguration.env.DB_SERVER_PORT,
         });
     }
 
@@ -44,8 +45,8 @@ class App {
         // Stop HTTP server
         await this._httpServerManager.stop();
 
-        // Disconnect from database
-        MainDatabase.instance.disconnect();
+        // Disconnect databases
+        DatabaseManager.instance.disconnectDatabases();
 
         // Disconnect from dragonfly
         Dragonfly.instance.disconnect();
@@ -54,14 +55,14 @@ class App {
         await RedPandaProducer.instance.disconnect();
 
         BasaltLogger.log(I18n.translate('app.stop', Language.EN, {
-            name: packageJsonConfiguration.name
+            name: packageJsonConfig.name
         }));
     }
 }
 
 const commander: Command = new Command();
 
-commander.version(packageJsonConfiguration.version, '-v, --version', 'Output the current version');
+commander.version(packageJsonConfig.version, '-v, --version', 'Output the current version');
 
 commander
     .command('migrate')
@@ -79,14 +80,15 @@ commander
             await RedPandaProducer.instance.connect();
 
             // Connect to database
-            MainDatabase.instance.connect();
+            DatabaseManager.instance.connectDatabases();
 
-            if (options.rollback)
+            if (options.rollback) 
                 console.log('Rolling back the last migration');
-            else if (options.rollbackAll)
-                await MainDatabase.instance.rollbackAllMigration();
-            else
-                await MainDatabase.instance.runMigrations();
+            else if (options.rollbackAll) 
+                DatabaseManager.instance.rollbackAllMigration();
+            else 
+                DatabaseManager.instance.runAllMigration();
+            
         } catch (error) {
             if (error instanceof ErrorEntity)
                 error.message = I18n.translate(error.message, Language.EN);
@@ -110,9 +112,9 @@ commander
             await RedPandaProducer.instance.connect();
 
             // Connect to database
-            MainDatabase.instance.connect();
+            DatabaseManager.instance.connectDatabases();
 
-            await MainDatabase.instance.runSeeders();
+            DatabaseManager.instance.runAllSeeder();
         } catch (error) {
             if (error instanceof ErrorEntity)
                 error.message = I18n.translate(error.message, Language.EN);
@@ -132,7 +134,7 @@ commander.action(async (): Promise<void> => {
     } catch (error) {
         if (error instanceof ErrorEntity)
             error.message = I18n.translate(error.message, Language.EN);
-        BasaltLogger.error(error);
+        BasaltLogger.error(error, ['console']);
         await app.stop();
     }
 });

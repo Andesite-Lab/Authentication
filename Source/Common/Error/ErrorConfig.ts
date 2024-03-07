@@ -1,4 +1,4 @@
-import { ErrorEntity } from '@/Common/Error';
+import { ErrorEntity } from './ErrorEntity';
 
 export enum ErrorConfigKey {
     DB_HOST_NOT_FOUND = 'DB_HOST_NOT_FOUND',

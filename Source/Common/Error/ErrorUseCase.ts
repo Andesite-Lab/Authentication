@@ -1,4 +1,4 @@
-import { ErrorEntity } from '@/Common/Error';
+import { ErrorEntity } from './ErrorEntity';
 
 export enum ErrorUseCaseKey {
     PASSWORD_NOT_VALID = 'PASSWORD_NOT_VALID',
