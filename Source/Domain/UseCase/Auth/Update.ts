@@ -2,7 +2,7 @@ import { BasaltToken } from '@basalt-lab/basalt-auth';
 import { BasaltPassword } from '@basalt-lab/basalt-helper';
 
 import { ITokenPayloadDTO } from '@/Data/DTO';
-import { ICrendentialDTO } from '@/Data/DTO/Models';
+import { ICrendentialDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 import { CredentialModel } from '@/Infrastructure/Repository/Model';
 import { Dragonfly } from '@/Infrastructure/Store';
 

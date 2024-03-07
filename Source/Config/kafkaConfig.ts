@@ -1,10 +1,10 @@
 import { KafkaConfig } from 'kafkajs';
 
 import { EnvironmentConfiguration } from './Environnement';
-import { packageJsonConfiguration } from './PackageJsonConfiguration';
+import { packageJsonConfig } from './PackageJsonConfig';
 
-export const kafkaConfiguration: KafkaConfig = {
-    clientId: packageJsonConfiguration.name,
+export const kafkaConfig: KafkaConfig = {
+    clientId: packageJsonConfig.name,
     retry: {
         retries: 3,
         initialRetryTime: 100,

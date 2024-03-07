@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
 import { BasaltPassword } from '@basalt-lab/basalt-helper';
 
-import { ICrendentialDTO, IRoleDTO } from '@/Data/DTO/Models';
+import { ICrendentialDTO, IRoleDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 import { RoleModel, CredentialModel, CredentialRoleModel } from '@/Infrastructure/Repository/Model';
 
 const credentialDTO: Partial<ICrendentialDTO>[] = [

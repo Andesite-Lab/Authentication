@@ -1,4 +1,3 @@
-export * from './CookiePlugin';
 export * from './CorsPlugin';
 export * from './FormbodyPlugin';
 export * from './HelmetPlugin';

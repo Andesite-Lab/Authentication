@@ -2,7 +2,7 @@ import { BasaltLogger } from '@basalt-lab/basalt-logger';
 import { Knex, knex } from 'knex';
 
 import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
-import { I18n, Language } from '@/Config';
+import { I18n, Language } from '@/Common/Tools';
 import { AbstractMigrationSourceCreator, AbstractSeedSourceCreator } from '@/Infrastructure/Database';
 
 import Transaction = Knex.Transaction;
@@ -112,7 +112,7 @@ export abstract class AbstractDatabaseCreator {
     public async runAllMigrations(): Promise<void> {
         if (!this._database)
             throw new ErrorInfrastructure({
-                key: ErrorInfrastructureKey.DATABASE_NOT_CONNECTEDn,
+                key: ErrorInfrastructureKey.DATABASE_NOT_CONNECTED,
                 interpolation: {
                     databaseName: this._databaseName
                 }

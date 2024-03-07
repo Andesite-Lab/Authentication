@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
 
 import { AbstractMigrationSourceCreator } from '@/Infrastructure/Database';
-import {} from '.';
+import { } from '.';
 
 export class MigrationSource extends AbstractMigrationSourceCreator {
     public constructor() {

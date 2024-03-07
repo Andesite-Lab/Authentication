@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
 
 import { PermissionModel, RoleModel, RolePermissionModel } from '@/Infrastructure/Repository/Model';
-import { IRoleDTO, IPermissionDTO, IRolePermissionDTO } from '@/Data/DTO/Models';
+import { IRoleDTO, IPermissionDTO, IRolePermissionDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 
 interface IRolesPermissions {
   roles: string[];

@@ -2,7 +2,9 @@ import { BasaltLogger } from '@basalt-lab/basalt-logger';
 import Redis from 'ioredis';
 
 import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
-import { EnvironmentConfiguration, I18n, Language } from '@/Config';
+import { I18n, Language } from '@/Common/Tools';
+import { EnvironmentConfiguration } from '@/Config';
+
 
 export class Dragonfly {
     private static _instance: Dragonfly;

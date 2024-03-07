@@ -1,4 +1,4 @@
-import { IPaginationOptionsDTO, IWhereClauseDTO } from '@/Data/DTO';
+import { IPaginationOptionDTO, IWhereClauseDTO } from '@/Data/DTO';
 import { CrudModel } from '@/Infrastructure/Repository/Model';
 
 export class Count<T extends NonNullable<unknown>> {
@@ -12,7 +12,7 @@ export class Count<T extends NonNullable<unknown>> {
 
     public execute(
         entitiesToSearch?: Partial<T>[] | Partial<Record<keyof T, IWhereClauseDTO>>[],
-        option?: IPaginationOptionsDTO
+        option?: IPaginationOptionDTO
     ): Promise<number> {
         const model: CrudModel<T> = new CrudModel(this._tableName, this._databaseName);
         return model.count(entitiesToSearch, option);

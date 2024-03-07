@@ -64,6 +64,10 @@ export class DatabaseManager {
         }
     }
 
+    public isDatabaseNameExists(databaseName: string): boolean {
+        return this._databases.has(databaseName);
+    }
+
     public runAllMigration(): void {
         this._databases.forEach((db) => {
             db.runAllMigrations();

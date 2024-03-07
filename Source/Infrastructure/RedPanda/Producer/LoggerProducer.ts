@@ -1,4 +1,4 @@
-import { packageJsonConfiguration } from '@/Config';
+import { packageJsonConfig } from '@/Config';
 import { Topics } from '@/Infrastructure/RedPanda';
 import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
 
@@ -9,7 +9,7 @@ export class LoggerProducer {
             messages: [
                 {
                     value: JSON.stringify({
-                        microservice: packageJsonConfiguration.name,
+                        microservice: packageJsonConfig.name,
                         level,
                         date,
                         object,

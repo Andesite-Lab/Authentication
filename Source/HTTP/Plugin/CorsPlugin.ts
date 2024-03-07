@@ -5,7 +5,7 @@ import { EnvironmentConfiguration } from '@/Config';
 import { IPlugin } from '@/HTTP/Interface';
 
 export class CorsPlugin implements IPlugin {
-    configure(app: FastifyInstance): void {
+    public configure(app: FastifyInstance): void {
         app.register(cors,
             {
                 origin: EnvironmentConfiguration.env.ORIGINS,

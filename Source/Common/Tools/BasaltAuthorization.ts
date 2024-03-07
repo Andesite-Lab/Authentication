@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
 
-import { IBasaltAuthorization } from '@/Common/Interface';
-import { ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO } from '@/Data/DTO/Models/Fk';
+import { IBasaltAuthorization } from '@/Common/Tools/Interface';
+import { IRoleDTO, IPermissionDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 
 export class BasaltAuthorization implements IBasaltAuthorization {
     private readonly _database: Knex | undefined;
@@ -13,9 +13,9 @@ export class BasaltAuthorization implements IBasaltAuthorization {
         return BasaltAuthorization._instance;
     }
 
-    public groupPermissionByRole(raw: Pick<ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO, 'role' | 'permission'>[]): Record<string, string[]> {
+    public groupPermissionByRole(raw: Pick<(IRoleDTO & IPermissionDTO), 'role' | 'permission'>[]): Record<string, string[]> {
         const roles: Record<string, string[]> = {};
-        raw.forEach((row: Pick<ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO, 'role' | 'permission'>): void => {
+        raw.forEach((row: Pick<(IRoleDTO & IPermissionDTO), 'role' | 'permission'>): void => {
             if (!row.role || !row.permission)
                 throw new Error('Invalid data structure required role and permission');
             if (!roles[row.role])

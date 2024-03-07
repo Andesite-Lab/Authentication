@@ -1,9 +1,10 @@
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
 import { Kafka, Producer, ProducerRecord } from 'kafkajs';
 
-import { RedPandaLoggerStrategy } from '@/Common';
 import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
-import { I18n, kafkaConfiguration, Language } from '@/Config';
+import { RedPandaLoggerStrategy } from '@/Common/StategyLogger';
+import { I18n, Language } from '@/Common/Tools';
+import { kafkaConfig } from '@/Config';
 
 export class RedPandaProducer {
     private static _instance: RedPandaProducer;
@@ -12,7 +13,7 @@ export class RedPandaProducer {
     private _isConnected: boolean = false;
 
     private constructor() {
-        this._kafka = new Kafka(kafkaConfiguration);
+        this._kafka = new Kafka(kafkaConfig);
         this._producer = this._kafka.producer();
     }
 

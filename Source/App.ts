@@ -3,7 +3,8 @@ import { Command } from 'commander';
 import { argv, exit } from 'process';
 
 import { ErrorEntity } from '@/Common/Error';
-import { EnvironmentConfiguration, I18n, Language, packageJsonConfiguration } from '@/Config';
+import { I18n, Language } from '@/Common/Tools';
+import { EnvironmentConfiguration, packageJsonConfig } from '@/Config';
 import { HttpServerManager } from '@/HTTP/HttpServerManager';
 import { DatabaseManager } from '@/Infrastructure/Database';
 import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
@@ -30,7 +31,7 @@ class App {
 
         BasaltLogger.log({
             message: I18n.translate('app.start', Language.EN, {
-                name: packageJsonConfiguration.name
+                name: packageJsonConfig.name
             }),
             baseUrl: EnvironmentConfiguration.env.BASE_URL,
             httpPort: EnvironmentConfiguration.env.HTTP_PORT,
@@ -54,14 +55,14 @@ class App {
         await RedPandaProducer.instance.disconnect();
 
         BasaltLogger.log(I18n.translate('app.stop', Language.EN, {
-            name: packageJsonConfiguration.name
+            name: packageJsonConfig.name
         }));
     }
 }
 
 const commander: Command = new Command();
 
-commander.version(packageJsonConfiguration.version, '-v, --version', 'Output the current version');
+commander.version(packageJsonConfig.version, '-v, --version', 'Output the current version');
 
 commander
     .command('migrate')

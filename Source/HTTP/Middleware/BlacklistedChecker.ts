@@ -5,7 +5,7 @@ import { join } from 'path';
 
 import { ErrorEntity, ErrorMiddleware, ErrorMiddlewareKey } from '@/Common/Error';
 import { ITokenPayloadDTO } from '@/Data/DTO';
-import { ICrendentialDTO } from '@/Data/DTO/Models';
+import { ICrendentialDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 import { PermissionChecker } from '@/HTTP/Middleware/PermissionChecker';
 import { CredentialModel } from '@/Infrastructure/Repository/Model';
 
@@ -27,7 +27,12 @@ export class BlacklistedChecker {
 
     public static async execute(req: FastifyRequest, reply: FastifyReply): Promise<void> {
         try {
-            const token: string = req.cookies.token || '';
+            const authorization: string | undefined = req.headers?.authorization;
+            if (!authorization)
+                throw new ErrorMiddleware({
+                    key: ErrorMiddlewareKey.TOKEN_NO_FOUND,
+                });
+            const token: string = authorization.split(' ')[1];
             const tokenPayload: ITokenPayloadDTO = PermissionChecker.getPayload(token);
             await BlacklistedChecker.checkBlacklisted(tokenPayload.uuid);
         } catch (error) {

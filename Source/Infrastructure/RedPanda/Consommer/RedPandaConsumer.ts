@@ -1,7 +1,7 @@
 import { Consumer, Kafka, KafkaMessage } from 'kafkajs';
 
 import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
-import { kafkaConfiguration, packageJsonConfiguration } from '@/Config';
+import { kafkaConfig, packageJsonConfig } from '@/Config';
 
 export class RedPandaConsumer {
     private static _instance: RedPandaConsumer;
@@ -10,8 +10,8 @@ export class RedPandaConsumer {
     private _isConnected: boolean = false;
 
     private constructor() {
-        this._redpanda = new Kafka(kafkaConfiguration);
-        this._consumer = this._redpanda.consumer({ groupId: packageJsonConfiguration.name });
+        this._redpanda = new Kafka(kafkaConfig);
+        this._consumer = this._redpanda.consumer({ groupId: packageJsonConfig.name });
     }
 
     public static get instance(): RedPandaConsumer {

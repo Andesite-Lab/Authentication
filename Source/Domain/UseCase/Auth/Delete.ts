@@ -1,7 +1,7 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 
 import { ITokenPayloadDTO } from '@/Data/DTO';
-import { ICrendentialDTO } from '@/Data/DTO/Models';
+import { ICrendentialDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 import { MailerProducer, MailTypes } from '@/Infrastructure/RedPanda/Producer';
 import { CredentialModel } from '@/Infrastructure/Repository/Model';
 import { Dragonfly } from '@/Infrastructure/Store';

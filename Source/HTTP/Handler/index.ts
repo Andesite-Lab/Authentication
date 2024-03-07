@@ -1,6 +1,6 @@
 export * from './AbstractHandler';
-export * from './AbstractHandlerCrud';
+export * from './CrudHandler';
 export * from './MicroserviceHandler';
 export * from './AuthHandler';
-export * from './AdminRolesHandler';
-export * from './AdminPermissionsHandler';
+// export * from './AdminRolesHandler';
+// export * from './AdminPermissionsHandler';

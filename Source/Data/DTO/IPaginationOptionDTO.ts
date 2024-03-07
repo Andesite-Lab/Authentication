@@ -1,4 +1,4 @@
-export interface IPaginationOptionsDTO {
+export interface IPaginationOptionDTO {
     limit: number;
     offset: number;
 }

@@ -30,7 +30,7 @@ export interface IPackageJson {
     },
 }
 
-export const packageJsonConfiguration: IPackageJson = {
+export const packageJsonConfig: IPackageJson = {
     version,
     author,
     dependencies,

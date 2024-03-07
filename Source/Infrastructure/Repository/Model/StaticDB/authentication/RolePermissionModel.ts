@@ -1,6 +1,5 @@
 import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
-import { IRolePermissionDTO } from '@/Data/DTO/Models';
-import { ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO } from '@/Data/DTO/Models/Fk';
+import { IRolePermissionDTO, IRoleDTO, IPermissionDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 import { AbstractModel } from '@/Infrastructure/Repository/Model';
 
 export class RolePermissionModel extends AbstractModel<IRolePermissionDTO>{
@@ -10,10 +9,10 @@ export class RolePermissionModel extends AbstractModel<IRolePermissionDTO>{
 
     public async findAllJoinRoleAndPermissionByCredential(
         credentialUuid: string,
-        columnToSelect: Partial<Record<keyof (ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO), boolean | string>>,
+        columnToSelect: Partial<Record<keyof (IPermissionDTO & IRoleDTO), boolean | string>>,
         options?: {
             toThrow?: boolean;
-        }): Promise<ICredentialRoleFkRoleAndRolePermissionAndPermissionDTO[]> {
+        }): Promise<(IPermissionDTO & IRoleDTO)[]> {
         try {
             const result = await this._knex
                 .select(this.transformColumnsToArray(columnToSelect))

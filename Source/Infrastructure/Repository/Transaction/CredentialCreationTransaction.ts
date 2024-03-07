@@ -1,4 +1,4 @@
-import { ICrendentialDTO, IRoleDTO } from '@/Data/DTO/Models';
+import { ICrendentialDTO, IRoleDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 import { DatabaseManager } from '@/Infrastructure/Database';
 import { CredentialModel, CredentialRoleModel, RoleModel } from '@/Infrastructure/Repository/Model';
 

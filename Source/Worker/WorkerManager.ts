@@ -1,6 +1,6 @@
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
 
-import { I18n, Language } from '@/Config';
+import { I18n, Language } from '@/Common/Tools';
 import { IWorker } from '@/Worker/Interface';
 
 export class WorkerManager {

@@ -3,16 +3,16 @@ import { FastifyInstance } from 'fastify';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import { EnvironmentConfiguration, packageJsonConfiguration } from '@/Config';
+import { EnvironmentConfiguration, packageJsonConfig } from '@/Config';
 import { IPlugin } from '@/HTTP/Interface';
 
 export class SwaggerUiPlugin implements IPlugin {
-    configure(app: FastifyInstance): void {
+    public configure(app: FastifyInstance): void {
         const pathLogo: string = join(__dirname, '../Public/Logo');
         const swaggerUiOptions: FastifySwaggerUiOptions = {
             routePrefix: `${EnvironmentConfiguration.env.BASE_URL}/swagger`,
             theme: {
-                title: `${packageJsonConfiguration.name} - API`,
+                title: `${packageJsonConfig.name} - API`,
                 favicon: [
                     {
                         filename: 'android-chrome-192x192',

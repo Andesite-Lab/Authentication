@@ -1,4 +1,4 @@
-import { IPaginationOptionsDTO } from '@/Data/DTO';
+import { IPaginationOptionDTO } from '@/Data/DTO';
 import { CrudModel } from '@/Infrastructure/Repository/Model';
 
 export class FindAll<T extends NonNullable<unknown>> {
@@ -10,7 +10,7 @@ export class FindAll<T extends NonNullable<unknown>> {
         this._databaseName = databaseName;
     }
 
-    public execute(paginationOptions: Partial<IPaginationOptionsDTO> | undefined): Promise<T[]> {
+    public execute(paginationOptions: Partial<IPaginationOptionDTO> | undefined): Promise<T[]> {
         const model: CrudModel<T> = new CrudModel(this._tableName, this._databaseName);
         return model.findAll({}, {
             limit: paginationOptions?.limit ? paginationOptions.limit : undefined,

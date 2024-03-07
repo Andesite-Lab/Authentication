@@ -1,11 +1,11 @@
 import rateLimit from '@fastify/rate-limit';
 import { FastifyInstance } from 'fastify';
 
-import { I18n } from '@/Config';
+import { I18n } from '@/Common/Tools';
 import { IPlugin } from '@/HTTP/Interface';
 
 export class RateLimitPlugin implements IPlugin {
-    configure(app: FastifyInstance): void {
+    public configure(app: FastifyInstance): void {
         app.register(rateLimit, {
             max: 100,
             timeWindow: 5000,
