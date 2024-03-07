@@ -1,15 +1,15 @@
-import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
+import { packageJsonConfig } from '@/Config';
 import { Topics } from '@/Infrastructure/RedPanda';
-import { packageJsonConfiguration } from '@/Config';
+import { RedPandaProducer } from '@/Infrastructure/RedPanda/Producer';
 
 export class LoggerProducer {
-    public async execute(level: string, date: string, object: unknown): Promise<void> {
+    public static async execute(level: string, date: string, object: unknown): Promise<void> {
         await RedPandaProducer.instance.send({
             topic: Topics.LOGGER_MICROSERVICE,
             messages: [
                 {
                     value: JSON.stringify({
-                        microservice: packageJsonConfiguration.name,
+                        microservice: packageJsonConfig.name,
                         level,
                         date,
                         object,

@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
 
-import { AbstractRouter } from '@/HTTP/Router';
 import { MicroserviceHandler } from '@/HTTP/Handler';
+import { AbstractRouter } from '@/HTTP/Router';
 
 export class MicroserviceRouter extends AbstractRouter<MicroserviceHandler> {
     public constructor(routerPrefix: string = '/microservice') {

@@ -1,20 +1,20 @@
+import { randomInt } from 'crypto';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { randomInt } from 'crypto';
 
-import { PermissionChecker } from '@/HTTP/Middleware/PermissionChecker';
-import { ITokenPayloadDTO } from '@/Data/DTO';
-import { CredentialModel } from '@/Infrastructure/Repository/Model';
-import { ICrendentialDTO } from '@/Data/DTO/Models';
 import { ErrorEntity, ErrorMiddleware, ErrorMiddlewareKey } from '@/Common/Error';
+import { ITokenPayloadDTO } from '@/Data/DTO';
+import { ICrendentialDTO } from '@/Data/DTO/Model/StaticDB/authentication';
+import { PermissionChecker } from '@/HTTP/Middleware/PermissionChecker';
+import { CredentialModel } from '@/Infrastructure/Repository/Model';
 
 export class BlacklistedChecker {
-    private static _credentialModel: CredentialModel = new CredentialModel();
     private static _imagesBuffer: Map<string, Buffer> = new Map<string, Buffer>();
 
     private static async checkBlacklisted(uuid: string) {
-        const credentialDTO: Pick<ICrendentialDTO, 'blacklisted'> | undefined = await BlacklistedChecker._credentialModel.findOne([{
+        const credentialModel: CredentialModel = new CredentialModel();
+        const credentialDTO: Pick<ICrendentialDTO, 'blacklisted'> | undefined = await credentialModel.findOne([{
             uuid
         }], {
             blacklisted: true
@@ -27,13 +27,19 @@ export class BlacklistedChecker {
 
     public static async execute(req: FastifyRequest, reply: FastifyReply): Promise<void> {
         try {
-            const token: string = req.cookies.token || '';
+            const authorization: string | undefined = req.headers?.authorization;
+            if (!authorization)
+                throw new ErrorMiddleware({
+                    key: ErrorMiddlewareKey.TOKEN_NO_FOUND,
+                });
+            const token: string = authorization.split(' ')[1];
             const tokenPayload: ITokenPayloadDTO = PermissionChecker.getPayload(token);
             await BlacklistedChecker.checkBlacklisted(tokenPayload.uuid);
         } catch (error) {
             const pathImages: string = join(__dirname, '../Public/Images');
             const random: number = randomInt(1, 6);
             const pathBlacklisted: string = `${pathImages}/black-listed-${random}.gif`;
+            console.error(error);
 
             if (!BlacklistedChecker._imagesBuffer.has(pathBlacklisted))
                 BlacklistedChecker._imagesBuffer.set(pathBlacklisted, readFileSync(pathBlacklisted));

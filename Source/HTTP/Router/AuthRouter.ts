@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify';
-import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 
-import { AbstractRouter } from '@/HTTP/Router';
 import { AuthHandler } from '@/HTTP/Handler';
 import { BlacklistedChecker, PermissionChecker, TokenChecker } from '@/HTTP/Middleware';
+import { AbstractRouter } from '@/HTTP/Router';
+import { LoginSchema, RegisterSchema, CredentialSchema } from '@/Schema';
 
 export class AuthRouter extends AbstractRouter<AuthHandler> {
     public constructor(routerPrefix: string = '/auth') {
@@ -18,10 +18,9 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             schema: {
                 tags: ['Auth'],
                 summary: 'Register a new user',
-                body: validationMetadatasToSchemas().RegisterValidator,
+                body: RegisterSchema,
                 security: []
             },
-            attachValidation: true
         });
 
         fastify.route({
@@ -31,10 +30,9 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             schema: {
                 tags: ['Auth'],
                 summary: 'Login a user',
-                body: validationMetadatasToSchemas().LoginValidator,
+                body: LoginSchema,
                 security: []
             },
-            attachValidation: true
         });
 
         fastify.route({
@@ -46,7 +44,6 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
                 tags: ['Auth'],
                 summary: 'Logout a user',
             },
-            attachValidation: true
         });
 
         fastify.route({
@@ -62,7 +59,6 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
                 tags: ['Auth'],
                 summary: 'Delete a user',
             },
-            attachValidation: true
         });
 
         fastify.route({
@@ -77,8 +73,8 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             schema: {
                 tags: ['Auth'],
                 summary: 'Update a user',
+                body: CredentialSchema,
             },
-            attachValidation: true
         });
 
         fastify.route({

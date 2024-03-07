@@ -27,14 +27,19 @@ async function run() {
 
     const env = process.env.ESBUILD_ENV || 'dev';
 
-    if (env === 'prod') {
+    if (env === 'prod::build') {
         options.minify = true;
         options.keepNames = true;
         options.treeShaking = true;
         await esbuild.build(options);
     }
 
-    if (env === 'dev') {
+    if (env === 'dev::build') {
+        options.sourcemap = 'linked';
+        await esbuild.build(options);
+    }
+
+    if (env === 'dev::watch') {
         options.sourcemap = 'linked';
         await esbuild.build(options);
         const ctx = await esbuild.context(options);

@@ -1,4 +1,4 @@
-import { ErrorEntity } from '@/Common/Error';
+import { ErrorEntity } from './ErrorEntity';
 
 export enum ErrorMiddlewareKey {
     CREDENTIAL_BLACKLISTED = 'CREDENTIAL_BLACKLISTED',
@@ -6,6 +6,7 @@ export enum ErrorMiddlewareKey {
     TOKEN_INVALID_STRUCTURE= 'TOKEN_INVALID_STRUCTURE',
     TOKEN_INVALID_SIGNATURE = 'TOKEN_INVALID_SIGNATURE',
     TOKEN_EXPIRED = 'TOKEN_EXPIRED',
+    TOKEN_NO_FOUND = 'TOKEN_NO_FOUND',
     PERMISSION_DENIED = 'PERMISSION_DENIED',
 }
 
@@ -15,6 +16,7 @@ const ErrorMiddlewareKeyCode: { [p: string]: number } = {
     TOKEN_INVALID_STRUCTURE: 401,
     TOKEN_INVALID_SIGNATURE: 401,
     TOKEN_EXPIRED: 401,
+    TOKEN_NO_FOUND: 401,
     PERMISSION_DENIED: 403,
 };
 

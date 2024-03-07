@@ -1,8 +1,10 @@
-import Redis from 'ioredis';
 import { BasaltLogger } from '@basalt-lab/basalt-logger';
+import Redis from 'ioredis';
 
-import { EnvironmentConfiguration, I18n, Language } from '@/Config';
-import { ErrorDragonfly, ErrorDragonflyKey } from '@/Common/Error';
+import { ErrorInfrastructure, ErrorInfrastructureKey } from '@/Common/Error';
+import { I18n, Language } from '@/Common/Tools';
+import { EnvironmentConfiguration } from '@/Config';
+
 
 export class Dragonfly {
     private static _instance: Dragonfly;
@@ -16,8 +18,8 @@ export class Dragonfly {
 
     public get redis(): Redis {
         if (!this._redis)
-            throw new ErrorDragonfly({
-                key: ErrorDragonflyKey.DRAGONFLY_NOT_CONNECTED
+            throw new ErrorInfrastructure({
+                key: ErrorInfrastructureKey.DRAGONFLY_NOT_CONNECTED
             });
         return this._redis;
     }
@@ -31,8 +33,8 @@ export class Dragonfly {
             });
             BasaltLogger.log(I18n.translate('infrastructure.dragonfly.connected', Language.EN));
         } catch (error) {
-            throw new ErrorDragonfly({
-                key: ErrorDragonflyKey.DRAGONFLY_CONNECTION_ERROR,
+            throw new ErrorInfrastructure({
+                key: ErrorInfrastructureKey.DRAGONFLY_CONNECTION_ERROR,
                 detail: error
             });
         }
@@ -43,8 +45,8 @@ export class Dragonfly {
             this._redis?.disconnect();
             BasaltLogger.log(I18n.translate('infrastructure.dragonfly.disconnected', Language.EN));
         } catch (error) {
-            throw new ErrorDragonfly({
-                key: ErrorDragonflyKey.DRAGONFLY_DISCONNECT_ERROR,
+            throw new ErrorInfrastructure({
+                key: ErrorInfrastructureKey.DRAGONFLY_DISCONNECT_ERROR,
                 detail: error
             });
         }

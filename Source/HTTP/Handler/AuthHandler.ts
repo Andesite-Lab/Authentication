@@ -1,10 +1,9 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { AbstractHandler } from '@/HTTP/Handler';
-import { I18n } from '@/Config/I18n';
+import { I18n } from '@/Common/Tools';
 import { ILoginDTO, IRegisterDTO } from '@/Data/DTO';
-import { ICrendentialDTO } from '@/Data/DTO/Models';
-import { CredentialValidator, LoginValidator, RegisterValidator } from '@/Validator';
+import { ICrendentialDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 import { Delete, Login, Logout, Register, Update } from '@/Domain/UseCase/Auth';
 
 export class AuthHandler extends AbstractHandler {
@@ -16,11 +15,12 @@ export class AuthHandler extends AbstractHandler {
 
     public register = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const dataDTO: IRegisterDTO = this._basaltKeyInclusionFilter.filter<IRegisterDTO>(req.body as IRegisterDTO, ['username', 'email', 'password'], true);
-            const registerValidator: RegisterValidator<IRegisterDTO> = new RegisterValidator(dataDTO);
-            await this.validate(registerValidator, req.headers['accept-language']);
+            const dataDTO: IRegisterDTO = req.body as IRegisterDTO;
             await this._registerUseCase.execute(dataDTO, req.headers['accept-language']);
-            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.register', reply.request.headers['accept-language']));
+            this.sendResponse(reply, {
+                statusCode: 200,
+                message: I18n.translate('http.handler.authHandler.register', req.headers['accept-language'])
+            });
         } catch (e) {
             this.sendError(reply, e);
         }
@@ -28,12 +28,16 @@ export class AuthHandler extends AbstractHandler {
 
     public login = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const dataDTO: Partial<ILoginDTO> = this._basaltKeyInclusionFilter.filter<ILoginDTO>(req.body as ILoginDTO, ['username', 'email', 'password'], true);
-            const loginValidator: LoginValidator = new LoginValidator(dataDTO);
-            await this.validate(loginValidator, req.headers['accept-language']);
+            const dataDTO: Partial<ILoginDTO> = req.body as Partial<ILoginDTO>;
             const token: string = await this._loginUseCase.execute(dataDTO);
-            this.addCookie(reply, 'token', token, 1000 * 60 * 60 * 24);
-            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.login', reply.request.headers['accept-language']));
+            this.sendResponse(reply, {
+                statusCode: 200,
+                message: I18n.translate('http.handler.authHandler.login', req.headers['accept-language']),
+                content: { 
+                    access_token: token,
+                    token_type: 'bearer'
+                }
+            });
         } catch (e) {
             this.sendError(reply, e);
         }
@@ -41,9 +45,11 @@ export class AuthHandler extends AbstractHandler {
 
     public logout = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            this._logoutUseCase.execute(req.cookies.token as string);
-            this.clearCookie(reply, 'token');
-            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.logout', reply.request.headers['accept-language']));
+            this._logoutUseCase.execute(req.headers.token as string);
+            this.sendResponse(reply, {
+                statusCode: 200,
+                message: I18n.translate('http.handler.authHandler.logout', req.headers['accept-language'])
+            });
         } catch (e) {
             this.sendError(reply, e);
         }
@@ -51,9 +57,11 @@ export class AuthHandler extends AbstractHandler {
 
     public delete = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            await this._deleteUseCase.execute(req.cookies.token as string, req.headers['accept-language']);
-            this.clearCookie(reply, 'token');
-            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.delete', reply.request.headers['accept-language']));
+            await this._deleteUseCase.execute(req.headers.token as string, req.headers['accept-language']);
+            this.sendResponse(reply, {
+                statusCode: 200,
+                message: I18n.translate('http.handler.authHandler.delete', req.headers['accept-language'])
+            });
         } catch (e) {
             this.sendError(reply, e);
         }
@@ -61,16 +69,13 @@ export class AuthHandler extends AbstractHandler {
 
     public update = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            const dataDTO: Partial<ICrendentialDTO> = this._basaltKeyInclusionFilter.filter<ICrendentialDTO>(req.body as ICrendentialDTO, ['username', 'email', 'password'], true);
-            const credentialValidator: CredentialValidator<ICrendentialDTO> = new CredentialValidator(dataDTO);
-            await this.validate(credentialValidator, req.headers['accept-language']);
-            const result: Pick<ICrendentialDTO, 'username' | 'email'>[] = await this._updateUseCase.execute(req.cookies.token as string, dataDTO);
-            this.sendResponse(
-                reply,
-                200,
-                I18n.translate('http.handler.authHandler.update', reply.request.headers['accept-language']),
-                result
-            );
+            const dataDTO: Partial<ICrendentialDTO> = req.body as ICrendentialDTO;
+            const result: Pick<ICrendentialDTO, 'username' | 'email'>[] = await this._updateUseCase.execute(req.headers.token as string, dataDTO);
+            this.sendResponse(reply, {
+                statusCode: 200,
+                message: I18n.translate('http.handler.authHandler.update', req.headers['accept-language']),
+                content: [result]
+            });
         } catch (e) {
             this.sendError(reply, e);
         }
@@ -78,7 +83,10 @@ export class AuthHandler extends AbstractHandler {
 
     public tokenCheck = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.token-check', reply.request.headers['accept-language']));
+            this.sendResponse(reply, {
+                statusCode: 200,
+                message: I18n.translate('http.handler.authHandler.token-check', req.headers['accept-language'])
+            });
         } catch (e) {
             this.sendError(reply, e);
         }
@@ -86,7 +94,10 @@ export class AuthHandler extends AbstractHandler {
 
     public blacklistCheck = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.blacklist-check', reply.request.headers['accept-language']));
+            this.sendResponse(reply, {
+                statusCode: 200,
+                message: I18n.translate('http.handler.authHandler.blacklist-check', req.headers['accept-language'])
+            });
         } catch (e) {
             this.sendError(reply, e);
         }
@@ -94,7 +105,10 @@ export class AuthHandler extends AbstractHandler {
 
     public tokenAndBlacklistCheck = async (req: FastifyRequest, reply: FastifyReply): Promise<void> => {
         try {
-            this.sendResponse(reply, 200, I18n.translate('http.handler.authHandler.token-blacklist-check', reply.request.headers['accept-language']));
+            this.sendResponse(reply, {
+                statusCode: 200,
+                message: I18n.translate('http.handler.authHandler.token-and-blacklist-check', req.headers['accept-language'])
+            });
         } catch (e) {
             this.sendError(reply, e);
         }

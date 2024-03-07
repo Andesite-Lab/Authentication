@@ -1,23 +1,42 @@
-import { FastifyInstance } from 'fastify';
 import fastifySwagger from '@fastify/swagger';
-import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import { SchemaObject } from 'ajv';
+import { FastifyInstance } from 'fastify';
 
+import { EnvironmentConfiguration, packageJsonConfig } from '@/Config';
 import { IPlugin } from '@/HTTP/Interface';
-import { EnvironmentConfiguration, packageJsonConfiguration } from '@/Config';
+import {
+    CredentialSchema,
+    IdSchema,
+    LoginSchema,
+    RegisterSchema,
+    PaginationOptionSchema,
+    RoleSchema
+} from '@/Schema';
 
 export class SwaggerPlugin implements IPlugin {
-    configure(app: FastifyInstance): void {
+    private getSchemas(): Record<string, SchemaObject> {
+        return {
+            CredentialSchema,
+            IdSchema,
+            LoginSchema,
+            RegisterSchema,
+            PaginationOptionsSchema: PaginationOptionSchema,
+            RoleSchema
+        };
+    }
+
+    public configure(app: FastifyInstance): void {
         app.register(fastifySwagger, {
             openapi: {
                 info: {
-                    title: packageJsonConfiguration.name,
-                    description: packageJsonConfiguration.description,
-                    version: packageJsonConfiguration.version,
+                    title: packageJsonConfig.name,
+                    description: packageJsonConfig.description,
+                    version: packageJsonConfig.version,
                     license : {
-                        name: packageJsonConfiguration.license,
+                        name: packageJsonConfig.license,
                     },
                     contact: {
-                        name: packageJsonConfiguration.author,
+                        name: packageJsonConfig.author,
                     },
                 },
                 servers: [ { url: `${EnvironmentConfiguration.env.NODE_ENV == 'development' ? 'http' : 'https'}://${EnvironmentConfiguration.env.DOMAIN}:${EnvironmentConfiguration.env.HTTP_PORT}` } ],
@@ -28,18 +47,16 @@ export class SwaggerPlugin implements IPlugin {
                     { name: 'Microservice', description: 'Microservice related end-points' },
                 ],
                 components: {
-                    schemas: {
-                        ...(validationMetadatasToSchemas() as object)
-                    },
+                    schemas: this.getSchemas(),
                     securitySchemes: {
-                        cookieAuth: {
-                            type: 'apiKey' as const,
-                            in: 'cookie',
-                            name: 'token'
-                        }
+                        bearerAuth: {
+                            type: 'http' as const,
+                            scheme: 'bearer',
+                            bearerFormat: 'basalt-auth',
+                        },
                     }
                 },
-                security: [{ cookieAuth: [] }]
+                security: [{ bearerAuth: [] }],
             }
         });
     }

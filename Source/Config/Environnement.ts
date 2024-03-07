@@ -14,17 +14,16 @@ export interface IEnvironment {
     NODE_ENV: string;
 
     /////// DATABASE ///////
-    DB_HOST: string;
-    DB_NAME: string;
-    DB_PASSWORD: string;
-    DB_PORT: number;
-    DB_USER: string;
+    DB_SERVER_HOST: string;
+    DB_SERVER_PASSWORD: string;
+    DB_SERVER_PORT: number;
+    DB_SERVER_USER: string;
     ////////////////////////
 
     //////// GLOBAL ////////
     DOMAIN: string;
     ORIGINS: string[];
-    PREFIX: string;
+    BASE_URL: string;
     ////////////////////////
 
     //////// HTTP //////////
@@ -52,19 +51,16 @@ export class EnvironmentConfiguration {
 
     /////// DATABASE ///////
     @CheckEnvVariable
-    public DB_HOST: string = env.DB_HOST || '';
+    public DB_SERVER_HOST: string = env.DB_SERVER_HOST || '';
 
     @CheckEnvVariable
-    public DB_NAME: string = env.DB_NAME || '';
+    public DB_SERVER_PASSWORD: string = env.DB_SERVER_PASSWORD || '';
 
     @CheckEnvVariable
-    public DB_PASSWORD: string = env.DB_PASSWORD || '';
+    public DB_SERVER_PORT: number = env.DB_SERVER_PORT ? parseInt(env.DB_SERVER_PORT) : 0;
 
     @CheckEnvVariable
-    public DB_PORT: number = env.DB_PORT ? parseInt(env.DB_PORT) : 0;
-
-    @CheckEnvVariable
-    public DB_USER: string = env.DB_USER || '';
+    public DB_SERVER_USER: string = env.DB_SERVER_USER || '';
     ////////////////////////
 
     //////// GLOBAL ////////
@@ -72,7 +68,7 @@ export class EnvironmentConfiguration {
 
     public ORIGINS: string[] = env.ORIGINS ? env.ORIGINS.split(',') : [];
 
-    public PREFIX: string = env.PREFIX || '';
+    public BASE_URL: string = env.BASE_URL || '';
     ////////////////////////
 
     //////// HTTP //////////
@@ -97,7 +93,6 @@ export class EnvironmentConfiguration {
     @CheckEnvVariable
     public DRAGONFLY_PORT: number = env.DRAGONFLY_PORT ? parseInt(env.DRAGONFLY_PORT) : 0;
     ////////////////////////
-
 
     public static get instance(): EnvironmentConfiguration {
         if (!EnvironmentConfiguration._instance)

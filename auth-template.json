@@ -1,0 +1,769 @@
+{
+  "dealerI18n:lang": [
+    "de",
+    "en",
+    "es",
+    "fr",
+    "it"
+  ],
+  "app": {
+    "signal": {
+      "SIGINT": {
+        "lang:de": "SIGINT (Strg-C) empfangen.",
+        "lang:en": "SIGINT (Ctrl-C) received.",
+        "lang:es": "SIGINT (Ctrl-C) recibido.",
+        "lang:fr": "SIGINT (Ctrl-C) reçu.",
+        "lang:it": "SIGINT (Ctrl-C) ricevuto."
+      }
+    },
+    "start": {
+      "lang:de": "{{name}} Gestartet.",
+      "lang:en": "{{name}} Started.",
+      "lang:es": "{{name}} Iniciado.",
+      "lang:fr": "{{name}} Démarré.",
+      "lang:it": "{{name}} Avviato."
+    },
+    "stop": {
+      "lang:de": "{{name}} Gestoppt.",
+      "lang:en": "{{name}} Stopped.",
+      "lang:es": "{{name}} Detenido.",
+      "lang:fr": "{{name}} Arrêté.",
+      "lang:it": "{{name}} Fermato."
+    }
+  },
+  "error": {
+    "errorConfig": {
+      "DB_SERVER_HOST_NOT_FOUND": {
+        "lang:de": "DB_SERVER_HOST Umgebungsvariable nicht gefunden.",
+        "lang:en": "DB_SERVER_HOST environment variable not found.",
+        "lang:es": "DB_SERVER_HOST variable de entorno no encontrada.",
+        "lang:fr": "DB_SERVER_HOST variable d'environnement non trouvée.",
+        "lang:it": "DB_SERVER_HOST variabile d'ambiente non trovata."
+      },
+      "DB_SERVER_PASSWORD_NOT_FOUND": {
+        "lang:de": "DB_SERVER_PASSWORD Umgebungsvariable nicht gefunden.",
+        "lang:en": "DB_SERVER_PASSWORD environment variable not found.",
+        "lang:es": "DB_SERVER_PASSWORD variable de entorno no encontrada.",
+        "lang:fr": "DB_SERVER_PASSWORD variable d'environnement non trouvée.",
+        "lang:it": "DB_SERVER_PASSWORD variabile d'ambiente non trovata.",
+        "ldeang:it": "DB_SERVER_PASSWORD variabile d'ambiente non trovata."
+      },
+      "DB_SERVER_PORT_NOT_FOUND": {
+        "lang:de": "DB_SERVER_PORT Umgebungsvariable nicht gefunden.",
+        "lang:en": "DB_SERVER_PORT environment variable not found.",
+        "lang:es": "DB_SERVER_PORT variable de entorno no encontrada.",
+        "lang:fr": "DB_SERVER_PORT variable d'environnement non trouvée.",
+        "lang:it": "DB_SERVER_PORT variabile d'ambiente non trovata."
+      },
+      "DB_SERVER_USER_NOT_FOUND": {
+        "lang:de": "DB_SERVER_USER Umgebungsvariable nicht gefunden.",
+        "lang:en": "DB_SERVER_USER environment variable not found.",
+        "lang:es": "DB_SERVER_USER variable de entorno no encontrada.",
+        "lang:fr": "DB_SERVER_USER variable d'environnement non trouvée.",
+        "lang:it": "DB_SERVER_USER variabile d'ambiente non trovata."
+      },
+      "DRAGONFLY_HOST_NOT_FOUND": {
+        "lang:de": "DRAGONFLY_HOST Umgebungsvariable nicht gefunden.",
+        "lang:en": "DRAGONFLY_HOST environment variable not found.",
+        "lang:es": "DRAGONFLY_HOST variable de entorno no encontrada.",
+        "lang:fr": "DRAGONFLY_HOST variable d'environnement non trouvée.",
+        "lang:it": "DRAGONFLY_HOST variabile d'ambiente non trovata."
+      },
+      "DRAGONFLY_PORT_NOT_FOUND": {
+        "lang:de": "DRAGONFLY_PORT Umgebungsvariable nicht gefunden.",
+        "lang:en": "DRAGONFLY_PORT environment variable not found.",
+        "lang:es": "DRAGONFLY_PORT variable de entorno no encontrada.",
+        "lang:fr": "DRAGONFLY_PORT variable d'environnement non trouvée.",
+        "lang:it": "DRAGONFLY_PORT variabile d'ambiente non trovata."
+      },
+      "HTTP_PORT_NOT_FOUND": {
+        "lang:de": "HTTP_PORT Umgebungsvariable nicht gefunden.",
+        "lang:en": "HTTP_PORT environment variable not found.",
+        "lang:es": "HTTP_PORT variable de entorno no encontrada.",
+        "lang:fr": "HTTP_PORT variable d'environnement non trouvée.",
+        "lang:it": "HTTP_PORT variabile d'ambiente non trovata."
+      },
+      "NODE_ENV_NOT_FOUND": {
+        "lang:de": "NODE_ENV Umgebungsvariable nicht gefunden.",
+        "lang:en": "NODE_ENV environment variable not found.",
+        "lang:es": "NODE_ENV variable de entorno no encontrada.",
+        "lang:fr": "NODE_ENV variable d'environnement non trouvée.",
+        "lang:it": "NODE_ENV variabile d'ambiente non trovata."
+      },
+      "RED_PANDA_BROKER_NOT_FOUND": {
+        "lang:de": "RED_PANDA_BROKER Umgebungsvariable nicht gefunden.",
+        "lang:en": "RED_PANDA_BROKER environment variable not found.",
+        "lang:es": "RED_PANDA_BROKER variable de entorno no encontrada.",
+        "lang:fr": "RED_PANDA_BROKER variable d'environnement non trouvée.",
+        "lang:it": "RED_PANDA_BROKER variabile d'ambiente non trovata."
+      },
+      "WS_PORT_NOT_FOUND": {
+        "lang:de": "WS_PORT Umgebungsvariable nicht gefunden.",
+        "lang:en": "WS_PORT environment variable not found.",
+        "lang:es": "WS_PORT variable de entorno no encontrada.",
+        "lang:fr": "WS_PORT variable d'environnement non trouvée.",
+        "lang:it": "WS_PORT variabile d'ambiente non trovata."
+      }
+    },
+    "errorInfrastructure": {
+      "DATABASE_CONNECTION_ERROR": {
+        "lang:de": "Fehler bei der Verbindung zur Datenbank {{databaseName}}.",
+        "lang:en": "Database connection error {{databaseName}}.",
+        "lang:es": "Error de conexión a la base de datos {{databaseName}}.",
+        "lang:fr": "Erreur de connexion à la base de données {{databaseName}}.",
+        "lang:it": "Errore di connessione al database {{databaseName}}."
+      },
+      "DATABASE_DISCONNECT_ERROR": {
+        "lang:de": "Fehler beim Trennen der Verbindung zur Datenbank {{databaseName}}.",
+        "lang:en": "Database disconnect error {{databaseName}}.",
+        "lang:es": "Error al desconectar la base de datos {{databaseName}}.",
+        "lang:fr": "Erreur de déconnexion de la base de données {{databaseName}}.",
+        "lang:it": "Errore di disconnessione del database {{databaseName}}."
+      },
+      "DATABASE_MODEL_NOT_CREATED": {
+        "lang:de": "Modell {{tableName}} nicht erstellt, in der Datenbank {{databaseName}}.",
+        "lang:en": "Model {{tableName}} not created, in the database {{databaseName}}.",
+        "lang:es": "Modelo {{tableName}} no creado, en la base de datos {{databaseName}}.",
+        "lang:fr": "Modèle {{tableName}} non créé, dans la base de données {{databaseName}}.",
+        "lang:it": "Modello {{tableName}} non creato, nel database {{databaseName}}."
+      },
+      "DATABASE_MODEL_NOT_DELETED": {
+        "lang:de": "Modell {{tableName}} nicht gelöscht, in der Datenbank {{databaseName}}.",
+        "lang:en": "Model {{tableName}} not deleted, in the database {{databaseName}}.",
+        "lang:es": "Modelo {{tableName}} no eliminado, en la base de datos {{databaseName}}.",
+        "lang:fr": "Modèle {{tableName}} non supprimé, dans la base de données {{databaseName}}.",
+        "lang:it": "Modello {{tableName}} non eliminato, nel database {{databaseName}}."
+      },
+      "DATABASE_MODEL_NOT_FOUND": {
+        "lang:de": "Modell {{tableName}} nicht gefunden, in der Datenbank {{databaseName}}.",
+        "lang:en": "Model {{tableName}} not found, in the database {{databaseName}}.",
+        "lang:es": "Modelo {{tableName}} no encontrado, en la base de datos {{databaseName}}.",
+        "lang:fr": "Modèle {{tableName}} non trouvé, dans la base de données {{databaseName}}.",
+        "lang:it": "Modello {{tableName}} non trovato, nel database {{databaseName}}."
+      },
+      "DATABASE_MODEL_NOT_UPDATED": {
+        "lang:de": "Modell {{tableName}} nicht aktualisiert, in der Datenbank {{databaseName}}.",
+        "lang:en": "Model {{tableName}}  not updated, in the database {{databaseName}}.",
+        "lang:es": "Modelo {{tableName}} no actualizado, en la base de datos {{databaseName}}.",
+        "lang:fr": "Modèle {{tableName}} non mis à jour, dans la base de données {{databaseName}}.",
+        "lang:it": "Modello {{tableName}} non aggiornato, nel database {{databaseName}}."
+      },
+      "DATABASE_MODEL_UNIQUE_CONSTRAINT_ERROR": {
+        "lang:de": "Modell {{tableName}} Eindeutigkeitsfehler [{{constraint}}], in der Datenbank {{databaseName}}.",
+        "lang:en": "Model {{tableName}} unique constraint error [{{constraint}}], in the database {{databaseName}}.",
+        "lang:es": "Modelo {{tableName}} error de restricción única [{{constraint}}], en la base de datos {{databaseName}}.",
+        "lang:fr": "Modèle {{tableName}} erreur de contrainte unique [{{constraint}}], dans la base de données {{databaseName}}.",
+        "lang:it": "Modello {{tableName}} errore di vincolo univoco [{{constraint}}], nel database {{databaseName}}."
+      },
+      "DATABASE_NOT_CONNECTED": {
+        "lang:de": "Datenbank {{databaseName}} ist nicht verbunden.",
+        "lang:en": "Database {{databaseName}} is not connected.",
+        "lang:es": "La base de datos {{databaseName}} no está conectada.",
+        "lang:fr": "La base de données {{databaseName}} n'est pas connectée.",
+        "lang:it": "Il database {{databaseName}} non è connesso."
+      },
+      "DATABASE_NOT_FOUND_IN_DATABASE_MANAGER": {
+        "lang:de": "Datenbank {{databaseName}} nicht im Datenbank-Manager gefunden.",
+        "lang:en": "Database {{databaseName}} not found in the database manager.",
+        "lang:es": "Base de datos {{databaseName}} no encontrada en el administrador de base de datos.",
+        "lang:fr": "Base de données {{databaseName}} non trouvée dans le gestionnaire de base de données.",
+        "lang:it": "Database {{databaseName}} non trovato nel database manager."
+      },
+      "DATABASE_OTHER_DATABASE_ERROR": {
+        "lang:de": "Anderer Datenbankfehler, in der Datenbank {{databaseName}}.",
+        "lang:en": "Other database error, in the database {{databaseName}}.",
+        "lang:es": "Otro error de base de datos, en la base de datos {{databaseName}}.",
+        "lang:fr": "Autre erreur de base de données, dans la base de données {{databaseName}}.",
+        "lang:it": "Altro errore del database, nel database {{databaseName}}."
+      },
+      "DRAGONFLY_CONNECTION_ERROR": {
+        "lang:de": "Dragonfly-Verbindungsfehler.",
+        "lang:en": "Dragonfly connection error.",
+        "lang:es": "Dragonfly error de conexión.",
+        "lang:fr": "Erreur de connexion Dragonfly.",
+        "lang:it": "Errore di connessione Dragonfly."
+      },
+      "DRAGONFLY_DISCONNECT_ERROR": {
+        "lang:de": "Dragonfly-Trennungsfehler.",
+        "lang:en": "Dragonfly disconnect error.",
+        "lang:es": "Dragonfly error de desconexión.",
+        "lang:fr": "Erreur de déconnexion Dragonfly.",
+        "lang:it": "Errore di disconnessione Dragonfly."
+      },
+      "DRAGONFLY_NOT_CONNECTED": {
+        "lang:de": "Dragonfly ist nicht verbunden.",
+        "lang:en": "Dragonfly is not connected.",
+        "lang:es": "Dragonfly no está conectado.",
+        "lang:fr": "Dragonfly n'est pas connecté.",
+        "lang:it": "Dragonfly non è connesso."
+      },
+      "RED_PANDA_CONSUMER_CONNECTION_ERROR": {
+        "lang:de": "RedPanda-Verbraucherverbindungsfehler.",
+        "lang:en": "RedPanda consumer connection error.",
+        "lang:es": "RedPanda error de conexión del consumidor.",
+        "lang:fr": "Erreur de connexion du consommateur RedPanda.",
+        "lang:it": "Errore di connessione del consumatore RedPanda."
+      },
+      "RED_PANDA_CONSUMER_DISCONNECT_ERROR": {
+        "lang:de": "RedPanda-Verbraucher-Trennungsfehler.",
+        "lang:en": "RedPanda consumer disconnect error.",
+        "lang:es": "RedPanda error de desconexión del consumidor.",
+        "lang:fr": "Erreur de déconnexion du consommateur RedPanda.",
+        "lang:it": "Errore di disconnessione del consumatore RedPanda."
+      },
+      "RED_PANDA_CONSUMER_IS_NOT_CONNECTED": {
+        "lang:de": "RedPanda-Verbraucher ist nicht verbunden.",
+        "lang:en": "RedPanda consumer is not connected.",
+        "lang:es": "RedPanda consumidor no está conectado.",
+        "lang:fr": "Le consommateur RedPanda n'est pas connecté.",
+        "lang:it": "Il consumatore RedPanda non è connesso."
+      },
+      "RED_PANDA_CONSUMER_SUBSCRIBE_ERROR": {
+        "lang:de": "RedPanda-Verbraucher-Abonnementfehler.",
+        "lang:en": "RedPanda consumer subscribe error.",
+        "lang:es": "RedPanda error de suscripción del consumidor.",
+        "lang:fr": "Erreur d'abonnement du consommateur RedPanda.",
+        "lang:it": "Errore di sottoscrizione del consumatore RedPanda."
+      },
+      "RED_PANDA_PRODUCER_CONNECTION_ERROR": {
+        "lang:de": "RedPanda-Produzentenverbindungsfehler.",
+        "lang:en": "RedPanda producer connection error.",
+        "lang:es": "RedPanda error de conexión del productor.",
+        "lang:fr": "Erreur de connexion du producteur RedPanda.",
+        "lang:it": "Errore di connessione del produttore RedPanda."
+      },
+      "RED_PANDA_PRODUCER_DISCONNECT_ERROR": {
+        "lang:de": "RedPanda-Produzenten-Trennungsfehler.",
+        "lang:en": "RedPanda producer disconnect error.",
+        "lang:es": "RedPanda error de desconexión del productor.",
+        "lang:fr": "Erreur de déconnexion du producteur RedPanda.",
+        "lang:it": "Errore di disconnessione del produttore RedPanda."
+      },
+      "RED_PANDA_PRODUCER_IS_NOT_CONNECTED": {
+        "lang:de": "RedPanda-Produzent ist nicht verbunden.",
+        "lang:en": "RedPanda producer is not connected.",
+        "lang:es": "RedPanda productor no está conectado.",
+        "lang:fr": "Le producteur RedPanda n'est pas connecté.",
+        "lang:it": "Il produttore RedPanda non è connesso."
+      },
+      "RED_PANDA_PRODUCER_SEND_ERROR": {
+        "lang:de": "RedPanda-Produzenten-Sendefehler.",
+        "lang:en": "RedPanda producer send error.",
+        "lang:es": "RedPanda error de envío del productor.",
+        "lang:fr": "Erreur d'envoi du producteur RedPanda.",
+        "lang:it": "Errore di invio del produttore RedPanda."
+      }
+    },
+    "errorMiddleware": {
+      "CREDENTIAL_BLACKLISTED": {
+        "lang:de": "Anmeldeinformationen auf der schwarzen Liste.",
+        "lang:en": "Credential blacklisted.",
+        "lang:es": "La cuenta está en la lista negra.",
+        "lang:fr": "Le compte est sur liste noire.",
+        "lang:it": "conto in lista nera."
+      },
+      "PERMISSION_DENIED": {
+        "lang:de": "Zugriff verweigert.",
+        "lang:en": "Permission denied.",
+        "lang:es": "Permiso denegado.",
+        "lang:fr": "Permission refusée.",
+        "lang:it": "Permesso negato."
+      },
+      "TOKEN_EXPIRED": {
+        "lang:de": "Token ist abgelaufen.",
+        "lang:en": "Token is expired",
+        "lang:es": "El token ha expirado.",
+        "lang:fr": "Le jeton a expiré.",
+        "lang:it": "Il token è scaduto."
+      },
+      "TOKEN_INVALID": {
+        "lang:de": "Token ist ungültig.",
+        "lang:en": "Token is invalid.",
+        "lang:es": "El token no es válido.",
+        "lang:fr": "Le jeton n'est pas valide.",
+        "lang:it": "Il token non è valido."
+      },
+      "TOKEN_INVALID_SIGNATURE": {
+        "lang:de": "Token-Signatur ist ungültig.",
+        "lang:en": "Token signature is invalid.",
+        "lang:es": "La firma del token no es válida.",
+        "lang:fr": "La signature du jeton n'est pas valide.",
+        "lang:it": "La firma del token non è valida."
+      },
+      "TOKEN_INVALID_STRUCTURE": {
+        "lang:de": "Tokenstruktur ist ungültig.",
+        "lang:en": "Token structure is invalid.",
+        "lang:es": "La estructura del token no es válida.",
+        "lang:fr": "La structure du jeton n'est pas valide.",
+        "lang:it": "La struttura del token non è valida"
+      },
+      "TOKEN_NO_FOUND": {
+        "lang:de": "Bearer-Token nicht gefunden.",
+        "lang:en": "Bearer token not found.",
+        "lang:es": "Token de portador no encontrado.",
+        "lang:fr": "Le bearer token n'a pas été trouvé.",
+        "lang:it": "Il bearer token non è stato trovato."
+      }
+    },
+    "errorSchema": {
+      "$EQ_PATTERN": {
+        "lang:de": "Der Wert muss vom Typ Zeichenfolge oder Zahl oder boolesch sein.",
+        "lang:en": "The value must be of type string or number or boolean.",
+        "lang:es": "El valor debe ser de tipo cadena o número o booleano.",
+        "lang:fr": "La valeur doit être de type string ou number ou boolean.",
+        "lang:it": "Il valore deve essere di tipo stringa o numero o booleano."
+      },
+      "$GTE_PATTERN": {
+        "lang:de": "Der Wert muss vom Typ Zahl oder Zeichenfolge sein.",
+        "lang:en": "The value must be of type number or string.",
+        "lang:es": "El valor debe ser de tipo número o cadena.",
+        "lang:fr": "La valeur doit être de type number ou string.",
+        "lang:it": "Il valore deve essere di tipo numero o stringa."
+      },
+      "$GT_PATTERN": {
+        "lang:de": "Der Wert muss vom Typ Zahl oder Zeichenfolge sein.",
+        "lang:en": "The value must be of type number or string.",
+        "lang:es": "El valor debe ser de tipo número o cadena.",
+        "lang:fr": "La valeur doit être de type number ou string.",
+        "lang:it": "Il valore deve essere di tipo numero o stringa."
+      },
+      "$IN_ARRAY_PATTERN": {
+        "lang:de": "Das Array muss mindestens ein Element vom Typ Zeichenfolge haben.",
+        "lang:en": "The array must have at least one element of type string.",
+        "lang:es": "La matriz debe tener al menos un elemento de tipo cadena.",
+        "lang:fr": "Le tableau doit avoir au moins un élément de type string.",
+        "lang:it": "L'array deve avere almeno un elemento di tipo stringa."
+      },
+      "$LTE_PATTERN": {
+        "lang:de": "Der Wert muss vom Typ Zahl oder Zeichenfolge sein.",
+        "lang:en": "The value must be of type number or string.",
+        "lang:es": "El valor debe ser de tipo número o cadena.",
+        "lang:fr": "La valeur doit être de type number ou string.",
+        "lang:it": "Il valore deve essere di tipo numero o stringa."
+      },
+      "$LT_PATTERN": {
+        "lang:de": "Der Wert muss vom Typ Zahl oder Zeichenfolge sein.",
+        "lang:en": "The value must be of type number or string.",
+        "lang:es": "El valor debe ser de tipo número o cadena.",
+        "lang:fr": "La valeur doit être de type number ou string.",
+        "lang:it": "Il valore deve essere di tipo numero o stringa."
+      },
+      "$MATCH_PATTERN": {
+        "lang:de": "Der Wert muss vom Typ Zeichenfolge sein.",
+        "lang:en": "The value must be of type string.",
+        "lang:es": "El valor debe ser de tipo cadena.",
+        "lang:fr": "La valeur doit être de type string.",
+        "lang:it": "Il valore deve essere di tipo stringa."
+      },
+      "$NEQ_PATTERN": {
+        "lang:de": "Der Wert muss vom Typ Zeichenfolge oder Zahl oder boolesch sein.",
+        "lang:en": "The value must be of type string or number or boolean.",
+        "lang:es": "El valor debe ser de tipo cadena o número o booleano.",
+        "lang:fr": "La valeur doit être de type string ou number ou boolean.",
+        "lang:it": "Il valore deve essere di tipo stringa o numero o booleano."
+      },
+      "$NIN_ARRAY_PATTERN": {
+        "lang:de": "Das Array darf keine Elemente vom Typ Zeichenfolge haben.",
+        "lang:en": "The array must not have any elements of type string.",
+        "lang:es": "La matriz no debe tener elementos de tipo cadena.",
+        "lang:fr": "Le tableau ne doit pas avoir d'élément de type string.",
+        "lang:it": "L'array non deve avere elementi di tipo stringa."
+      },
+      "ADDITIONAL_PROPERTIES": {
+        "lang:de": "Zusätzliche Eigenschaften sind nicht erlaubt.",
+        "lang:en": "Additional properties are not allowed.",
+        "lang:es": "No se permiten propiedades adicionales.",
+        "lang:fr": "Des propriétés supplémentaires ne sont pas autorisées.",
+        "lang:it": "Proprietà aggiuntive non sono consentite."
+      },
+      "DATE_PATTERN": {
+        "lang:de": "Das Datum muss ein gültiges Datum sein.",
+        "lang:en": "The date must be a valid date.",
+        "lang:es": "La fecha debe ser una fecha válida.",
+        "lang:fr": "La date doit être une date valide.",
+        "lang:it": "La data deve essere una data valida."
+      },
+      "EMAIL_BLACKLIST": {
+        "lang:de": "Die E-Mail muss eine gültige E-Mail-Adresse sein und nicht in der Blacklist stehen.",
+        "lang:en": "The email must be a valid email address and not in the blacklist.",
+        "lang:es": "El correo electrónico debe ser una dirección de correo electrónico válida y no estar en la lista negra.",
+        "lang:fr": "L'email doit être une adresse e-mail valide et ne pas figurer sur la liste noire.",
+        "lang:it": "L'email deve essere un indirizzo email valido e non essere nella blacklist."
+      },
+      "EMAIL_IS_REQUIRED": {
+        "lang:de": "Die E-Mail ist erforderlich.",
+        "lang:en": "The email is required.",
+        "lang:es": "El correo electrónico es obligatorio.",
+        "lang:fr": "L'email est requis.",
+        "lang:it": "L'email è obbligatoria."
+      },
+      "EMAIL_OR_USERNAME_REQUIRED": {
+        "lang:de": "Die E-Mail oder der Benutzername ist erforderlich.",
+        "lang:en": "The email or username is required.",
+        "lang:es": "El correo electrónico o el nombre de usuario es obligatorio.",
+        "lang:fr": "L'email ou le nom d'utilisateur est requis.",
+        "lang:it": "L'email o il nome utente è obbligatorio."
+      },
+      "EMAIL_PATTERN": {
+        "lang:de": "Die E-Mail muss eine gültige E-Mail-Adresse sein.",
+        "lang:en": "The email must be a valid email address.",
+        "lang:es": "El correo electrónico debe ser una dirección de correo electrónico válida.",
+        "lang:fr": "L'email doit être une adresse e-mail valide.",
+        "lang:it": "L'email deve essere un indirizzo email valido."
+      },
+      "LIMIT_PATTERN": {
+        "lang:de": "Limit muss eine Ganzzahl zwischen 1 und 100 sein",
+        "lang:en": "Limit must be an integer between 1 and 100",
+        "lang:es": "El límite debe ser un entero entre 1 y 100",
+        "lang:fr": "La limite doit être un entier entre 1 et 100",
+        "lang:it": "Il limite deve essere un intero compreso tra 1 e 100"
+      },
+      "MUST_BE_ARRAY_OR_OBJECT": {
+        "lang:de": "Muss ein Array oder ein Objekt sein.",
+        "lang:en": "Must be an array or an object.",
+        "lang:es": "Debe ser un array o un objeto.",
+        "lang:fr": "Doit être un tableau ou un objet.",
+        "lang:it": "Deve essere un array o un oggetto."
+      },
+      "NO_BODY": {
+        "lang:de": "Kein Körper gefunden.",
+        "lang:en": "No body found.",
+        "lang:es": "No se encontró cuerpo.",
+        "lang:fr": "Aucun corps trouvé.",
+        "lang:it": "Nessun corpo trovato."
+      },
+      "OFFSET_PATTERN": {
+        "lang:de": "Offset muss eine Ganzzahl größer oder gleich 0 sein",
+        "lang:en": "Offset must be an integer greater than or equal to 0",
+        "lang:es": "El desplazamiento debe ser un entero mayor o igual a 0",
+        "lang:fr": "Le décalage doit être un entier supérieur ou égal à 0",
+        "lang:it": "L'offset deve essere un intero maggiore o uguale a 0"
+      },
+      "PASSWORD_IS_REQUIRED": {
+        "lang:de": "Das Passwort ist erforderlich.",
+        "lang:en": "The password is required.",
+        "lang:es": "La contraseña es obligatoria.",
+        "lang:fr": "Le mot de passe est requis.",
+        "lang:it": "La password è obbligatoria."
+      },
+      "PASSWORD_PATTERN": {
+        "lang:de": "Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten und eine Mindestlänge von 8 Zeichen und eine maximale Länge von 32 Zeichen haben.",
+        "lang:en": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character and must have a minimum length of 8 characters and a maximum length of 32 characters.",
+        "lang:es": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial y debe tener una longitud mínima de 8 caracteres y una longitud máxima de 32 caracteres.",
+        "lang:fr": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial et doit être d'une longueur minimale de 8 caractères et d'une longueur maximale de 32 caractères.",
+        "lang:it": "La password deve contenere almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale e deve avere una lunghezza minima di 8 caratteri e una lunghezza massima di 32 caratteri."
+      },
+      "ROLE_PATTERN": {
+        "lang:de": "Die Rolle muss alphanumerisch sein und zwischen 3 und 16 Zeichen lang sein.",
+        "lang:en": "The role must be alphanumeric and between 3 and 16 characters.",
+        "lang:es": "El rol debe ser alfanumérico y tener entre 3 y 16 caracteres.",
+        "lang:fr": "Le rôle doit être alpha numérique et entre 3 et 16 caractères.",
+        "lang:it": "Il ruolo deve essere alfanumerico e compreso tra 3 e 16 caratteri."
+      },
+      "TYPE_OBJECT": {
+        "lang:de": "Typ muss ein Objekt sein.",
+        "lang:en": "Type must be an object.",
+        "lang:es": "El tipo debe ser un objeto.",
+        "lang:fr": "Le type doit être un objet.",
+        "lang:it": "Il tipo deve essere un oggetto."
+      },
+      "USERNAME_IS_REQUIRED": {
+        "lang:de": "Der Benutzername ist erforderlich.",
+        "lang:en": "The username is required.",
+        "lang:es": "El nombre de usuario es obligatorio.",
+        "lang:fr": "Le nom d'utilisateur est requis.",
+        "lang:it": "Il nome utente è obbligatorio."
+      },
+      "USERNAME_PATTERN": {
+        "lang:de": "Der Benutzername darf nur Buchstaben und Zahlen enthalten und muss eine Mindestlänge von 4 Zeichen und eine maximale Länge von 32 Zeichen haben.",
+        "lang:en": "The username can only contain letters and numbers and must have a minimum length of 4 characters and a maximum length of 32 characters.",
+        "lang:es": "El nombre de usuario solo puede contener letras y números y debe tener una longitud mínima de 4 caracteres y una longitud máxima de 32 caracteres.",
+        "lang:fr": "Le nom d'utilisateur ne peut contenir que des lettres et des chiffres et doit avoir une longueur minimale de 4 caractères et une longueur maximale de 32 caractères.",
+        "lang:it": "Il nome utente può contenere solo lettere e numeri e deve avere una lunghezza minima di 4 caratteri e una lunghezza massima di 32 caratteri."
+      }
+    },
+    "errorUseCase": {
+      "PASSWORD_NOT_VALID": {
+        "lang:de": "Das Passwort ist ungültig.",
+        "lang:en": "The password is not valid.",
+        "lang:es": "La contraseña no es válida.",
+        "lang:fr": "Le mot de passe n'est pas valide.",
+        "lang:it": "La password non è valida."
+      }
+    }
+  },
+  "http": {
+    "close": {
+      "lang:de": "HTTP-Server geschlossen.",
+      "lang:en": "HTTP server closed.",
+      "lang:es": "HTTP server cerrado.",
+      "lang:fr": "Serveur HTTP fermé.",
+      "lang:it": "Server HTTP chiuso."
+    },
+    "handler": {
+      "CRUD": {
+        "count": {
+          "lang:de": "Zählung erfolgreich. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "count successful. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "recuento exitoso. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "comptage réussi. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "conteggio riuscito. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "delete": {
+          "lang:de": "{{x}} Modelle erfolgreich gelöscht. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "{{x}} models deleted successfully. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "{{x}} modelos eliminados con éxito. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Suppression de {{x}} modèles réussie. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "{{x}} modelli eliminati con successo. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "deleteAll": {
+          "lang:de": "Alle {{x}} Modelle erfolgreich gelöscht. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "All {{x}} models deleted successfully. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "Todos los {{x}} modelos eliminados con éxito. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Tous les {{x}} modèles ont été supprimés avec succès. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "Tutti i {{x}} modelli eliminati con successo. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "deleteOne": {
+          "lang:de": "Modell erfolgreich gelöscht. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "Model successfully deleted. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "Modelo eliminado con éxito. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Suppression réussie du model. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "Modello eliminato con successo. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "find": {
+          "lang:de": "{{x}} Modelle erfolgreich gefunden. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "{{x}} models found successfully. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "{{x}} modelos encontrados con éxito. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "{{x}} models ont été trouvés avec succès. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "{{x}} modelli trovati con successo. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "findAll": {
+          "lang:de": "Alle {{x}} Modelle erfolgreich gefunden. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "All {{x}} models found successfully. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "Todos los {{x}} modelos encontrados con éxito. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Tous les {{x}} models ont été trouvés avec succès. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "Tutti i {{x}} modelli trovati con successo. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "findOne": {
+          "lang:de": "Modell erfolgreich gefunden. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "Model found successfully. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "Modelo encontrado con éxito. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Le model a été trouvé avec succès. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "Modello trovato con successo. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "insert": {
+          "lang:de": "Einfügen erfolgreich von {{x}} Elementen. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "insert successful of {{x}} items. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "inserción exitosa de {{x}} elementos. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "insertion réussie de {{x}} éléments. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "inserimento riuscito di {{x}} elementi. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "truncate": {
+          "lang:de": "Trunkierung erfolgreich. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "Truncation successful. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "Truncamiento exitoso. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Troncage réussi. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "Troncamento riuscito. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "update": {
+          "lang:de": "Aktualisierung von {{x}} Elementen erfolgreich. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "Update of {{x}} items successful. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "Actualización de {{x}} elementos exitosa. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Mise à jour de {{x}} éléments réussie. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "Aggiornamento di {{x}} elementi riuscito. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "updateAll": {
+          "lang:de": "Aktualisierung erfolgreich von allen {{x}} Modellen. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "Update successful of all {{x}} models. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "Actualización exitosa de todos los {{x}} modelos. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Mise à jour réussie de tous les {{x}} models. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "Aggiornamento riuscito di tutti i {{x}} modelli. Database::{{databaseName}} -> Table::{{tableName}}."
+        },
+        "updateOne": {
+          "lang:de": "Aktualisierung erfolgreich des Modells. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:en": "update successful of model. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:es": "actualización exitosa del modelo. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:fr": "Mise à jour réussie du model. Database::{{databaseName}} -> Table::{{tableName}}.",
+          "lang:it": "aggiornamento riuscito del modello. Database::{{databaseName}} -> Table::{{tableName}}."
+        }
+      },
+      "authHandler": {
+        "blacklist-check": {
+          "lang:de": "Das Konto ist nicht auf der Blacklist.",
+          "lang:en": "The account is not on the blacklist.",
+          "lang:es": "La cuenta no está en la lista negra.",
+          "lang:fr": "Le compte n'est pas sur la liste noir.",
+          "lang:it": "L'account non è nella blacklist."
+        },
+        "delete": {
+          "lang:de": "Konto-Löschung erfolgreich.",
+          "lang:en": "Account deletion successful.",
+          "lang:es": "Eliminación de cuenta exitosa.",
+          "lang:fr": "Suppression de compte réussie.",
+          "lang:it": "Eliminazione dell'account riuscita."
+        },
+        "login": {
+          "lang:de": "Anmeldung erfolgreich.",
+          "lang:en": "Login successful.",
+          "lang:es": "Inicio de sesión exitoso.",
+          "lang:fr": "Connexion réussie.",
+          "lang:it": "Accesso riuscito."
+        },
+        "logout": {
+          "lang:de": "Abmeldung erfolgreich.",
+          "lang:en": "Logout successful.",
+          "lang:es": "Cierre de sesión exitoso.",
+          "lang:fr": "Déconnexion réussie.",
+          "lang:it": "Logout riuscito."
+        },
+        "register": {
+          "lang:de": "Registrierung erfolgreich.",
+          "lang:en": "Registration successful.",
+          "lang:es": "Registro exitoso.",
+          "lang:fr": "Inscription réussie.",
+          "lang:it": "Registrazione riuscita."
+        },
+        "token-blacklist-check": {
+          "lang:de": "Der Token ist gültig und das Konto ist nicht auf der Blacklist.",
+          "lang:en": "The token is valid and the account is not on the blacklist.",
+          "lang:es": "El token es válido y la cuenta no está en la lista negra.",
+          "lang:fr": "Le jeton est valide et le compte n'est pas sur la liste noire.",
+          "lang:it": "Il token è valido e l'account non è nella blacklist."
+        },
+        "token-check": {
+          "lang:de": "Token ist gültig.",
+          "lang:en": "Token is valid.",
+          "lang:es": "El token es válido.",
+          "lang:fr": "Le jeton est valide.",
+          "lang:it": "Il token è valido."
+        },
+        "update": {
+          "lang:de": "Konto-Aktualisierung erfolgreich.",
+          "lang:en": "Account update successful.",
+          "lang:es": "Actualización de cuenta exitosa.",
+          "lang:fr": "Mise à jour du compte réussie.",
+          "lang:it": "Aggiornamento dell'account riuscito."
+        }
+      },
+      "microserviceHandler": {
+        "info": {
+          "lang:de": "Info erfolgreich abgerufen.",
+          "lang:en": "Info retrieved successfully.",
+          "lang:es": "Información recuperada con éxito.",
+          "lang:fr": "Informations récupérées avec succès.",
+          "lang:it": "Informazioni recuperate con successo."
+        },
+        "ping": {
+          "lang:de": "Ping erfolgreich.",
+          "lang:en": "pong",
+          "lang:es": "pong",
+          "lang:fr": "pong",
+          "lang:it": "pong"
+        }
+      }
+    },
+    "listening": {
+      "lang:de": "HTTP-Server hört auf Port {{port}} im {{mode}}-Modus. (Präfix: {{prefix}}) PID: {{pid}}",
+      "lang:en": "HTTP server listening on port {{port}} in {{mode}} mode. (Prefix: {{prefix}}) PID: {{pid}}",
+      "lang:es": "El servidor HTTP escucha en el puerto {{port}} en modo {{mode}}. (Prefijo: {{prefix}}) PID: {{pid}}",
+      "lang:fr": "Le serveur HTTP écoute sur le port {{port}} en mode {{mode}}. (Préfixe: {{prefix}}) PID: {{pid}}",
+      "lang:it": "Il server HTTP è in ascolto sulla porta {{port}} in modalità {{mode}}. (Prefisso: {{prefix}}) PID: {{pid}}"
+    },
+    "plugin": {
+      "RateLimitPlugin": {
+        "RATE_LIMIT": {
+          "lang:de": "Rate Limit {{max}} überschritten. Versuchen Sie es in {{timeWindow}} Sekunden erneut.",
+          "lang:en": "Rate limit {{max}} exceeded. Try again in {{timeWindow}} seconds.",
+          "lang:es": "Límite de velocidad {{max}} excedido. Inténtelo de nuevo en {{timeWindow}} segundos.",
+          "lang:fr": "Limite de débit {{max}} dépassée. Réessayez dans {{timeWindow}} secondes.",
+          "lang:it": "Limite di velocità {{max}} superato. Riprova tra {{timeWindow}} secondi."
+        }
+      }
+    }
+  },
+  "infrastructure": {
+    "database": {
+      "connected": {
+        "lang:de": "Datenbank {{databaseName}} verbunden.",
+        "lang:en": "Database {{databaseName}} connected.",
+        "lang:es": "Base de datos {{databaseName}} conectada.",
+        "lang:fr": "Base de données {{databaseName}} connectée.",
+        "lang:it": "Database {{databaseName}} connesso."
+      },
+      "disconnected": {
+        "lang:de": "Datenbank {{databaseName}} getrennt.",
+        "lang:en": "Database {{databaseName}} disconnected.",
+        "lang:es": "Base de données {{databaseName}} desconectada.",
+        "lang:fr": "Base de données {{databaseName}} déconnectée.",
+        "lang:it": "Database {{databaseName}} disconnesso."
+      },
+      "rollback_all_migrations": {
+        "lang:de": "Datenbank {{databaseName}}-Migrationen rollen alles zurück.",
+        "lang:en": "Database {{databaseName}} migrations rollback all.",
+        "lang:es": "Las Migraciones de base de datos {{databaseName}} retroceden todo.",
+        "lang:fr": "Les migrations de base de données {{databaseName}} annulent tout.",
+        "lang:it": "I rollback di tutte le migrazioni del database {{databaseName}}."
+      },
+      "run_all_mirations": {
+        "lang:de": "Datenbank {{databaseName}}-Migrationen ausgeführt.",
+        "lang:en": "Database {{databaseName}} migrations run.",
+        "lang:es": "Migraciones de base de datos {{databaseName}} ejecutadas.",
+        "lang:fr": "Les migrations de base de données {{databaseName}} sont exécutées.",
+        "lang:it": "Migrazioni del database {{databaseName}} eseguite."
+      },
+      "run_all_seeds": {
+        "lang:de": "Datenbank {{databaseName}}-Saatgut ausgeführt.",
+        "lang:en": "Database {{databaseName}} seeders run.",
+        "lang:es": "Las semillas de la base de datos {{databaseName}} se ejecutan.",
+        "lang:fr": "Les graines de base de données {{databaseName}} sont exécutées.",
+        "lang:it": "Semi del database {{databaseName}} eseguiti."
+      }
+    },
+    "dragonfly": {
+      "connected": {
+        "lang:de": "Dragonfly verbunden.",
+        "lang:en": "Dragonfly connected.",
+        "lang:es": "Dragonfly conectado.",
+        "lang:fr": "Dragonfly connecté.",
+        "lang:it": "Dragonfly connesso."
+      },
+      "disconnected": {
+        "lang:de": "Dragonfly getrennt.",
+        "lang:en": "Dragonfly disconnected.",
+        "lang:es": "Dragonfly desconectado.",
+        "lang:fr": "Dragonfly déconnecté.",
+        "lang:it": "Dragonfly disconnesso."
+      }
+    },
+    "redpanda": {
+      "consumer_connected": {
+        "lang:de": "RedPanda-Verbraucher verbunden.",
+        "lang:en": "RedPanda Consumer connected.",
+        "lang:es": "RedPanda Consumer conectado.",
+        "lang:fr": "Consommateur RedPanda connecté.",
+        "lang:it": "RedPanda Consumer connesso."
+      },
+      "consumer_disconnected": {
+        "lang:de": "RedPanda-Verbraucher getrennt.",
+        "lang:en": "RedPanda Consumer disconnected.",
+        "lang:es": "RedPanda Consumer desconectado.",
+        "lang:fr": "Consommateur RedPanda déconnecté.",
+        "lang:it": "RedPanda Consumer disconnesso."
+      },
+      "producer_connected": {
+        "lang:de": "RedPanda-Produzent verbunden.",
+        "lang:en": "RedPanda Producer connected.",
+        "lang:es": "RedPanda Producer conectado.",
+        "lang:fr": "Producteur RedPanda connecté.",
+        "lang:it": "RedPanda Producer connesso."
+      },
+      "producer_disconnected": {
+        "lang:de": "RedPanda-Produzent getrennt.",
+        "lang:en": "RedPanda Producer disconnected.",
+        "lang:es": "RedPanda Producer desconectado.",
+        "lang:fr": "Producteur RedPanda déconnecté.",
+        "lang:it": "RedPanda Producer disconnesso."
+      }
+    }
+  }
+}

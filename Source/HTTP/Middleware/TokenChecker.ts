@@ -1,10 +1,10 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { Dragonfly } from '@/Infrastructure/Store';
-import { I18n } from '@/Config';
 import { ErrorEntity, ErrorMiddleware, ErrorMiddlewareKey } from '@/Common/Error';
+import { I18n } from '@/Common/Tools';
 import { ITokenPayloadDTO } from '@/Data/DTO';
+import { Dragonfly } from '@/Infrastructure/Store';
 
 export class TokenChecker {
 
@@ -53,11 +53,17 @@ export class TokenChecker {
 
     public static async execute(req: FastifyRequest, reply: FastifyReply): Promise<void> {
         try {
-            const token: string = req.cookies.token || '';
+            const authorization: string | undefined = req.headers?.authorization;
+            if (!authorization)
+                throw new ErrorMiddleware({
+                    key: ErrorMiddlewareKey.TOKEN_NO_FOUND,
+                });
+            const token: string = authorization.split(' ')[1];
             const tokenUuid: string = TokenChecker.getTokenUuid(token);
             const tokenPayload: ITokenPayloadDTO = new BasaltToken().getPayload(token);
             const publicKey: string = await TokenChecker.getPublicKey(tokenPayload.uuid, tokenUuid);
             TokenChecker.check(token, publicKey);
+            req.headers.token = token;
         } catch (error) {
             if (error instanceof ErrorEntity)
                 reply.status(error.code).send({

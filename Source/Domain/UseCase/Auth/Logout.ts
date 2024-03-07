@@ -1,7 +1,7 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
 
-import { Dragonfly } from '@/Infrastructure/Store';
 import { ITokenPayloadDTO } from '@/Data/DTO';
+import { Dragonfly } from '@/Infrastructure/Store';
 
 export class Logout {
     public execute (token: string): void {
