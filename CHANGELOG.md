@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.2](https://github.com/Andesite-Lab/Authentication/compare/v1.7.1...v1.7.2) (2024-03-08)
+
+
+### Bug Fixes
+
+* correction asynchronous ([7787f9a](https://github.com/Andesite-Lab/Authentication/commit/7787f9a0679925785fae09e3c17ae06c9b5fb2b3))
+
+
+### Continuous Integration
+
+* fix dockerfile ([0814116](https://github.com/Andesite-Lab/Authentication/commit/08141160567c512d2aca873bc887f03a59944249))
+
 ## [1.7.1](https://github.com/Andesite-Lab/Authentication/compare/v1.7.0...v1.7.1) (2024-03-07)
 
 
