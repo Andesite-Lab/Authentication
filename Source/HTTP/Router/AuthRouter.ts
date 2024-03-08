@@ -95,6 +95,7 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             preHandler: BlacklistedChecker.execute,
             handler: this._handler.blacklistCheck,
             schema: {
+                deprecated: true,
                 tags: ['Auth'],
                 summary: 'Check if credential is blacklist',
             },
@@ -106,6 +107,7 @@ export class AuthRouter extends AbstractRouter<AuthHandler> {
             preHandler: [TokenChecker.execute, BlacklistedChecker.execute],
             handler: this._handler.blacklistCheck,
             schema: {
+                deprecated: true,
                 tags: ['Auth'],
                 summary: 'Check if credential is blacklist',
             },

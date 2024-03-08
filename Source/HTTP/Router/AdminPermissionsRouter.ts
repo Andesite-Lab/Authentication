@@ -9,7 +9,7 @@ export class AdminPermissionsRouter extends AbstractCrudRouter<IPermissionDTO> {
             tableName: 'permission',
             schema: PermissionSchema,
             routerPrefix,
-            tags: 'Admin-Permissions',
+            tags: 'Admin-Permission',
             primaryKeyName: ['id', 'NUMBER'],
             crudOperationWithPermission: {
                 insert: ['admin', 'permission.all', 'permission.create'],
