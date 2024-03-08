@@ -68,36 +68,33 @@ export class DatabaseManager {
         return this._databases.has(databaseName);
     }
 
-    public runAllMigration(): void {
-        this._databases.forEach((db) => {
-            db.runAllMigrations();
-        });
+    public async runAllMigration(): Promise<void> {
+        for (const [, db] of this._databases)
+            await db.runAllMigrations();
     }
 
-    public rollbackAllMigration(): void {
-        this._databases.forEach((db) => {
-            db.rollbackAllMigrations();
-        });
+    public async rollbackAllMigration(): Promise<void> {
+        for (const [, db] of this._databases)
+            await db.rollbackAllMigrations();
     }
 
-    public runAllSeeder(): void {
-        this._databases.forEach((db) => {
-            db.runAllSeeds();
-        });
+    public async runAllSeeder(): Promise<void> {
+        for (const [, db] of this._databases)
+            await db.runAllSeeds();
     }
 
-    public runMigrationForDatabase(databaseName: string): void {
+    public async runMigrationForDatabase(databaseName: string): Promise<void> {
         if (this._databases.has(databaseName)) 
-            this._databases.get(databaseName)?.runAllMigrations();
+            await this._databases.get(databaseName)?.runAllMigrations();
     }
 
-    public rollbackMigrationForDatabase(databaseName: string): void {
+    public async rollbackMigrationForDatabase(databaseName: string): Promise<void> {
         if (this._databases.has(databaseName)) 
-            this._databases.get(databaseName)?.rollbackAllMigrations();
+            await this._databases.get(databaseName)?.rollbackAllMigrations();
     }
 
-    public runSeederForDatabase(databaseName: string): void {
+    public async runSeederForDatabase(databaseName: string): Promise<void> {
         if (this._databases.has(databaseName)) 
-            this._databases.get(databaseName)?.runAllSeeds();
+            await this._databases.get(databaseName)?.runAllSeeds();
     }
 }
