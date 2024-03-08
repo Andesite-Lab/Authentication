@@ -17,7 +17,7 @@ import {
     SwaggerPlugin,
     SwaggerUiPlugin
 } from '@/HTTP/Plugin';
-import { AdminRolesRouter, AuthRouter, MicroserviceRouter } from '@/HTTP/Router';
+import { AdminPermissionsRouter, AdminRolesRouter, AuthRouter, MicroserviceRouter } from '@/HTTP/Router';
 
 export class HttpServerManager {
     private readonly _app: FastifyInstance;
@@ -35,7 +35,7 @@ export class HttpServerManager {
             new MicroserviceRouter('/microservice'),
             new AuthRouter('/'),
             new AdminRolesRouter('/admin/roles'),
-            // new AdminPermissionsRouter('/admin/permissions'),
+            new AdminPermissionsRouter('/admin/permissions'),
         ];
     }
 
