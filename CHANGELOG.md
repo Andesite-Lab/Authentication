@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.8.0](https://github.com/Andesite-Lab/Authentication/compare/v1.7.2...v1.8.0) (2024-03-08)
+
+
+### Features
+
+* add CRUD Admin permission ([38b72ae](https://github.com/Andesite-Lab/Authentication/commit/38b72aef24a8a677b32bce68cd55d579e00535d0))
+* Add permission pattern to error schema and language files ([39d648a](https://github.com/Andesite-Lab/Authentication/commit/39d648a3e7ecbb80de41455eaa1236980869987c))
+* add permission schema ([efd9689](https://github.com/Andesite-Lab/Authentication/commit/efd96892f11c1dc7a2b4c0bf57b1f53035d5f3d1))
+
+
+### Bug Fixes
+
+* change permission of seed ([271dd64](https://github.com/Andesite-Lab/Authentication/commit/271dd64d4ea3b731d7a26fca23f3fe279ee2f819))
+
 ## [1.7.2](https://github.com/Andesite-Lab/Authentication/compare/v1.7.1...v1.7.2) (2024-03-08)
 
 
