@@ -9,7 +9,7 @@ export class AdminRolesRouter extends AbstractCrudRouter<IRoleDTO> {
             tableName: 'role',
             schema: RoleSchema,
             routerPrefix,
-            tags: 'Admin-Roles',
+            tags: 'Admin-Role',
             primaryKeyName: ['id', 'NUMBER'],
             crudOperationWithPermission: {
                 insert: ['admin', 'role.all', 'role.create'],
