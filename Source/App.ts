@@ -85,9 +85,9 @@ commander
             if (options.rollback) 
                 console.log('Rolling back the last migration');
             else if (options.rollbackAll) 
-                DatabaseManager.instance.rollbackAllMigration();
+                await DatabaseManager.instance.rollbackAllMigration();
             else 
-                DatabaseManager.instance.runAllMigration();
+                await DatabaseManager.instance.runAllMigration();
             
         } catch (error) {
             if (error instanceof ErrorEntity)
@@ -114,7 +114,7 @@ commander
             // Connect to database
             DatabaseManager.instance.connectDatabases();
 
-            DatabaseManager.instance.runAllSeeder();
+            await DatabaseManager.instance.runAllSeeder();
         } catch (error) {
             if (error instanceof ErrorEntity)
                 error.message = I18n.translate(error.message, Language.EN);
