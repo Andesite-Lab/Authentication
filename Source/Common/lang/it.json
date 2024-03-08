@@ -73,6 +73,7 @@
       "OFFSET_PATTERN": "L'offset deve essere un intero maggiore o uguale a 0",
       "PASSWORD_IS_REQUIRED": "La password è obbligatoria.",
       "PASSWORD_PATTERN": "La password deve contenere almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale e deve avere una lunghezza minima di 8 caratteri e una lunghezza massima di 32 caratteri.",
+      "PERMISSION_PATTERN": "Il permesso deve essere alfanumerico e compreso tra 3 e 32 caratteri.",
       "ROLE_PATTERN": "Il ruolo deve essere alfanumerico e compreso tra 3 e 16 caratteri.",
       "TYPE_OBJECT": "Il tipo deve essere un oggetto.",
       "USERNAME_IS_REQUIRED": "Il nome utente è obbligatorio.",
