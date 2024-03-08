@@ -453,6 +453,13 @@
         "lang:fr": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial et doit être d'une longueur minimale de 8 caractères et d'une longueur maximale de 32 caractères.",
         "lang:it": "La password deve contenere almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale e deve avere una lunghezza minima di 8 caratteri e una lunghezza massima di 32 caratteri."
       },
+      "PERMISSION_PATTERN": {
+        "lang:de": "Die Berechtigung muss alphanumerisch sein und zwischen 3 und 32 Zeichen lang sein.",
+        "lang:en": "The permission must be alphanumeric and between 3 and 32 characters.",
+        "lang:es": "El permiso debe ser alfanumérico y tener entre 3 y 32 caracteres.",
+        "lang:fr": "La permission doit être alphanumérique et entre 3 et 32 caractères.",
+        "lang:it": "Il permesso deve essere alfanumerico e compreso tra 3 e 32 caratteri."
+      },
       "ROLE_PATTERN": {
         "lang:de": "Die Rolle muss alphanumerisch sein und zwischen 3 und 16 Zeichen lang sein.",
         "lang:en": "The role must be alphanumeric and between 3 and 16 characters.",
