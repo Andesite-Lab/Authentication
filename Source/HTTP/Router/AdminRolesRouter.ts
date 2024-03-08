@@ -12,14 +12,14 @@ export class AdminRolesRouter extends AbstractCrudRouter<IRoleDTO> {
             tags: 'Admin-Roles',
             primaryKeyName: ['id', 'NUMBER'],
             crudOperationWithPermission: {
-                insert: ['admin', 'role', 'role.create'],
-                findAll: ['admin', 'role', 'role.read'],
-                findOne: ['admin', 'role', 'role.read'],
-                updateAll: ['admin', 'role', 'role.update'],
-                updateOne: ['admin', 'role', 'role.update'],
-                deleteAll: ['admin', 'role', 'role.delete'],
-                deleteOne: ['admin', 'role', 'role.delete'],
-                truncate: ['admin', 'role', 'role.delete']
+                insert: ['admin', 'role.all', 'role.create'],
+                findAll: ['admin', 'role.all', 'role.read'],
+                findOne: ['admin', 'role.all', 'role.read'],
+                updateAll: ['admin', 'role.all', 'role.update'],
+                updateOne: ['admin', 'role.all', 'role.update'],
+                deleteAll: ['admin', 'role.all', 'role.delete'],
+                deleteOne: ['admin', 'role.all', 'role.delete'],
+                truncate: ['admin', 'role.all', 'role.delete']
             }
         });
     }
