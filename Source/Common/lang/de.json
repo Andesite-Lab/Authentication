@@ -73,6 +73,7 @@
       "OFFSET_PATTERN": "Offset muss eine Ganzzahl größer oder gleich 0 sein",
       "PASSWORD_IS_REQUIRED": "Das Passwort ist erforderlich.",
       "PASSWORD_PATTERN": "Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten und eine Mindestlänge von 8 Zeichen und eine maximale Länge von 32 Zeichen haben.",
+      "PERMISSION_PATTERN": "Die Berechtigung muss alphanumerisch sein und zwischen 3 und 32 Zeichen lang sein.",
       "ROLE_PATTERN": "Die Rolle muss alphanumerisch sein und zwischen 3 und 16 Zeichen lang sein.",
       "TYPE_OBJECT": "Typ muss ein Objekt sein.",
       "USERNAME_IS_REQUIRED": "Der Benutzername ist erforderlich.",

@@ -73,6 +73,7 @@
       "OFFSET_PATTERN": "Le décalage doit être un entier supérieur ou égal à 0",
       "PASSWORD_IS_REQUIRED": "Le mot de passe est requis.",
       "PASSWORD_PATTERN": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial et doit être d'une longueur minimale de 8 caractères et d'une longueur maximale de 32 caractères.",
+      "PERMISSION_PATTERN": "La permission doit être alphanumérique et entre 3 et 32 caractères.",
       "ROLE_PATTERN": "Le rôle doit être alpha numérique et entre 3 et 16 caractères.",
       "TYPE_OBJECT": "Le type doit être un objet.",
       "USERNAME_IS_REQUIRED": "Le nom d'utilisateur est requis.",
