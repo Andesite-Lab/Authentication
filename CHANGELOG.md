@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.1](https://github.com/Andesite-Lab/Authentication/compare/v1.8.0...v1.8.1) (2024-03-08)
+
+
+### Bug Fixes
+
+* Remove unused admin permission and role handlers ([5c8ef13](https://github.com/Andesite-Lab/Authentication/commit/5c8ef13e544b3f65d138f685694e9c8449467847))
+
+
+### Code Refactoring
+
+* Add deprecation flag to blacklist check endpoints ([9be20ab](https://github.com/Andesite-Lab/Authentication/commit/9be20ab58a173f56b0213307ae65040561de048d))
+
 ## [1.8.0](https://github.com/Andesite-Lab/Authentication/compare/v1.7.2...v1.8.0) (2024-03-08)
 
 
