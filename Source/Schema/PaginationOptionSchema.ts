@@ -13,7 +13,7 @@ export const PaginationOptionSchema: JSONSchemaType<IPaginationOptionDTO> = {
         limit: {
             type: 'integer',
             minimum: 1,
-            maximum: 200,
+            maximum: 500,
             default: 25,
         },
         offset: {

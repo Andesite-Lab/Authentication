@@ -67,7 +67,7 @@
       "EMAIL_IS_REQUIRED": "Die E-Mail ist erforderlich.",
       "EMAIL_OR_USERNAME_REQUIRED": "Die E-Mail oder der Benutzername ist erforderlich.",
       "EMAIL_PATTERN": "Die E-Mail muss eine gültige E-Mail-Adresse sein.",
-      "LIMIT_PATTERN": "Limit muss eine Ganzzahl zwischen 1 und 100 sein",
+      "LIMIT_PATTERN": "Limit muss eine Ganzzahl zwischen 1 und 500 sein",
       "MUST_BE_ARRAY_OR_OBJECT": "Muss ein Array oder ein Objekt sein.",
       "NO_BODY": "Kein Körper gefunden.",
       "OFFSET_PATTERN": "Offset muss eine Ganzzahl größer oder gleich 0 sein",

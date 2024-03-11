@@ -67,7 +67,7 @@
       "EMAIL_IS_REQUIRED": "L'email est requis.",
       "EMAIL_OR_USERNAME_REQUIRED": "L'email ou le nom d'utilisateur est requis.",
       "EMAIL_PATTERN": "L'email doit être une adresse e-mail valide.",
-      "LIMIT_PATTERN": "La limite doit être un entier entre 1 et 100",
+      "LIMIT_PATTERN": "La limite doit être un entier entre 1 et 500",
       "MUST_BE_ARRAY_OR_OBJECT": "Doit être un tableau ou un objet.",
       "NO_BODY": "Aucun corps trouvé.",
       "OFFSET_PATTERN": "Le décalage doit être un entier supérieur ou égal à 0",
