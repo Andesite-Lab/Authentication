@@ -67,7 +67,7 @@
       "EMAIL_IS_REQUIRED": "The email is required.",
       "EMAIL_OR_USERNAME_REQUIRED": "The email or username is required.",
       "EMAIL_PATTERN": "The email must be a valid email address.",
-      "LIMIT_PATTERN": "Limit must be an integer between 1 and 100",
+      "LIMIT_PATTERN": "Limit must be an integer between 1 and 500",
       "MUST_BE_ARRAY_OR_OBJECT": "Must be an array or an object.",
       "NO_BODY": "No body found.",
       "OFFSET_PATTERN": "Offset must be an integer greater than or equal to 0",
