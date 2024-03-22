@@ -1,4 +1,3 @@
-import { JSONSchemaType } from 'ajv';
 import { FastifyInstance } from 'fastify';
 import { FastifySchema } from 'fastify/types/schema';
 
