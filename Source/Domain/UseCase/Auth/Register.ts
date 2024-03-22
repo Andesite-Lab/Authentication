@@ -1,4 +1,4 @@
-import { BasaltPassword } from '@basalt-lab/basalt-helper';
+import { hashPassword } from '@basalt-lab/basalt-helper';
 
 import { IRegisterDTO } from '@/Data/DTO';
 import { MailerProducer, MailTypes } from '@/Infrastructure/RedPanda/Producer';
@@ -6,7 +6,7 @@ import { CredentialCreationTransaction } from '@/Infrastructure/Repository/Trans
 
 export class Register {
     public async execute (body: IRegisterDTO, language: string = 'en'): Promise<void> {
-        body.password = await BasaltPassword.hashPassword(body.password);
+        body.password = await hashPassword(body.password);
         const credentialCreationTransaction: CredentialCreationTransaction = new CredentialCreationTransaction();
         await credentialCreationTransaction.execute(body);
         await MailerProducer.execute({
