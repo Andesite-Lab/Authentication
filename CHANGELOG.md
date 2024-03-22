@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.8.2](https://github.com/Andesite-Lab/Authentication/compare/v1.8.1...v1.8.2) (2024-03-22)
+
+
+### Bug Fixes
+
+* regex correction ([556ac5d](https://github.com/Andesite-Lab/Authentication/commit/556ac5d8468e253f2c70642fb6004450dd700f49))
+* remove unused ([0b55ac0](https://github.com/Andesite-Lab/Authentication/commit/0b55ac0240fb5be47c1af7c11a21682cb4d14f68))
+
+
+### Code Refactoring
+
+* improvements ([c2c6740](https://github.com/Andesite-Lab/Authentication/commit/c2c67404c26892f10fe2b36f36ab78daaa612914))
+
+
+### Build System
+
+* update build env + packages etc ([4763377](https://github.com/Andesite-Lab/Authentication/commit/47633779be46f6d8a245a3003925ec177d9840f4))
+* update packages ([685c59b](https://github.com/Andesite-Lab/Authentication/commit/685c59ba8e146ff74f825f985a7adc01a11dcf1b))
+
 ## [1.8.1](https://github.com/Andesite-Lab/Authentication/compare/v1.8.0...v1.8.1) (2024-03-08)
 
 
