@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import { BasaltPassword } from '@basalt-lab/basalt-helper';
+import { hashPassword } from '@basalt-lab/basalt-helper';
 
 import { ICrendentialDTO, IRoleDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 import { RoleModel, CredentialModel, CredentialRoleModel } from '@/Infrastructure/Repository/Model';
@@ -25,7 +25,7 @@ export class InitAdminCredential implements Knex.Seed {
                 const credentialRoleModel: CredentialRoleModel = new CredentialRoleModel();
 
                 await Promise.all(credentialDTO.map(async (credential: Partial<ICrendentialDTO>): Promise<Partial<ICrendentialDTO>> => {
-                    credential.password = await BasaltPassword.hashPassword(credential.password as string);
+                    credential.password = await hashPassword(credential.password as string);
                     return credential;
                 }));
 

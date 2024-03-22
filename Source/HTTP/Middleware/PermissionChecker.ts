@@ -54,12 +54,3 @@ export class PermissionChecker {
     }
 }
 
-
-
-
-
-
-
-
-
-

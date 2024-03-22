@@ -1,5 +1,5 @@
 import { BasaltToken, BasaltTokenExpiry, IBasaltTokenSignResult } from '@basalt-lab/basalt-auth';
-import { BasaltPassword } from '@basalt-lab/basalt-helper';
+import { verifyPassword } from '@basalt-lab/basalt-helper';
 
 import { BasaltAuthorization } from '@/Common/Tools';
 import { ErrorUseCase, ErrorUseCaseKey } from '@/Common/Error';
@@ -30,7 +30,7 @@ export class Login {
     }
 
     private checkPassword(password: string, hash: string): Promise<boolean> {
-        return BasaltPassword.verifyPassword(password, hash);
+        return verifyPassword(password, hash);
     }
 
     public async execute (body: Partial<ILoginDTO>): Promise<string> {
