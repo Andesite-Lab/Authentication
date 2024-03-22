@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.3](https://github.com/Andesite-Lab/Authentication/compare/v1.8.2...v1.8.3) (2024-03-22)
+
+
+### Bug Fixes
+
+* correction lint + dockerfile ([be04c21](https://github.com/Andesite-Lab/Authentication/commit/be04c213ac785979af0974aababcbf0723a4f7c2))
+
 ## [1.8.2](https://github.com/Andesite-Lab/Authentication/compare/v1.8.1...v1.8.2) (2024-03-22)
 
 
