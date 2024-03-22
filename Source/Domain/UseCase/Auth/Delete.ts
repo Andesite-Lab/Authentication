@@ -19,10 +19,10 @@ export class Delete {
             username: true,
         });
         await MailerProducer.execute({
-            username: credential.username,
-            email: credential.email,
+            username: credential?.username,
+            email: credential?.email,
         },{
-            to: credential.email,
+            to: credential?.email as string,
             mailType: MailTypes.DELETE_ACCOUNT,
             language
         });

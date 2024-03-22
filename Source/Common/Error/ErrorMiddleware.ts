@@ -27,7 +27,7 @@ export class ErrorMiddleware extends ErrorEntity {
         interpolation?: { [key: string]: unknown }
     }) {
         super({
-            code: ErrorMiddlewareKeyCode[e.key],
+            code: ErrorMiddlewareKeyCode[e.key] || 400,
             messageKey: `error.errorMiddleware.${e.key}`,
             detail: e.detail,
             interpolation: e.interpolation,

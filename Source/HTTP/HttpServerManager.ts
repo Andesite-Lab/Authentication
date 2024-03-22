@@ -91,7 +91,7 @@ export class HttpServerManager {
                     if (e.instancePath === '') {
                         const [param] = e.params.errors as { params: { missingProperty: string } }[];
                         return {
-                            property: param.params.missingProperty,
+                            property: param?.params.missingProperty,
                             constraints: I18n.translate(e.message as string, request.headers['accept-language'])
                         };
                     }
