@@ -28,7 +28,7 @@ export class PermissionChecker {
                     throw new ErrorMiddleware({
                         key: ErrorMiddlewareKey.TOKEN_NO_FOUND,
                     });
-                const token: string = authorization.split(' ')[1];
+                const token: string = authorization.split(' ')[1] || '';
                 const tokenPayload: ITokenPayloadDTO = PermissionChecker.getPayload(token);
                 if (!multiple) {
                     if (!BasaltAuthorization.instance.checkContainOneOfPermissions(permissionsToSearch, tokenPayload.rolePermission))

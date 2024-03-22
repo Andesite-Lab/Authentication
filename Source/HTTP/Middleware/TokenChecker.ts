@@ -58,7 +58,7 @@ export class TokenChecker {
                 throw new ErrorMiddleware({
                     key: ErrorMiddlewareKey.TOKEN_NO_FOUND,
                 });
-            const token: string = authorization.split(' ')[1];
+            const token: string = authorization.split(' ')[1] || '';
             const tokenUuid: string = TokenChecker.getTokenUuid(token);
             const tokenPayload: ITokenPayloadDTO = new BasaltToken().getPayload(token);
             const publicKey: string = await TokenChecker.getPublicKey(tokenPayload.uuid, tokenUuid);

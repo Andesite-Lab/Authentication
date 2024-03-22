@@ -7,6 +7,11 @@
     "**/*.spec.ts",
     "esbuild.config.ts"
   ],
+  "include": [
+    "Source/**/*.ts",
+    "Source/**/*.json",
+    "package.json"
+  ],
   "typedocOptions": {
     "entryPoints": [
       "Source/**/*.ts"

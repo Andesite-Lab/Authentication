@@ -1,10 +1,7 @@
-import { Knex } from 'knex';
-
 import { IBasaltAuthorization } from '@/Common/Tools/Interface';
 import { IRoleDTO, IPermissionDTO } from '@/Data/DTO/Model/StaticDB/authentication';
 
 export class BasaltAuthorization implements IBasaltAuthorization {
-    private readonly _database: Knex | undefined;
     private static _instance: BasaltAuthorization;
 
     public static get instance(): BasaltAuthorization {
@@ -20,7 +17,7 @@ export class BasaltAuthorization implements IBasaltAuthorization {
                 throw new Error('Invalid data structure required role and permission');
             if (!roles[row.role])
                 roles[row.role] = [];
-            roles[row.role].push(row.permission);
+            roles[row.role]?.push(row.permission);
         });
         return roles;
     }

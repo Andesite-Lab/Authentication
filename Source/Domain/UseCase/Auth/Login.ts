@@ -11,7 +11,7 @@ import { Dragonfly } from '@/Infrastructure/Store';
 
 export class Login {
     private getCredential(body: Partial<ILoginDTO>): Promise<Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'>> {
-        const credentialToSearch: Partial<ICrendentialDTO> = body.username ? { username: body.username } : { email: body.email };
+        const credentialToSearch: Partial<ICrendentialDTO> = body.username ? { username: body.username } : { email: body.email as string };
 
         const credentialModel: CredentialModel = new CredentialModel();
         return credentialModel.findOne([credentialToSearch], {

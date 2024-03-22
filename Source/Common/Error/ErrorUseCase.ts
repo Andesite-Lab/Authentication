@@ -15,7 +15,7 @@ export class ErrorUseCase extends ErrorEntity {
         interpolation?: { [key: string]: unknown }
     }) {
         super({
-            code: ErrorUseCaseKeyCode[e.key],
+            code: ErrorUseCaseKeyCode[e.key] || 400,
             messageKey: `error.errorUseCase.${e.key}`,
             detail: e.detail,
             interpolation: e.interpolation,

@@ -101,7 +101,7 @@ export class CrudHandler<T extends NonNullable<unknown>> extends AbstractHandler
             const params: Record<string, string> = req.params as Record<string, string>;
 
             const data: T | undefined = await findOneUseCase.execute({
-                [primaryKey]: typeKey === 'NUMBER' ? parseInt(params['id']) : params['id']
+                [primaryKey]: typeKey === 'NUMBER' ? parseInt(params['id'] as string) : params['id']
             } as T);
             this.sendResponse(reply, {
                 statusCode: 200,
@@ -151,7 +151,7 @@ export class CrudHandler<T extends NonNullable<unknown>> extends AbstractHandler
             const params: Record<string, string> = req.params as Record<string, string>;
 
             const data: T[] = await updateOneUseCase.execute(req.body as T, {
-                [primaryKey]: typeKey === 'NUMBER' ? parseInt(params['id']) : params['id'],
+                [primaryKey]: typeKey === 'NUMBER' ? parseInt(params['id'] as string) : params['id'],
             } as unknown as T) as T[];
             this.sendResponse(reply, {
                 statusCode: 200,
@@ -202,7 +202,7 @@ export class CrudHandler<T extends NonNullable<unknown>> extends AbstractHandler
             const typeKey: 'NUMBER' | 'STRING' = this._primaryKey[1];
             const params: Record<string, string> = req.params as Record<string, string>;
             await deleteOneUseCase.execute({
-                [primaryKey]: typeKey === 'NUMBER' ? parseInt(params['id']) : params['id'],
+                [primaryKey]: typeKey === 'NUMBER' ? parseInt(params['id'] as string) : params['id'],
             } as unknown as T);
             this.sendResponse(reply, {
                 statusCode: 200,

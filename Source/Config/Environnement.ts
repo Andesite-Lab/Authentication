@@ -2,7 +2,7 @@ import { env } from 'process';
 
 import { ErrorConfig, ErrorConfigKey } from '@/Common/Error';
 
-function CheckEnvVariable(target: unknown, propertyKey: string): void {
+function CheckEnvVariable(_target: unknown, propertyKey: string): void {
     const value: string | undefined = env[propertyKey];
     if (!value)
         throw new ErrorConfig({
