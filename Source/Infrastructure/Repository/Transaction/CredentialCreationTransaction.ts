@@ -17,7 +17,7 @@ export class CredentialCreationTransaction {
                 transaction
             }) as Pick<IRoleDTO, 'id'>;
 
-            await credentialRoleModel.insert([{ credentialUuid: credential?.uuid, roleId: role?.id }], { id: true }, {
+            await credentialRoleModel.insert([{ credentialUuid: credential?.uuid as string, roleId: role?.id }], { id: true }, {
                 transaction
             });
         });

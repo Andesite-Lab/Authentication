@@ -7,7 +7,7 @@ import { DatabaseManager, IErrorDatabase, Transaction } from '@/Infrastructure/D
 export abstract class AbstractModel<T extends NonNullable<unknown>> {
     protected readonly _tableName: string;
     protected readonly _databaseName: string;
-    protected readonly _primaryKey?: [keyof T, 'NUMBER' | 'STRING'];
+    protected readonly _primaryKey: [keyof T, 'NUMBER' | 'STRING'] | undefined;
     protected _knex: Knex;
 
     public constructor(tableName: string, databaseName: string, primaryKey?: [keyof T, 'NUMBER' | 'STRING']) {
@@ -377,8 +377,8 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
     public async findAll(
         columnToSelect: Partial<Record<keyof T, boolean | string>> = {},
         options?: {
-            limit?: number;
-            offset?: number;
+            limit?: number | undefined;
+            offset?: number | undefined;
             toThrow?: boolean;
             transaction?: Transaction;
         }
@@ -433,7 +433,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
             if (options?.transaction)
                 query = query.transacting(options.transaction);
             const result: Record<string, number>[] = await query as unknown as Record<string, number>[];
-            return parseInt(result[0].count.toString());
+            return parseInt(result[0]?.count?.toString() ?? '0');
         } catch (err) {
             if (options?.toThrow ?? true)
                 this.forwardException(err);

@@ -21,8 +21,8 @@ export abstract class AbstractMigrationSourceCreator implements Knex.MigrationSo
 
             if (migrationFunctions)
                 resolve({
-                    up: migrationFunctions.up,
-                    down: migrationFunctions.down
+                    up: migrationFunctions.up || (() => Promise.resolve()),
+                    down: migrationFunctions.down || (() => Promise.resolve())
                 });
             else
                 reject(new Error(`Migration not found: ${migration}`));

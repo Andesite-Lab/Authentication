@@ -20,7 +20,7 @@ export class ErrorEntity extends Error {
     /**
      * The error interpolation.
      */
-    private readonly _interpolation?: { [key: string]: unknown };
+    private readonly _interpolation: { [key: string]: unknown } | undefined;
     /**
      * The error detail.
      */
@@ -35,7 +35,7 @@ export class ErrorEntity extends Error {
         code: number,
         messageKey: string,
         detail?: unknown
-        interpolation?: { [key: string]: unknown }
+        interpolation: { [key: string]: unknown } | undefined
     }) {
         super();
         this.message = error.messageKey;
@@ -59,7 +59,7 @@ export class ErrorEntity extends Error {
      * Gets the error name.
      * @returns The error name.
      */
-    public get name(): string {
+    public override get name(): string {
         return this._name;
     }
 

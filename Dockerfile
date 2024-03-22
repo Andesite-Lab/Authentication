@@ -1,4 +1,4 @@
-FROM node:21.6-alpine as builder
+FROM node:21.7.1-alpine as builder
 WORKDIR /build
 RUN apk update --no-cache
 RUN apk add --no-cache git
@@ -9,7 +9,7 @@ COPY . .
 RUN pnpm run prod::build
 RUN pnpm prune --prod
 
-FROM node:21.6-alpine
+FROM node:21.7.1-alpine
 WORKDIR /
 COPY --from=builder /build/node_modules ./node_modules
 COPY --from=builder /build/package.json ./package.json
