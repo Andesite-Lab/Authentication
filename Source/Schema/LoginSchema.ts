@@ -14,7 +14,7 @@ export const LoginSchema: JSONSchemaType<ILoginDTO> = {
         username: {
             description: 'Username of the user',
             type: 'string',
-            pattern: '^[a-zA-Z0-9].{3,32}$',
+            pattern: '^[a-zA-Z0-9]{4,32}$',
         },
         email: {
             description: 'Email of the user',
@@ -24,7 +24,7 @@ export const LoginSchema: JSONSchemaType<ILoginDTO> = {
         password: {
             description: 'Password of the user',
             type: 'string',
-            pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{4,32}$',
+            pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{8,32}$',
         }
     },
     anyOf: [
@@ -34,7 +34,7 @@ export const LoginSchema: JSONSchemaType<ILoginDTO> = {
                 username: {
                     description: 'Username of the user',
                     type: 'string',
-                    pattern: '^[a-zA-Z0-9].{3,32}$',
+                    pattern: '^[a-zA-Z0-9]{4,32}$',
                 },
             }
         },
