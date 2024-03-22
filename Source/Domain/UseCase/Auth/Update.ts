@@ -1,5 +1,5 @@
 import { BasaltToken } from '@basalt-lab/basalt-auth';
-import { BasaltPassword } from '@basalt-lab/basalt-helper';
+import { hashPassword } from '@basalt-lab/basalt-helper';
 
 import { ITokenPayloadDTO } from '@/Data/DTO';
 import { ICrendentialDTO } from '@/Data/DTO/Model/StaticDB/authentication';
@@ -12,7 +12,7 @@ export class Update {
         const basaltToken: BasaltToken = new BasaltToken();
         const payloadToken: ITokenPayloadDTO = basaltToken.getPayload(token);
         if (newCredential.password) {
-            newCredential.password = await BasaltPassword.hashPassword(newCredential.password);
+            newCredential.password = await hashPassword(newCredential.password);
             Dragonfly.instance.redis.del(`${payloadToken.uuid}:token`);
         }
         return await credentialModel.update(newCredential, [{

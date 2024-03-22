@@ -7,11 +7,13 @@ import { DatabaseManager, IErrorDatabase, Transaction } from '@/Infrastructure/D
 export abstract class AbstractModel<T extends NonNullable<unknown>> {
     protected readonly _tableName: string;
     protected readonly _databaseName: string;
+    protected readonly _primaryKey?: [keyof T, 'NUMBER' | 'STRING'];
     protected _knex: Knex;
 
-    public constructor(tableName: string, databaseName: string) {
+    public constructor(tableName: string, databaseName: string, primaryKey?: [keyof T, 'NUMBER' | 'STRING']) {
         this._tableName = tableName;
         this._databaseName = databaseName;
+        this._primaryKey = primaryKey;
         const database : Knex = DatabaseManager.instance.getDatabaseInstance(databaseName);
         this._knex = database;
     }
@@ -47,6 +49,7 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
             throw new ErrorInfrastructure({
                 key: ErrorInfrastructureKey.DATABASE_OTHER_DATABASE_ERROR,
                 interpolation: {
+                    tableName: this._tableName,
                     databaseName: this._databaseName
                 },
                 detail: err
@@ -313,6 +316,9 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
                 .select(this.transformColumnsToArray(columnToSelect))
                 .from(this._tableName);
             query = this.queryBuilder(query, entitiesToSearch);
+            const primaryKey: string = this._primaryKey?.[0] as string ?? 'id';
+            if (options?.limit || options?.offset)
+                query = query.orderBy(primaryKey ?? 'id', 'asc');
             if (options?.limit)
                 query = query.limit(options.limit);
             if (options?.offset)
@@ -381,6 +387,10 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
             let query = this._knex
                 .select(this.transformColumnsToArray(columnToSelect))
                 .from(this._tableName);
+            const primaryKey: string = this._primaryKey?.[0] as string ?? 'id';
+
+            if (options?.limit || options?.offset)
+                query = query.orderBy(primaryKey ?? 'id', 'asc');
 
             if (options?.limit)
                 query = query.limit(options.limit);
@@ -418,13 +428,8 @@ export abstract class AbstractModel<T extends NonNullable<unknown>> {
             let query = this._knex
                 .count<Record<string, number>>({ count: '*' })
                 .from(this._tableName);
-
             if (entitiesToSearch)
                 query = this.queryBuilder(query, entitiesToSearch);
-            if (options?.limit)
-                query = query.limit(options.limit);
-            if (options?.offset)
-                query = query.offset(options.offset);
             if (options?.transaction)
                 query = query.transacting(options.transaction);
             const result: Record<string, number>[] = await query as unknown as Record<string, number>[];

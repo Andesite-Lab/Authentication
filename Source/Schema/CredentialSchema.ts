@@ -19,13 +19,13 @@ export const CredentialSchema: JSONSchemaType<Omit<ICrendentialDTO, 'blacklisted
         username: {
             description: 'Username of the user',
             type: 'string',
-            pattern: '^[a-zA-Z0-9].{3,32}$',
+            pattern: '^[a-zA-Z0-9]{4,32}$',
         },
         password: {
             description: 'Password of the user',
             type: 'string',
             format: 'password',
-            pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{4,32}$',
+            pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{8,32}$',
         }
     },
     errorMessage: {

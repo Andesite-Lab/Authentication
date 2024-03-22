@@ -8,7 +8,7 @@ export class CreateCredentialTable {
                 .unique()
                 .checkLength('>=', 3)
                 .checkLength('<=', 20)
-                .checkRegex('^[a-zA-Z0-9_]*$')
+                .checkRegex('^[a-zA-Z0-9]{4,32}$')
                 .comment('The username of the user');
             table.string('email', 255)
                 .notNullable()

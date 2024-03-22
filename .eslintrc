@@ -17,7 +17,7 @@
     "plugins": [
         "@typescript-eslint"
     ],
-    "ignorePatterns": ["node_modules/*", "Addons/*", "wait-and-watch.js", "esbuild.config.js"],
+    "ignorePatterns": ["node_modules/*", "Addons/*", "wait-and-watch.js", "esbuild.config.ts"],
     "rules": {
         "indent": [
             "error",

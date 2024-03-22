@@ -1,4 +1,3 @@
-import { JSONSchemaType } from 'ajv';
 import { FastifyInstance } from 'fastify';
 import { FastifySchema } from 'fastify/types/schema';
 
@@ -37,7 +36,6 @@ export abstract class AbstractCrudRouter<T extends NonNullable<unknown>> extends
     private readonly _operationSchemaMap: OperationSchemaMap;
 
     private readonly _crudOperationWithPermission: Partial<CrudOperationWithPermission>;
-    private readonly _databaseName: string;
     private readonly _schema: unknown | undefined;
     private readonly _tableName: string;
     private readonly _tags: string;
@@ -59,7 +57,6 @@ export abstract class AbstractCrudRouter<T extends NonNullable<unknown>> extends
         ), config.routerPrefix);
 
         this._crudOperationWithPermission = config.crudOperationWithPermission;
-        this._databaseName = config.databaseName;
         this._schema = config.schema;
         this._tableName = config.tableName;
         this._tags = config.tags || 'CRUD';
@@ -89,8 +86,7 @@ export abstract class AbstractCrudRouter<T extends NonNullable<unknown>> extends
                 params: IdSchema
             },
             truncate: {},
-            count: {
-            }
+            count: {}
         };
     }
 
@@ -105,7 +101,7 @@ export abstract class AbstractCrudRouter<T extends NonNullable<unknown>> extends
     private getSchemas(operations: keyof CrudOperationWithPermission): FastifySchema {
         const fastifySchema: FastifySchema = {
             tags: [this._tags],
-            description: `Operation to ${operations} a ${this._tableName} in the ${this._databaseName} database`,
+            description: `Operation to ${operations} a ${this._tableName}`,
         };
         if (this._operationSchemaMap[operations])
             Object.assign(fastifySchema, this._operationSchemaMap[operations]);
