@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.4](https://github.com/Andesite-Lab/Authentication/compare/v1.8.3...v1.8.4) (2024-03-29)
+
+
+### Bug Fixes
+
+* add email in token ([060eee2](https://github.com/Andesite-Lab/Authentication/commit/060eee2a43d66499a332d2c579dc4c7acaac4eb4))
+
 ## [1.8.3](https://github.com/Andesite-Lab/Authentication/compare/v1.8.2...v1.8.3) (2024-03-22)
 
 
