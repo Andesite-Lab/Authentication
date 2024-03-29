@@ -10,7 +10,7 @@ import { CredentialModel, RolePermissionModel } from '@/Infrastructure/Repositor
 import { Dragonfly } from '@/Infrastructure/Store';
 
 export class Login {
-    private getCredential(body: Partial<ILoginDTO>): Promise<Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'>> {
+    private getCredential(body: Partial<ILoginDTO>): Promise<Pick<ICrendentialDTO, 'uuid' | 'password' | 'username' | 'email'>> {
         const credentialToSearch: Partial<ICrendentialDTO> = body.username ? { username: body.username } : { email: body.email as string };
 
         const credentialModel: CredentialModel = new CredentialModel();
@@ -18,7 +18,8 @@ export class Login {
             uuid: true,
             password: true,
             username: true,
-        }) as Promise<Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'>>;
+            email: true
+        }) as Promise<Pick<ICrendentialDTO, 'uuid' | 'password' | 'username' | 'email'>>;
     }
 
     private getRolePermission(credentialUUID: string): Promise<Pick<(IRoleDTO & IPermissionDTO), 'role' | 'permission'>[]> {
@@ -34,7 +35,7 @@ export class Login {
     }
 
     public async execute (body: Partial<ILoginDTO>): Promise<string> {
-        const credentialDTO: Pick<ICrendentialDTO, 'uuid' | 'password' | 'username'> = await this.getCredential(body);
+        const credentialDTO: Pick<ICrendentialDTO, 'uuid' | 'password' | 'username' | 'email'> = await this.getCredential(body);
         
         if (!await this.checkPassword(body.password as string, credentialDTO.password))
             throw new ErrorUseCase({
@@ -48,6 +49,7 @@ export class Login {
         const signResult: IBasaltTokenSignResult = basaltToken.sign({
             uuid: credentialDTO.uuid,
             username: credentialDTO.username,
+            email: credentialDTO.email,
             rolePermission,
         }, BasaltTokenExpiry.ONE_DAY, `${packageJsonConfig.name}-${packageJsonConfig.version}`, 'andesite');
 
